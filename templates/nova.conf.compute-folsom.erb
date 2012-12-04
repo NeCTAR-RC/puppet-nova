@@ -1,0 +1,77 @@
+[DEFAULT]
+state_path=/var/lib/nova
+lock_path=/var/lock/nova
+bindir=/usr/bin
+rootwrap_config=/etc/nova/rootwrap.conf
+auth_strategy=keystone
+
+# Logging
+<% if @environment == "testing" -%>
+verbose=True
+<%- else -%>
+verbose=False
+<%- end -%>
+logdir=/var/log/nova
+use_syslog=true
+syslog_log_facility=LOG_DAEMON
+
+#libvirt/kvm
+libvirt_type=kvm
+connection_type=libvirt
+libvirt_use_virtio_for_bridges=True
+live_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE
+remove_unused_base_images=False
+
+# Image service
+image_service=nova.image.glance.GlanceImageService
+glance_api_servers=<%= glance_host %>:9292
+
+# SQL
+sql_connection=mysql://<%= nova_db_user -%>:<%= nova_db_pass -%>@<%= nova_db_host -%>/<%= nova_db_name %>
+
+# Memcache
+memcached_servers=<%= nova_memcached_servers %>
+
+# Volume
+volume_api_class=nova.volume.cinder.API
+
+#Rabbit
+rabbit_hosts="<%= nova_rabbit_hosts %>"
+<% if nova_rabbit_ha %>
+rabbit_ha_queues=True
+<% end %>
+rabbit_userid=<%= nova_rabbit_user %>
+rabbit_password=<%= nova_rabbit_pass %>
+rabbit_durable_queues=True
+<% if nova_rabbit_ssl %>
+rabbit_use_ssl=True
+<% end %>
+rabbit_virtual_host=<%= nova_rabbit_virtual_host %>
+
+# Networking
+network_manager=nova.network.manager.FlatDHCPManager
+network_size=<%= nova_network_size %>
+network_host=<%= ipaddress %>
+force_dhcp_release=True
+dhcp_domain=<%= nova_dhcp_domain %>
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dnsmasq_config_file=/etc/nova/dnsmasq.conf
+routing_source_ip=<%= ipaddress %>
+multi_host=True
+fixed_range=<%= nova_fixed_ip_range %>
+flat_network_dns=<%= nova_flat_network_dns %>
+flat_network_dhcp_start=<%= nova_flat_network_dhcp_start %>
+flat_network_bridge=<%= nova_network_bridge %>
+flat_interface=<%= nova_flat_interface %>
+allow_same_net_traffic=false
+
+# VNC
+vncserver_listen=0.0.0.0
+vncserver_proxyclient_address=<%= ipaddress %>
+novncproxy_base_url=http://<%= nova_vnc_host %>:6080/vnc_auto.html
+
+<% if nova_cells_enable %>
+[cells]
+enable=true
+name=<%= nova_cells_name %>
+<% end %>
