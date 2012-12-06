@@ -39,7 +39,7 @@ class nova::node {
 
   user { 'nova':
     ensure     => present,
-    uid        => 118,
+    uid        => $nova_uid,
     gid        => nova,
     groups     => ['libvirtd'],
     shell      => '/bin/bash',

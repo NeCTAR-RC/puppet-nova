@@ -8,7 +8,7 @@ class nova::kvm {
 
   group { 'kvm':
     ensure => present,
-    gid    => 210,
+    gid    => $kvm_gid,
   }
 
 }

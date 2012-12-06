@@ -11,7 +11,7 @@ class nova::libvirt {
 
   user { 'libvirt-qemu':
     ensure     => present,
-    uid        => 210,
+    uid        => $libvirt_uid,
     gid        => 'kvm',
     shell      => '/bin/false',
     home       => '/var/lib/libvirt',
