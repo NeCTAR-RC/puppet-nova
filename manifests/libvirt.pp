@@ -5,6 +5,10 @@ class nova::libvirt {
     require => User['libvirt-qemu'],
   }
 
+  package {'pm-utils':
+    ensure => installed,
+  }
+  
   service { 'libvirt-bin':
     ensure => running,
   }

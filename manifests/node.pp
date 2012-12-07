@@ -10,10 +10,6 @@ class nova::node {
     require => User['nova'],
   }
 
-  package {['pm-utils', 'kvm-ipxe']:
-    ensure => installed,
-  }
-
   realize Package['python-memcache']
   realize Package['python-mysqldb']
 
