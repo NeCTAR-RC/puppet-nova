@@ -1,0 +1,85 @@
+[DEFAULT]
+# Logging
+lock_path=/var/lock/nova
+state_path=/var/lib/nova 
+logdir=/var/log/nova
+<% if @logdebug -%>
+verbose=True
+<%- else -%>
+verbose=False
+<%- end -%>
+rootwrap_config=/etc/nova/rootwrap.conf
+
+# Cert
+project_cert_subject=/C=AU/O=NeCTAR/CN=project-ca-%.16s-%s
+user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
+
+# API server
+api_paste_config=/etc/nova/api-paste.ini
+enabled_apis=ec2,osapi_compute
+osapi_compute_workers=4
+ec2_workers=4
+osapi_volume_workers=4
+volume_api_class=nova.volume.cinder.API
+
+<% if nova_cells_api_cell %>
+# Cells class overrides
+compute_api_class=nova.compute.cells_api.ComputeCellsAPI
+securitygroup_api_class=nova.compute.cells_api.SecurityGroupCellsAPI
+<% end %>
+
+# Authentication
+keystone_ec2_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0/ec2tokens
+auth_strategy=keystone
+keystone_auth_url=<%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
+
+# Image Service
+image_service=nova.image.glance.GlanceImageService
+glance_api_servers=<%= nova_glance_servers %>
+
+# Storage Service
+s3_host=<%= s3_host %>
+s3_dmz=<%= s3_host %>
+s3_port=8888
+<% if swift_protocol == 'https' %>
+s3_use_ssl=True
+<% end %>
+
+# RabbitMQ
+rabbit_hosts="<%= nova_rabbit_hosts %>"
+<% if nova_rabbit_ha %>
+rabbit_ha_queues=True
+<% end %>
+rabbit_userid=<%= nova_rabbit_user %>
+rabbit_password=<%= nova_rabbit_pass %>
+rabbit_durable_queues=True
+<% if nova_rabbit_ssl %>
+rabbit_use_ssl=True
+<% end %>
+rabbit_virtual_host=<%= nova_rabbit_virtual_host %>
+
+# Database
+sql_connection=mysql://<%= nova_db_user %>:<%= nova_db_pass %>@<%= nova_db_host %>/<%= nova_db_name %>
+
+# Memcached
+memcached_servers=<%= nova_memcached_servers %>
+
+# Quota
+quota_instances=20
+quota_cores=80
+quota_ram=327680
+quota_volumes=0
+quota_gigabytes=0
+quota_floating_ips=0
+max_age = 600
+until_refresh = 100
+
+
+<% if nova_cells_enable %>
+[cells]
+enable=true
+name=<%= nova_cells_name %>
+<% if @nova_cells_instance_update_interval %>instance_update_interval=<%= nova_cells_instance_update_interval %><% end %>
+<% if @nova_cells_instance_updated_at_threshold %>instance_updated_at_threshold=<%= nova_cells_instance_updated_at_threshold %><% end %>
+<% if @nova_cells_instance_update_num_instances %>instance_update_num_instances=<%= nova_cells_instance_update_num_instances %><% end %>
+<% end %>
