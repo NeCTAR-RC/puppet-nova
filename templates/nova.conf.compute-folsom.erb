@@ -6,7 +6,7 @@ rootwrap_config=/etc/nova/rootwrap.conf
 auth_strategy=keystone
 
 # Logging
-<% if @environment == "testing" -%>
+<% if @logdebug -%>
 verbose=True
 <%- else -%>
 verbose=False

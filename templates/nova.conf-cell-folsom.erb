@@ -3,7 +3,7 @@
 lock_path=/var/lock/nova
 state_path=/var/lib/nova 
 logdir=/var/log/nova
-<% if @environment == "testing" -%>
+<% if @logdebug -%>
 verbose=True
 <%- else -%>
 verbose=False
