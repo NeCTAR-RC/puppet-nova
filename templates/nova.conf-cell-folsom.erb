@@ -26,7 +26,7 @@ keystone_auth_url=<%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
 
 # Image Service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= glance_host %>:9292
+glance_api_servers=<%= nova_glance_servers %>
 
 # Storage Service
 s3_host=<%= s3_host %>

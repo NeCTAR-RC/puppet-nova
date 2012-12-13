@@ -24,7 +24,7 @@ remove_unused_base_images=False
 
 # Image service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= glance_host %>:9292
+glance_api_servers=<%= nova_glance_servers %>
 
 # SQL
 sql_connection=mysql://<%= nova_db_user -%>:<%= nova_db_pass -%>@<%= nova_db_host -%>/<%= nova_db_name %>
