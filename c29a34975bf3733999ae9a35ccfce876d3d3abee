@@ -1,0 +1,8 @@
+Change-Id: Ic29a34975bf3733999ae9a35ccfce876d3d3abee
+Code-Review+2: Sam Morrison <sorrison@gmail.com>
+Verified+1: Sam Morrison <sorrison@gmail.com>
+Submitted-by: Sam Morrison <sorrison@gmail.com>
+Submitted-at: Tue, 19 Feb 2013 11:03:24 +1100
+Reviewed-on: https://review.rc.nectar.org.au/35
+Project: NeCTAR-RC/puppet-nova
+Branch: refs/heads/master
