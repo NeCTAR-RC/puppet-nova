@@ -4,10 +4,6 @@ class nova::cert {
     ensure  => installed,
   }
 
-  package { 'nfs-common':
-    ensure  => installed,
-  }
-
   mount { '/var/lib/nova/CA':
     device  => $nova_cc_nfs_ca_mount,
     fstype  => 'nfs',
