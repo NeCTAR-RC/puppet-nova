@@ -1,0 +1,8 @@
+Change-Id: If7f901d2f158e5d1011359f6a1c9868a7429e506
+Code-Review+2: Sam Morrison <sam.morrison@unimelb.edu.au>
+Verified+1: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-by: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-at: Thu, 21 Feb 2013 09:52:39 +1100
+Reviewed-on: https://review.rc.nectar.org.au/36
+Project: NeCTAR-RC/puppet-nova
+Branch: refs/heads/production
