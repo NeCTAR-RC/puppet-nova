@@ -76,6 +76,8 @@ until_refresh = 100
 
 
 <% if nova_cells_enable %>
+stub_floating_ips_api=True
+
 [cells]
 enable=true
 name=<%= nova_cells_name %>
