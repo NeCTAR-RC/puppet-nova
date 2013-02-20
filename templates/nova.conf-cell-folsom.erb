@@ -16,7 +16,7 @@ ram_allocation_ratio=1.0
 cpu_allocation_ratio=0.92
 reserved_host_memory_mb=1024
 reserved_host_disk_mb=0
-scheduler_default_filters=RetryFilter,RamFilter,CoreFilter,ComputeFilter
+scheduler_default_filters=RetryFilter,AggregateInstanceExtraSpecsFilter,RamFilter,CoreFilter,ComputeFilter
 compute_fill_first_cost_fn_weight=1.0
 
 # Authentication
