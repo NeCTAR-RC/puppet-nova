@@ -1,4 +1,6 @@
-class nova::node {
+class nova::node($nova_uid, $instances_mount=undef) {
+
+  $cell_config = hiera('nova::cell_config')
 
   package { 'nova-compute':
     ensure  => present,
@@ -13,17 +15,17 @@ class nova::node {
   realize Package['python-memcache']
   realize Package['python-mysqldb']
 
-  if $nova_cc_nfs_instances_mount {
+  if $instances_mount {
 
     package { 'nfs-common':
       ensure => installed,
     }
 
     mount { '/var/lib/nova/instances':
-      device  => $nova_cc_nfs_instances_mount,
+      device  => $instances_mount,
       fstype  => 'nfs',
       ensure  => mounted,
-      options => $nfs_options,
+      options => hiera('nfs::options'),
       atboot  => true,
       require => [ Package['nova-compute'],
                    Package['nfs-common']],
@@ -108,7 +110,6 @@ class nova::node {
     notify  => Service['nova-api-metadata'],
     require => Package['nova-api-metadata'],
   }
-
 
   package { 'nova-api-metadata':
     ensure  => present,

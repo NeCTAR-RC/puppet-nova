@@ -1,5 +1,7 @@
 class nova::cloudcontroller {
 
+  $cell_config = hiera('nova::cell_config')
+
   realize Package['python-mysqldb']
   realize Package['python-keystone']
 
