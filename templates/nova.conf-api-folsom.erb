@@ -34,7 +34,7 @@ keystone_auth_url=<%= scope.function_hiera(['keystone::protocol']) %>://<%= scop
 
 # Image Service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= config[:glance_servers] %>
+glance_api_servers=<%= config['glance_server'] %>
 
 # Storage Service
 s3_host=<%= s3_host %>
@@ -45,23 +45,23 @@ s3_use_ssl=True
 <% end %>
 
 #RabbitMQ
-rabbit_hosts="<%= cell_config[:rabbit_hosts] %>"
-<% if cell_config[:rabbit_ha] %>
+rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
+<% if cell_config['rabbit_ha'] %>
 rabbit_ha_queues=True
 <% end %>
-rabbit_userid=<%= cell_config[:rabbit_user] %>
-rabbit_password=<%= cell_config[:rabbit_pass] %>
+rabbit_userid=<%= cell_config['rabbit_user'] %>
+rabbit_password=<%= cell_config['rabbit_pass'] %>
 rabbit_durable_queues=True
-<% if cell_config[:rabbit_ssl] %>
+<% if cell_config['rabbit_ssl'] %>
 rabbit_use_ssl=True
 <% end %>
-rabbit_virtual_host=<%= cell_config[:rabbit_virtual_host] %>
+rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
 # Database
-sql_connection=mysql://<%= cell_config[:db_user] %>:<%= cell_config[:db_pass] %>@<%= cell_config[:db_host] %>/<%= cell_config[:db_name] %>
+sql_connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 
 # Memcached
-memcached_servers=<%= cell_config[:memcached_servers] %>
+memcached_servers=<%= cell_config['memcached_servers'] %>
 
 # Quota
 quota_instances=2
@@ -74,10 +74,10 @@ max_age = 600
 until_refresh = 100
 
 
-[cells]
+[cells']
 enable=true
-name=<%= cell_config[:cells_name] %>
-<% if @cell_config[:cells_instance_update_interval] %>instance_update_interval=<%= cell_config[:cells_instance_update_interval] %><% end %>
-<% if @cell_config[:cells_instance_updated_at_threshold] %>instance_updated_at_threshold=<%= cell_config[:cells_instance_updated_at_threshold] %><% end %>
-<% if @cell_config[:cells_instance_update_num_instances] %>instance_update_num_instances=<%= cell_config[:cells_instance_update_num_instances] %><% end %>
+name=<%= cell_config['cells_name'] %>
+<% if @cell_config['cells_instance_update_interval'] %>instance_update_interval=<%= cell_config['cells_instance_update_interval'] %><% end %>
+<% if @cell_config['cells_instance_updated_at_threshold'] %>instance_updated_at_threshold=<%= cell_config['cells_instance_updated_at_threshold'] %><% end %>
+<% if @cell_config['cells_instance_update_num_instances'] %>instance_update_num_instances=<%= cell_config['cells_instance_update_num_instances'] %><% end %>
 <% end %>
