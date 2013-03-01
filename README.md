@@ -1,10 +1,11 @@
-===============================
-Puppet Nova moudle for NeCTAR RC
-===============================
+================================
+Puppet Nova module for NeCTAR RC
+================================
 
 Variables
 =========
 
+This module makes explicit use of hiera, you will need it to use this module.
 Classes
 =======
 
@@ -35,13 +36,16 @@ nova::cloudcontroller
 ---------------------
 Sets up nova configs for cloud controllers. Needs the nova::config variable
 
+nova::cloudcontroller::api
+--------------------------
+Installs a slightly different nova.conf for an API server
+
 nova::consoleauth
 -----------------
 Sets up nova-consoleauth
 
 nova::kvm
 ---------
-
  * nova::kvm::gid
 
 nova::libvirt
@@ -52,22 +56,27 @@ nova::node
 ----------
 Sets up nova configs for compute nodes. Needs the nova::config variable
 
+This class currently pulls in nova::kvm and nova::libvirt
+
  * nova::node::nova_uid
 
 nova::novnc
 -----------
+Sets up nova-novncproxy
 
 nova::scheduler
 ---------------
-Sets up nova-schedler
+Sets up nova-scheduler
 
 
 nova::config
 ============
 
+This is a hash object that is used to configure nova.
 Example:
 --------
 
+```yaml
 nova::cell_config:
     rabbit_hosts: 'mq:5671,mq2:5671,mq2:5671'
     rabbit_ha: true
@@ -88,13 +97,14 @@ nova::cell_config:
     flat_interface: 'eth0'
     network_bridge: 'br100'
     keystone_user: nova
-    keystone_password: secret
+    keystone_password: secret     
     glance_servers: 'https://localhost:9292'
     memcached_servers: 'localhost:11211'
     vnc_host: 'localhost'
     cells_enable: true
     cells_name: my-cell-name
     cells_full_name: my-full-cell-name
+```
 
 Other variables needed
 ======================
