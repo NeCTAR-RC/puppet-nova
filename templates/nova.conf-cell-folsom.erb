@@ -1,5 +1,4 @@
 [DEFAULT]
-# Logging
 lock_path=/var/lock/nova
 state_path=/var/lib/nova 
 logdir=/var/log/nova
@@ -36,7 +35,7 @@ s3_port=8888
 s3_use_ssl=True
 <% end %>
 
-# RabbitMQ
+#RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
 <% if cell_config['rabbit_ha'] %>
 rabbit_ha_queues=True
@@ -66,7 +65,7 @@ quota_driver=nova.quota.NoopQuotaDriver
 <% end %>
 
 <% if cell_config['cells_enable'] %>
-[cells']
+[cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
 <% if @cell_config['cells_instance_update_interval'] %>instance_update_interval=<%= cell_config['cells_instance_update_interval'] %><% end %>

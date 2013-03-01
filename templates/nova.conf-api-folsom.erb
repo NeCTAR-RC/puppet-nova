@@ -1,5 +1,4 @@
 [DEFAULT]
-# Logging
 lock_path=/var/lock/nova
 state_path=/var/lib/nova 
 logdir=/var/log/nova
@@ -74,7 +73,7 @@ max_age = 600
 until_refresh = 100
 
 
-[cells']
+[cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
 <% if @cell_config['cells_instance_update_interval'] %>instance_update_interval=<%= cell_config['cells_instance_update_interval'] %><% end %>
