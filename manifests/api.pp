@@ -24,7 +24,7 @@ class nova::api::nagios-checks {
   }
 }
 
-class nova::api::load-balanced inherits nova::api {
+class nova::api::load-balanced($ssl=true, $upstream_osapi, $upstream_ec2) inherits nova::api {
 
 
   file { '/etc/init/nova-api.conf':
@@ -59,14 +59,15 @@ class nova::api::load-balanced inherits nova::api {
 
   nginx::proxy { 'osapi':
     port         => 8774,
-    ssl          => $::nova_ssl,
-    upstreams    => $::nova_upstream_osapi,
+    ssl          => $ssl,
+    upstreams    => $upstream_osapi,
     nagios_check => false,
   }
+
   nginx::proxy { 'ec2':
     port         => 8773,
-    ssl          => $::nova_ssl,
-    upstreams    => $::nova_upstream_ec2,
+    ssl          => $ssl,
+    upstreams    => $upstream_ec2,
     nagios_check => false,
   }
 
