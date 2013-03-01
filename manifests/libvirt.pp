@@ -1,4 +1,4 @@
-class nova::libvirt {
+class nova::libvirt($uid) {
 
   package { 'libvirt-bin':
     ensure  => present,
@@ -15,7 +15,7 @@ class nova::libvirt {
 
   user { 'libvirt-qemu':
     ensure     => present,
-    uid        => $libvirt_uid,
+    uid        => $uid,
     gid        => 'kvm',
     shell      => '/bin/false',
     home       => '/var/lib/libvirt',
