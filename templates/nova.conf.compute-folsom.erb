@@ -36,7 +36,7 @@ memcached_servers=<%= cell_config['memcached_servers'] %>
 # Volume
 volume_api_class=nova.volume.cinder.API
 
-#RabbitMQ
+# RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
 <% if cell_config['rabbit_ha'] %>
 rabbit_ha_queues=True

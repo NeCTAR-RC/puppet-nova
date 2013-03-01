@@ -25,7 +25,7 @@ keystone_auth_url=<%= scope.function_hiera(['keystone::protocol']) %>://<%= scop
 
 # Image Service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= config['glance_servers'] %>
+glance_api_servers=<%= cell_config['glance_servers'] %>
 
 # Storage Service
 s3_host=<%= s3_host %>
@@ -35,7 +35,7 @@ s3_port=8888
 s3_use_ssl=True
 <% end %>
 
-#RabbitMQ
+# RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
 <% if cell_config['rabbit_ha'] %>
 rabbit_ha_queues=True
@@ -60,9 +60,7 @@ network_manager=nova.network.manager.FlatDHCPManager
 #Volume
 volume_api_class=nova.volume.cinder.API
 
-<% if @cell_config['cells_api_cell'] == false %>
 quota_driver=nova.quota.NoopQuotaDriver
-<% end %>
 
 <% if cell_config['cells_enable'] %>
 [cells]
