@@ -25,55 +25,55 @@ running_deleted_instance_action=reap
 
 # Image service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= nova_glance_servers %>
+glance_api_servers=<%= cell_config[:glance_servers] %>
 
 # SQL
-sql_connection=mysql://<%= nova_db_user -%>:<%= nova_db_pass -%>@<%= nova_db_host -%>/<%= nova_db_name %>
+sql_connection=mysql://<%= cell_config[:db_user] -%>:<%= cell_config[:db_pass] -%>@<%= cell_config[:db_host] -%>/<%= cell_config[:db_name] %>
 
 # Memcache
-memcached_servers=<%= nova_memcached_servers %>
+memcached_servers=<%= cell_config[:memcached_servers] %>
 
 # Volume
 volume_api_class=nova.volume.cinder.API
 
-#Rabbit
-rabbit_hosts="<%= nova_rabbit_hosts %>"
-<% if nova_rabbit_ha %>
+# RabbitMQ
+rabbit_hosts="<%= cell_config[:rabbit_hosts] %>"
+<% if cell_config[:rabbit_ha] %>
 rabbit_ha_queues=True
 <% end %>
-rabbit_userid=<%= nova_rabbit_user %>
-rabbit_password=<%= nova_rabbit_pass %>
+rabbit_userid=<%= cell_config[:rabbit_user] %>
+rabbit_password=<%= cell_config[:rabbit_pass] %>
 rabbit_durable_queues=True
-<% if nova_rabbit_ssl %>
+<% if cell_config[:rabbit_ssl] %>
 rabbit_use_ssl=True
 <% end %>
-rabbit_virtual_host=<%= nova_rabbit_virtual_host %>
+rabbit_virtual_host=<%= cell_config[:rabbit_virtual_host] %>
 
 # Networking
 network_manager=nova.network.manager.FlatDHCPManager
-network_size=<%= nova_network_size %>
+network_size=<%= cell_config[:network_size] %>
 network_host=<%= ipaddress %>
 force_dhcp_release=True
-dhcp_domain=<%= nova_dhcp_domain %>
+dhcp_domain=<%= cell_config[:dhcp_domain] %>
 dhcpbridge_flagfile=/etc/nova/nova.conf
 dnsmasq_config_file=/etc/nova/dnsmasq.conf
 routing_source_ip=<%= ipaddress %>
 multi_host=True
-fixed_range=<%= nova_fixed_ip_range %>
-flat_network_dns=<%= nova_flat_network_dns %>
-flat_network_dhcp_start=<%= nova_flat_network_dhcp_start %>
-flat_network_bridge=<%= nova_network_bridge %>
-flat_interface=<%= nova_flat_interface %>
+fixed_range=<%= cell_config[:fixed_ip_range] %>
+flat_network_dns=<%= cell_config[:flat_network_dns] %>
+flat_network_dhcp_start=<%= cell_config[:flat_network_dhcp_start] %>
+flat_network_bridge=<%= cell_config[:network_bridge] %>
+flat_interface=<%= cell_config[:flat_interface] %>
 allow_same_net_traffic=false
 
 # VNC
 vncserver_listen=0.0.0.0
 vncserver_proxyclient_address=<%= ipaddress %>
-novncproxy_base_url=http://<%= nova_vnc_host %>:6080/vnc_auto.html
+novncproxy_base_url=http://<%= cell_config[:vnc_host] %>:6080/vnc_auto.html
 
-<% if nova_cells_enable %>
+<% if cell_config[:cells_enable] %>
 [cells]
 enable=true
-name=<%= nova_cells_name %>
-full_name=<%= nova_cells_full_name %>
+name=<%= cell_config[:cells_name] %>
+full_name=<%= cell_config[:cells_full_name] %>
 <% end %>

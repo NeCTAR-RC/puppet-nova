@@ -118,11 +118,11 @@ paste.filter_factory = nova.api.auth:NovaKeystoneContext.factory
 
 [filter:authtoken]
 paste.filter_factory = keystone.middleware.auth_token:filter_factory
-auth_host = <%= keystone_host %>
+auth_host = <%= scope.function_hiera(['keystone::host']) %>
 auth_port = 35357
-auth_protocol = <%= keystone_protocol %>
-admin_tenant_name = <%= keystone_service_tenant %>
-admin_user = <%= nova_keystone_user %>
-admin_password = <%= nova_keystone_password %>
+auth_protocol = <%= scope.function_hiera(['keystone::protocol']) %>
+admin_tenant_name = <%= scope.function_hiera(['keystone::service_tenant']) %>
+admin_user = <%= cell_config[:keystone_user] %>
+admin_password = <%= cell_config[:keystone_password] %>
 signing_dir = /tmp/keystone-signing-nova-<%= hostname %>
-memcache_servers = <%= nova_memcached_servers %>
+memcache_servers = <%= cell_config[:memcached_servers] %>
