@@ -25,24 +25,24 @@ running_deleted_instance_action=reap
 
 # Image service
 image_service=nova.image.glance.GlanceImageService
-glance_api_servers=<%= cell_config[:glance_servers'] %>
+glance_api_servers=<%= cell_config['glance_servers'] %>
 
 # SQL
-sql_connection=mysql://<%= cell_config[:db_user'] -%>:<%= cell_config[:db_pass'] -%>@<%= cell_config[:db_host'] -%>/<%= cell_config[:db_name'] %>
+sql_connection=mysql://<%= cell_config['db_user'] -%>:<%= cell_config['db_pass'] -%>@<%= cell_config['db_host'] -%>/<%= cell_config['db_name'] %>
 
 # Memcache
-memcached_servers=<%= cell_config[:memcached_servers'] %>
+memcached_servers=<%= cell_config['memcached_servers'] %>
 
 # Volume
 volume_api_class=nova.volume.cinder.API
 
-# RabbitMQ
-rabbit_hosts="<%= cell_config[:rabbit_hosts'] %>"
-<% if cell_config[:rabbit_ha'] %>
+#RabbitMQ
+rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
+<% if cell_config['rabbit_ha'] %>
 rabbit_ha_queues=True
 <% end %>
-rabbit_userid=<%= cell_config[:rabbit_user'] %>
-rabbit_password=<%= cell_config[:rabbit_pass'] %>
+rabbit_userid=<%= cell_config['rabbit_user'] %>
+rabbit_password=<%= cell_config['rabbit_pass'] %>
 rabbit_durable_queues=True
 <% if cell_config['rabbit_ssl'] %>
 rabbit_use_ssl=True
@@ -72,7 +72,7 @@ vncserver_proxyclient_address=<%= ipaddress %>
 novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
 
 <% if cell_config['cells_enable'] %>
-[cells']
+[cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
 full_name=<%= cell_config['cells_full_name'] %>
