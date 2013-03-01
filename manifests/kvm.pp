@@ -1,4 +1,4 @@
-class nova::kvm {
+class nova::kvm($gid) {
 
   file { '/dev/kvm':
     group   => kvm,
@@ -8,7 +8,7 @@ class nova::kvm {
 
   group { 'kvm':
     ensure => present,
-    gid    => $kvm_gid,
+    gid    => $gid,
   }
 
   package {'kvm-ipxe':
