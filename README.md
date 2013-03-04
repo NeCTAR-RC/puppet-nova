@@ -20,6 +20,8 @@ nova::api::load-balanced
 ------------------------
 Puts nginx in front of nova-api
 
+Requires the puppet-nginx module
+
  * nova::api::load-balanced::ssl - Use ssl endpoints (default=true)
  * nova::api::load-balanced::upstream_osapi - list of nova-api servers  eg [nova-api-1:18774,nova-api-2:18774]
  * nova::api::load-balanced::upstream_ec2 - Same as osapi except for ec2 api
@@ -42,7 +44,7 @@ Installs a slightly different nova.conf for an API server
 
 nova::consoleauth
 -----------------
-Sets up nova-consoleauth
+Sets up nova-consoleauth, only one needed per site unless using memcache
 
 nova::kvm
 ---------
