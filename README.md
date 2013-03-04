@@ -20,6 +20,8 @@ nova::api::load-balanced
 ------------------------
 Puts nginx in front of nova-api
 
+Requires the puppet-nginx module
+
  * nova::api::load-balanced::ssl - Use ssl endpoints (default=true)
  * nova::api::load-balanced::upstream_osapi - list of nova-api servers  eg [nova-api-1:18774,nova-api-2:18774]
  * nova::api::load-balanced::upstream_ec2 - Same as osapi except for ec2 api
@@ -42,7 +44,7 @@ Installs a slightly different nova.conf for an API server
 
 nova::consoleauth
 -----------------
-Sets up nova-consoleauth
+Sets up nova-consoleauth, only one needed per site unless using memcache
 
 nova::kvm
 ---------
@@ -59,6 +61,7 @@ Sets up nova configs for compute nodes. Needs the nova::config variable
 This class currently pulls in nova::kvm and nova::libvirt
 
  * nova::node::nova_uid
+ * nova::node::instances_mount - Set this to use NFS for /var/lib/nova/instances
 
 nova::novnc
 -----------
@@ -73,6 +76,8 @@ nova::config
 ============
 
 This is a hash object that is used to configure nova.
+
+If you have multiple cells you will need to specify this multiple times
 Example:
 --------
 
@@ -114,3 +119,4 @@ Other variables needed
  * keystone::service_tenant
 
  * swift::protocol
+ * nfs::options
