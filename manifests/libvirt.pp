@@ -36,13 +36,17 @@ class nova::libvirt($uid) {
     require => Package['libvirt-bin'],
   }
 
-  # Remove the default configured dnsmasq network.
-  file {'/etc/libvirt/qemu/networks/autostart/':
-    ensure  => directory,
-    recurse => true,
-    purge   => true,
-    force   => true,
-    notify  => Service['libvirt-bin'],
-    require => Package['libvirt-bin'],
+  # delete the current virbr0 interface if it exists
+  exec { 'virsh-net-destroy-default':
+    command => '/usr/bin/virsh net-destroy default',
+    onlyif  => '/sbin/ifconfig virbr0',
+    notify  => Exec['virsh-net-undefine-default'],
   }
+
+  # undefine the 'default' network if it is defined
+  exec { 'virsh-net-undefine-default':
+    command => '/usr/bin/virsh net-undefine default',
+    onlyif  => '/usr/bin/test -e /etc/libvirt/qemu/networks/default.xml',
+  }
+
 }
