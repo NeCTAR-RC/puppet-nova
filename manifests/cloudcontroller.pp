@@ -1,6 +1,6 @@
 class nova::cloudcontroller {
 
-  $cell_config = hiera('nova::cell_config')
+  $cell_config = hiera_hash('nova::cell_config')
 
   realize Package['python-mysqldb']
   realize Package['python-keystone']
