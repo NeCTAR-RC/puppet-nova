@@ -1,4 +1,4 @@
 class nova {
 
-  
+  require nectar
 }

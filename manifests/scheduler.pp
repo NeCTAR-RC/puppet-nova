@@ -1,5 +1,7 @@
 class nova::scheduler {
 
+  require nova::cloudcontroller
+
   package { 'nova-scheduler':
     ensure  => present,
   }

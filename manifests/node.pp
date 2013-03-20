@@ -1,5 +1,7 @@
 class nova::node($nova_uid, $instances_mount=undef) {
 
+  require nova
+
   $cell_config = hiera_hash('nova::cell_config')
 
   package { 'nova-compute':

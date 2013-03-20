@@ -1,5 +1,7 @@
 class nova::cert {
 
+  require nova::cloudcontroller
+
   package { 'nova-cert':
     ensure  => installed,
   }
