@@ -1,5 +1,7 @@
 class nova::cloudcontroller {
 
+  require nova
+
   $cell_config = hiera_hash('nova::cell_config')
 
   realize Package['python-mysqldb']

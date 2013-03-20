@@ -1,5 +1,7 @@
 class nova::cells {
 
+  require nova::cloudcontroller
+
   package { 'nova-cells':
     ensure  => installed,
   }

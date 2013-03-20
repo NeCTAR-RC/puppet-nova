@@ -1,5 +1,7 @@
 class nova::consoleauth {
 
+  require nova::cloudcontroller
+
   package { 'nova-consoleauth':
     ensure => installed,
   }
