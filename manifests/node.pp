@@ -25,9 +25,9 @@ class nova::node($nova_uid, $instances_mount=undef) {
 
     mount { '/var/lib/nova/instances':
       device  => $instances_mount,
-      fstype  => 'nfs',
+      fstype  => hiera('nfs::type', 'nfs'),
       ensure  => mounted,
-      options => hiera('nfs::options'),
+      options => hiera('nfs::options', '_netdev,auto'),
       atboot  => true,
       require => [ Package['nova-compute'],
                    Package['nfs-common']],
