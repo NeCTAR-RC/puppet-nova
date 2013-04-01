@@ -51,6 +51,7 @@ vncserver_proxyclient_address=<%= ipaddress %>
 novncproxy_base_url=http://<%= nova_vnc_host %>:6080/vnc_auto.html
 dhcp_domain=<%= nova_dhcp_domain %>
 live_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE
+block_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_NON_SHARED_INC,VIR_MIGRATE_LIVE
 <% if nova_volume_type == 'nexenta' %>
 # Nexenta Volume
 volume_driver=nova.volume.nexenta.volume.NexentaDriver
