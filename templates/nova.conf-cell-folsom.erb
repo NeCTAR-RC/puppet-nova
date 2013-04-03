@@ -70,5 +70,6 @@ name=<%= cell_config['cells_name'] %>
 <% if @cell_config['cells_instance_updated_at_threshold'] %>instance_updated_at_threshold=<%= cell_config['cells_instance_updated_at_threshold'] %><% end %>
 <% if @cell_config['cells_instance_update_num_instances'] %>instance_update_num_instances=<%= cell_config['cells_instance_update_num_instances'] %><% end %>
 <% if @cell_config['cells_scheduler_filters'] %>scheduler_filters=<%= cell_config['cells_scheduler_filters'] %><% end %>
+<% if @cell_config['cells_scheduler_direct_only_cells'] %>scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %><% end %>
 <% if @cell_config['cells_capabilities'] %>capabilities="<%= cell_config['cells_capabilities'] %>"<% end %>
 <% end %>
