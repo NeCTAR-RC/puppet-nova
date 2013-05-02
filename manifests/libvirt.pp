@@ -1,4 +1,4 @@
-class nova::libvirt($uid) {
+class nova::libvirt($uid, $host_uuid=undef) {
 
   package { 'libvirt-bin':
     ensure  => present,
@@ -24,7 +24,7 @@ class nova::libvirt($uid) {
 
   file { '/etc/libvirt/libvirtd.conf':
     ensure  => present,
-    source  => 'puppet:///modules/nova/libvirtd.conf',
+    content => template('nova/libvirtd.conf.erb'),
     notify  => Service['libvirt-bin'],
     require => Package['libvirt-bin'],
   }
