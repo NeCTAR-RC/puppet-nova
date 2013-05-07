@@ -15,26 +15,32 @@ logdir=/var/log/nova
 use_syslog=true
 syslog_log_facility=LOG_DAEMON
 
-#libvirt/kvm
+# Libvirt/KVM
 libvirt_type=kvm
 connection_type=libvirt
+<%= if @cell_config['libvirt_cpu_mode'] %>
+libvirt_cpu_mode=<%= cell_config['libvirt_cpu_mode'] %>
+<% end %>
+<%= if @cell_config['libvirt_cpu_model'] %>
+libvirt_cpu_model=<%= cell_config['libvirt_cpu_model'] %>
+<% end %>
 libvirt_use_virtio_for_bridges=True
 live_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE
 block_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_NON_SHARED_INC,VIR_MIGRATE_LIVE
 remove_unused_base_images=False
 running_deleted_instance_action=reap
 
-# Image service
+# Image
 image_service=nova.image.glance.GlanceImageService
 glance_api_servers=<%= cell_config['glance_servers'] %>
 
 # SQL
 sql_connection=mysql://<%= cell_config['db_user'] -%>:<%= cell_config['db_pass'] -%>@<%= cell_config['db_host'] -%>/<%= cell_config['db_name'] %>
 
-# Memcache
+# Memcached
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
-# Volume
+# Volume 
 volume_api_class=nova.volume.cinder.API
 
 # RabbitMQ
