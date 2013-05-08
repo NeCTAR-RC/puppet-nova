@@ -55,7 +55,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
     group   => nova,
     mode    => '0640',
     require => Package['nova-compute'],
-    content => template("nova/nova.conf.compute-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/nova.conf-compute.erb"),
   }
 
   file { '/etc/nova/nova-compute.conf':
@@ -64,7 +64,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
     group   => nova,
     mode    => '0640',
     require => Package['nova-compute'],
-    content => template("nova/nova-compute.conf-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
 
   file { '/etc/nova/dnsmasq.conf':
@@ -108,7 +108,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
     owner   => nova,
     group   => nova,
     mode    => '0600',
-    content => template("nova/api-paste.ini-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/api-paste.ini.erb"),
     notify  => Service['nova-api-metadata'],
     require => Package['nova-api-metadata'],
   }

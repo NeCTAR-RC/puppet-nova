@@ -16,7 +16,7 @@ class nova::cloudcontroller {
     owner   => nova,
     group   => nova,
     mode    => '0600',
-    content => template("nova/nova.conf-cell-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/nova.conf-cell.erb"),
     require => Package['nova-common'],
   }
 
@@ -25,7 +25,7 @@ class nova::cloudcontroller {
     owner   => nova,
     group   => nova,
     mode    => '0600',
-    content => template("nova/api-paste.ini-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/api-paste.ini.erb"),
     require => Package['nova-common'],
   }
 
@@ -34,7 +34,7 @@ class nova::cloudcontroller {
 class nova::cloudcontroller::api inherits nova::cloudcontroller {
 
   File['/etc/nova/nova.conf'] {
-    content => template("nova/nova.conf-api-${openstack_version}.erb"),
+    content => template("nova/${openstack_version}/nova.conf-api.erb"),
   }
 
 }
