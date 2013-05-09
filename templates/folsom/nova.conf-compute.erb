@@ -18,10 +18,10 @@ syslog_log_facility=LOG_DAEMON
 # Libvirt/KVM
 libvirt_type=kvm
 connection_type=libvirt
-<%= if @cell_config['libvirt_cpu_mode'] %>
+<% if @cell_config['libvirt_cpu_mode'] %>
 libvirt_cpu_mode=<%= cell_config['libvirt_cpu_mode'] %>
 <% end %>
-<%= if @cell_config['libvirt_cpu_model'] %>
+<% if @cell_config['libvirt_cpu_model'] %>
 libvirt_cpu_model=<%= cell_config['libvirt_cpu_model'] %>
 <% end %>
 libvirt_use_virtio_for_bridges=True
