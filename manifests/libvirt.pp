@@ -47,6 +47,7 @@ class nova::libvirt($uid, $host_uuid=false) {
   exec { 'virsh-net-undefine-default':
     command => '/usr/bin/virsh net-undefine default',
     onlyif  => '/usr/bin/test -e /etc/libvirt/qemu/networks/default.xml',
+    require => Package['libvirt-bin'],
   }
 
 }
