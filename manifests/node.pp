@@ -62,7 +62,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0640',
+    mode    => '0600',
     require => Package['nova-compute'],
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
@@ -107,7 +107,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0600',
+    mode    => '0640',
     content => template("nova/${openstack_version}/api-paste.ini.erb"),
     notify  => Service['nova-api-metadata'],
     require => Package['nova-api-metadata'],
