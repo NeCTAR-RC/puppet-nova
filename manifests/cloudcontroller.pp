@@ -2,6 +2,7 @@ class nova::cloudcontroller {
 
   require nova
 
+  $openstack_version = hiera('openstack_version')
   $cell_config = hiera_hash('nova::cell_config')
 
   realize Package['python-mysqldb']
