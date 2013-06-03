@@ -2,6 +2,7 @@ class nova::node($nova_uid, $instances_mount=undef) {
 
   require nova
 
+  $openstack_version = hiera('openstack_version')
   $cell_config = hiera_hash('nova::cell_config')
 
   package { 'nova-compute':
