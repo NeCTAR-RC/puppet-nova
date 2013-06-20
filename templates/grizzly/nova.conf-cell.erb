@@ -63,6 +63,9 @@ volume_api_class=nova.volume.cinder.API
 
 quota_driver=nova.quota.NoopQuotaDriver
 
+[conductor]
+use_local=true
+
 <% if cell_config['cells_enable'] %>
 [cells]
 enable=true
