@@ -75,6 +75,9 @@ novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
 
 quota_fixed_ips=-1
 
+<% extra_config.each do |key,value| %>
+<%= key %> = <%= value %><% end %>
+
 [conductor]
 use_local=true
 
