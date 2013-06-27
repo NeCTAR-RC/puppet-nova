@@ -1,6 +1,6 @@
 class nova::api {
 
-  require nova::cloudcontroller
+  require nova::cloudcontroller::api
 
   package { 'nova-api':
     ensure  => present,
