@@ -63,6 +63,9 @@ volume_api_class=nova.volume.cinder.API
 
 quota_driver=nova.quota.NoopQuotaDriver
 
+<% extra_config.each do |key,value| %>
+<%= key %> = <%= value %><% end %>
+
 [conductor]
 use_local=true
 

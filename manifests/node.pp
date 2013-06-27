@@ -1,4 +1,4 @@
-class nova::node($nova_uid, $instances_mount=undef, $extra_config=undef) {
+class nova::node($nova_uid, $instances_mount=undef, $extra_config={}) {
 
   require nova
 
