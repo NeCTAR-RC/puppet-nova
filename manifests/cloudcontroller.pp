@@ -1,4 +1,4 @@
-class nova::cloudcontroller {
+class nova::cloudcontroller($extra_config={}) {
 
   require nova
 
