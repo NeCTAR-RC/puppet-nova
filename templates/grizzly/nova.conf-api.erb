@@ -19,12 +19,11 @@ api_paste_config=/etc/nova/api-paste.ini
 enabled_apis=ec2,osapi_compute
 osapi_compute_workers=4
 ec2_workers=4
-osapi_volume_workers=4
 volume_api_class=nova.volume.cinder.API
 
 # Cells class overrides
 compute_api_class=nova.compute.cells_api.ComputeCellsAPI
-securitygroup_api_class=nova.compute.cells_api.SecurityGroupCellsAPI
+security_group_api=nova-cells
 stub_floating_ips_api=True
 
 # Authentication
