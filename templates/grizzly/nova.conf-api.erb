@@ -17,8 +17,8 @@ user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
 # API server
 api_paste_config=/etc/nova/api-paste.ini
 enabled_apis=ec2,osapi_compute
-osapi_compute_workers=4
-ec2_workers=4
+osapi_compute_workers=<%= workers %>
+ec2_workers=<%= workers %>
 volume_api_class=nova.volume.cinder.API
 
 # Cells class overrides

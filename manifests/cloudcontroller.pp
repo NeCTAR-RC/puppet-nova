@@ -32,7 +32,7 @@ class nova::cloudcontroller($extra_config={}) {
 
 }
 
-class nova::cloudcontroller::api inherits nova::cloudcontroller {
+class nova::cloudcontroller::api($workers=2) inherits nova::cloudcontroller {
 
   File['/etc/nova/nova.conf'] {
     content => template("nova/${openstack_version}/nova.conf-api.erb"),
