@@ -26,4 +26,10 @@ class nova::novnc {
     'http_novncproxy':
       check_command => 'http_port!6080';
   }
+
+  firewall { '100 novnc':
+    dport  => 6080,
+    proto  => tcp,
+    action => accept,
+  }
 }
