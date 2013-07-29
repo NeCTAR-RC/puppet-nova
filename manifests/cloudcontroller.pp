@@ -30,6 +30,15 @@ class nova::cloudcontroller($extra_config={}) {
     require => Package['nova-common'],
   }
 
+  file { '/etc/nova/policy.json':
+    ensure  => present,
+    owner   => nova,
+    group   => nova,
+    mode    => '0600',
+    source  => 'puppet:///modules/nova/policy.json',
+    require => Package['nova-common'],
+  }
+
 }
 
 class nova::cloudcontroller::api($workers=2) inherits nova::cloudcontroller {
