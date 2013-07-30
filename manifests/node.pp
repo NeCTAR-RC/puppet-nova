@@ -3,6 +3,9 @@ class nova::node($nova_uid, $instances_mount=undef, $extra_config={}) {
   require nova
 
   $openstack_version = hiera('openstack_version')
+  $keystone_host = hiera('keystone::host')
+  $keystone_protocol = hiera('keystone::protocol')
+  $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
 
   package { 'nova-compute':
