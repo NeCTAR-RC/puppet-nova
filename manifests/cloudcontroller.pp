@@ -3,6 +3,9 @@ class nova::cloudcontroller($extra_config={}) {
   require nova
 
   $openstack_version = hiera('openstack_version')
+  $keystone_host = hiera('keystone::host')
+  $keystone_protocol = hiera('keystone::protocol')
+  $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
 
   realize Package['python-mysqldb']
