@@ -19,7 +19,7 @@ class nova::novnc {
 
   nagios::nrpe::service {
     'service_nova_novncproxy':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:10 -w 1:5 -u nova -a /usr/bin/nova-novncproxy';
+      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:20 -w 1:10 -u nova -a /usr/bin/nova-novncproxy';
   }
 
   nagios::service {
