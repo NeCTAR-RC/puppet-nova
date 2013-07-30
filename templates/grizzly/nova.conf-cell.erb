@@ -1,14 +1,18 @@
 [DEFAULT]
+state_path=/var/lib/nova
 lock_path=/var/lock/nova
-state_path=/var/lib/nova 
-logdir=/var/log/nova
+bindir=/usr/bin
+rootwrap_config=/etc/nova/rootwrap.conf
+auth_strategy=keystone
+
+# Logging
 <% if @logdebug -%>
 verbose=True
 debug=True
-<%- else -%>
-verbose=False
 <%- end -%>
-rootwrap_config=/etc/nova/rootwrap.conf
+logdir=/var/log/nova
+use_syslog=true
+syslog_log_facility=LOG_DAEMON
 
 # Scheduler
 compute_scheduler_driver=nova.scheduler.filter_scheduler.FilterScheduler
