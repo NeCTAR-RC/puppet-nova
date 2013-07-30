@@ -29,12 +29,10 @@ glance_api_servers=<%= cell_config['glance_servers'] %>
 
 # SQL
 sql_connection=mysql://<%= cell_config['db_user'] -%>:<%= cell_config['db_pass'] -%>@<%= cell_config['db_host'] -%>/<%= cell_config['db_name'] %>
+sql_idle_timeout=60
 
 # Memcache
 memcached_servers=<%= cell_config['memcached_servers'] %>
-
-# Volume
-volume_api_class=nova.volume.cinder.API
 
 # RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
@@ -79,9 +77,6 @@ quota_fixed_ips=-1
 [conductor]
 use_local=true
 
-
-<% if cell_config['cells_enable'] %>
 [cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
-<% end %>
