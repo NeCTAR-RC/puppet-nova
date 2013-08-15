@@ -6,12 +6,13 @@
     "cells_scheduler_filter:TargetCellFilter": "is_admin:True",
 
     "compute:create": "",
+    "compute:resize": "is_admin:True",
     "compute:create:attach_network": "",
     "compute:create:attach_volume": "",
     "compute:create:forced_host": "is_admin:True",
     "compute:get_all": "",
     "compute:get_all_tenants": "",
-    "compute:get_all_instance_metadata": "",
+    "compute:get_all_instance_metadata": "rule:admin_api",
 
 
     "admin_api": "is_admin:True",
