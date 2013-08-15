@@ -23,6 +23,11 @@ block_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRA
 remove_unused_base_images=False
 running_deleted_instance_action=reap
 
+ram_allocation_ratio=<%= cell_config['ram_allocation_ratio'] %>
+cpu_allocation_ratio=<%= cell_config['cpu_allocation_ratio'] %>
+reserved_host_memory_mb=<%= cell_config['reserved_host_memory'] %>
+reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
+
 # Image service
 image_service=nova.image.glance.GlanceImageService
 glance_api_servers=<%= cell_config['glance_servers'] %>
