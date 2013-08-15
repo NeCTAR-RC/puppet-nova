@@ -22,6 +22,7 @@ reserved_host_memory_mb=<%= cell_config['reserved_host_memory'] %>
 reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
 scheduler_default_filters=<%= cell_config['scheduler_default_filters'] %>
 compute_fill_first_cost_fn_weight=<%= cell_config['compute_fill_weight'] %>
+multi_instance_display_name_template='Server %(uuid)s'
 
 # Authentication
 keystone_ec2_url = <%= scope.function_hiera(['keystone::protocol']) %>://<%= scope.function_hiera(['keystone::host']) %>:5000/v2.0/ec2tokens
