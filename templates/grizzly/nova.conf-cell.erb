@@ -61,8 +61,9 @@ quota_driver=nova.quota.NoopQuotaDriver
 <% if @cell_config['reservation_expire'] %>reservation_expire=<%= cell_config['reservation_expire'] %><% end %>
 
 # Extra
-<% extra_config.each do |key,value| %>
-<%= key %> = <%= value %><% end %>
+<% extra_config.keys.sort.each do |key| -%>
+<%= key %> = <%= extra_config[key] %>
+<% end -%>
 
 [conductor]
 use_local=true
