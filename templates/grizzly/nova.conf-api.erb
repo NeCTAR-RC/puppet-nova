@@ -27,6 +27,7 @@ cinder_endpoint_template=http://localhost:8776/v1/%(project_id)s
 ec2_host=<%= cell_config['ec2_host'] %>
 ec2_scheme=https
 multi_instance_display_name_template='Server %(uuid)s'
+cinder_cross_az_attach=False
 
 # Cells class overrides
 compute_api_class=nova.compute.cells_api.ComputeCellsAPI
