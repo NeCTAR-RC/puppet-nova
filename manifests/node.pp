@@ -1,4 +1,4 @@
-class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver_proxyclient_address=$ipaddress) {
+class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver_proxyclient_address=$ipaddress, $libvirt_type='kvm') {
 
   require nova
 
