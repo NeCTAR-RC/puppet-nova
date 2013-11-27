@@ -38,7 +38,7 @@ class nova::cloudcontroller($extra_config={}) {
     owner   => nova,
     group   => nova,
     mode    => '0600',
-    source  => 'puppet:///modules/nova/policy.json',
+    source  => "puppet:///modules/nova/${openstack_version}/policy.json",
     require => Package['nova-common'],
   }
 
