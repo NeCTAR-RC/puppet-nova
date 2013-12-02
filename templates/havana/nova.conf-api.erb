@@ -23,7 +23,7 @@ api_paste_config=/etc/nova/api-paste.ini
 enabled_apis=ec2,osapi_compute
 osapi_compute_workers=<%= workers %>
 ec2_workers=<%= workers %>
-cinder_endpoint_template=http://localhost:8776/v1/%(project_id)s
+cinder_endpoint_template=http://<%= cell_config['cinder_host'] %>:8776/v1/%(project_id)s
 ec2_host=<%= cell_config['ec2_host'] %>
 ec2_scheme=https
 multi_instance_display_name_template='Server %(uuid)s'
