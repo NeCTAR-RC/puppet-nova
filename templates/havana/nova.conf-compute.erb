@@ -79,6 +79,12 @@ quota_fixed_ips=-1
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
 
+[spice]
+enabled=true
+html5proxy_base_url=http://<%= cell_config['vnc_host'] %>:6082/spice_auto.html
+server_listen=0.0.0.0
+server_proxyclient_address=<%= vncserver_proxyclient_address %>
+
 [conductor]
 use_local=true
 
