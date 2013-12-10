@@ -11,8 +11,4 @@ class nova::kvm($gid) {
     gid    => $gid,
   }
 
-  package {'kvm-ipxe':
-    ensure => installed,
-  }
-  
 }
