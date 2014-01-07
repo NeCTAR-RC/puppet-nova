@@ -75,7 +75,10 @@ max_age = 10
 until_refresh = 5
 reservation_expire=600
 
-
+# Extra
+<% extra_config.keys.sort.each do |key| -%>
+<%= key %> = <%= extra_config[key] %>
+<% end -%>
 
 [cells]
 enable=true
