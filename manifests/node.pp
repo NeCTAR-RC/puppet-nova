@@ -75,6 +75,7 @@ class nova::node (
 
   include nova::libvirt
   include nova::network
+  include nova::api-metadata
 
   file { '/etc/nova/api-paste.ini':
     ensure  => present,
@@ -86,21 +87,4 @@ class nova::node (
     require => Package['nova-api-metadata'],
   }
 
-  package { 'nova-api-metadata':
-    ensure  => present,
-    require => User['nova'],
-  }
-
-  service { 'nova-api-metadata':
-    ensure    => running,
-    enable    => true,
-    provider  => upstart,
-    subscribe => File['/etc/nova/nova.conf'],
-    require   => Package['nova-api-metadata'],
-  }
-
-  nagios::nrpe::service {
-    'service_nova_api_metadata':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-api-metadata';
-  }
 }
