@@ -1,4 +1,10 @@
-class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver_proxyclient_address=$ipaddress, $libvirt_type='kvm') {
+class nova::node (
+  $nova_uid,
+  $instances_mount=undef,
+  $extra_config={},
+  $vncserver_proxyclient_address=$ipaddress,
+  $libvirt_type='kvm')
+{
 
   require nova
 
@@ -9,11 +15,6 @@ class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver
   $cell_config = hiera_hash('nova::cell_config')
 
   package { 'nova-compute':
-    ensure  => present,
-    require => User['nova'],
-  }
-
-  package { 'nova-network':
     ensure  => present,
     require => User['nova'],
   }
@@ -71,28 +72,12 @@ class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
 
-  file { '/etc/nova/dnsmasq.conf':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0644',
-    require => Package['nova-compute'],
-    content => template('nova/dnsmasq.conf.erb'),
-  }
-
   service { 'nova-compute':
     ensure    => running,
     enable    => true,
     provider  => upstart,
     subscribe => [ File['/etc/nova/nova-compute.conf'],
                    File['/etc/nova/nova.conf']],
-  }
-
-  service { 'nova-network':
-    ensure    => running,
-    enable    => true,
-    provider  => upstart,
-    subscribe => File['/etc/nova/nova.conf'],
   }
 
   case $libvirt_type {
@@ -102,14 +87,11 @@ class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver
   }
 
   include nova::libvirt
+  include nova::network
 
   nagios::nrpe::service {
     'service_nova_compute':
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-compute';
-    'service_nova_network':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-network';
-    'service_dnsmasq':  # RE is used to prevent check_procs matching its self.
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 2:2 --ereg-argument-array /usr/sbin/dnsmas[q]';
   }
 
   file { '/etc/nova/api-paste.ini':
