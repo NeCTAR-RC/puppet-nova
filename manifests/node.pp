@@ -14,11 +14,6 @@ class nova::node (
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
 
-  package { 'nova-compute':
-    ensure  => present,
-    require => User['nova'],
-  }
-
   realize Package['python-memcache']
   realize Package['python-mysqldb']
 
@@ -72,14 +67,6 @@ class nova::node (
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
 
-  service { 'nova-compute':
-    ensure    => running,
-    enable    => true,
-    provider  => upstart,
-    subscribe => [ File['/etc/nova/nova-compute.conf'],
-                   File['/etc/nova/nova.conf']],
-  }
-
   case $libvirt_type {
     'kvm':   { include nova::kvm }
     'lxc':   { include nova::lxc }
@@ -88,11 +75,6 @@ class nova::node (
 
   include nova::libvirt
   include nova::network
-
-  nagios::nrpe::service {
-    'service_nova_compute':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-compute';
-  }
 
   file { '/etc/nova/api-paste.ini':
     ensure  => present,
