@@ -45,6 +45,7 @@ rabbit_durable_queues=True
 rabbit_use_ssl=True
 <% end %>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+<% if cell_config['rabbit_max_retries'] %>rabbit_max_retries=<%= cell_config['rabbit_max_retries'] %><% end %>
 
 # Database
 sql_connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
