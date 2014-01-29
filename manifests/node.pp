@@ -95,7 +95,12 @@ class nova::node($nova_uid, $instances_mount=undef, $extra_config={}, $vncserver
     subscribe => File['/etc/nova/nova.conf'],
   }
 
-  include nova::kvm
+  case $libvirt_type {
+    'kvm':   { include nova::kvm }
+    'lxc':   { include nova::lxc }
+    default: {  }
+  }
+
   include nova::libvirt
 
   nagios::nrpe::service {
