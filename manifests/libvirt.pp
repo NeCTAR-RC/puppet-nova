@@ -1,4 +1,4 @@
-class nova::libvirt($uid, $host_uuid=false) {
+class nova::libvirt($uid, $host_uuid=false, $config={}) {
 
   package { 'libvirt-bin':
     ensure  => present,

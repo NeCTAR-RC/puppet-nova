@@ -238,7 +238,9 @@ auth_tcp = "none"
 # The maximum number of concurrent client connections to allow
 # over all sockets combined.
 #max_clients = 20
-
+<% if config['max_clients'] %>
+max_clients = <%= config['max_clients'] %>
+<% end %>
 
 # The minimum limit sets the number of workers to start up
 # initially. If the number of active clients exceeds this,
@@ -247,6 +249,13 @@ auth_tcp = "none"
 # of clients allowed
 #min_workers = 5
 #max_workers = 20
+<% if config['max_workers'] %>
+max_workers = <%= config['max_workers'] %>
+<% end %>
+<% if config['min_workers'] %>
+min_workers = <%= config['min_workers'] %>
+<% end %>
+
 
 # Total global limit on concurrent RPC calls. Should be
 # at least as large as max_workers. Beyond this, RPC requests
@@ -257,12 +266,19 @@ auth_tcp = "none"
 # XXX this isn't actually enforced yet, only the per-client
 # limit is used so far
 #max_requests = 20
+<% if config['max_requests'] %>
+max_requests = <%= config['max_requests'] %>
+<% end %>
 
 # Limit on concurrent requests from a single client
 # connection. To avoid one client monopolizing the server
 # this should be a small fraction of the global max_requests
 # and max_workers parameter
 #max_client_requests = 5
+<% if config['max_client_requests'] %>
+max_client_requests = <%= config['max_client_requests'] %>
+<% end %>
+
 
 #################################################################
 #
