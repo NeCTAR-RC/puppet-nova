@@ -1,4 +1,5 @@
 class nova::libvirt($uid, $host_uuid=false) {
+  libvirt_config = hiera_hash('nova::libvirt_config',{})
 
   package { 'libvirt-bin':
     ensure  => present,
