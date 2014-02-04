@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3///u4\u003d",
+        "filename": "manifests/node.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-02-04T05:47:39Z",
+      "side": 1,
+      "message": "don\u0027t need this one anymore?",
+      "revId": "af5a96bb479b8ac0071703c7ca880c39d64e5893",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
