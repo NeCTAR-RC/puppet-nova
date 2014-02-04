@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3///vY\u003d",
+        "filename": "manifests/compute.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-02-04T05:39:36Z",
+      "side": 1,
+      "message": "instances_mount?",
+      "revId": "43887ab9064a01ec19796208af74e4e40e578179",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
