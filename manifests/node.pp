@@ -17,22 +17,10 @@ class nova::node (
   realize Package['python-memcache']
   realize Package['python-mysqldb']
 
-  if $instances_mount {
-
-    package { 'nfs-common':
-      ensure => installed,
-    }
-
-    mount { '/var/lib/nova/instances':
-      device  => $instances_mount,
-      fstype  => hiera('nfs::type', 'nfs'),
-      ensure  => mounted,
-      options => hiera('nfs::options', '_netdev,auto'),
-      atboot  => true,
-      require => [ Package['nova-compute'],
-                   Package['nfs-common']],
-    }
+  package {'nova-common':
+    ensure => present,
   }
+
   group { 'nova':
     ensure => present,
   }
@@ -54,7 +42,7 @@ class nova::node (
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    require => Package['nova-compute'],
+    require => Package['nova-common'],
     content => template("nova/${openstack_version}/nova.conf-compute.erb"),
   }
 
@@ -63,7 +51,7 @@ class nova::node (
     owner   => nova,
     group   => nova,
     mode    => '0600',
-    require => Package['nova-compute'],
+    require => Package['nova-common'],
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
 
@@ -77,15 +65,5 @@ class nova::node (
   include nova::compute
   include nova::network
   include nova::api-metadata
-
-  file { '/etc/nova/api-paste.ini':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0640',
-    content => template("nova/${openstack_version}/api-paste.ini.erb"),
-    notify  => Service['nova-api-metadata'],
-    require => Package['nova-api-metadata'],
-  }
 
 }
