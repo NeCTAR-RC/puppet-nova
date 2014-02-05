@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3///uA\u003d",
+        "filename": "manifests/libvirt.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-02-05T05:50:42Z",
+      "side": 1,
+      "message": "Another way of doing this would be to:\n\nclass nova::libvirt($uid, $host_uuid\u003dfalse, config\u003d{}) {\n ....\n}\n\nThen you will have a variable config available in the template. \n\nIn hiera you would set:\n\nnova::libvirt::config\n\nHow does that sound?\n\nBTW, great to have other people sending reviews.",
+      "revId": "d43fd2d64a8bae231c0f67cf21afa526d51e8457",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
