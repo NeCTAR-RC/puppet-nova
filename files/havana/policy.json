@@ -3,6 +3,7 @@
     "admin_or_owner":  "is_admin:True or project_id:%(project_id)s",
     "default": "rule:admin_or_owner",
     "monitoring": "role:monitoring",
+    "monitoring_or_owner":  "role:monitoring or project_id:%(project_id)s",
     "quota_admin": "role:QuotaAdmin",
 
     "cells_scheduler_filter:TargetCellFilter": "is_admin:True",
@@ -11,8 +12,8 @@
     "compute:create:attach_network": "",
     "compute:create:attach_volume": "",
     "compute:create:forced_host": "is_admin:True",
-    "compute:get_all": "",
-    "compute:get_all_tenants": "",
+    "compute:get_all": "rule:monitoring_or_owner",
+    "compute:get_all_tenants": "rule:admin_api or rule:monitoring",
     "compute:unlock_override": "rule:admin_api",
 
     "compute:shelve": "rule:admin_api",
