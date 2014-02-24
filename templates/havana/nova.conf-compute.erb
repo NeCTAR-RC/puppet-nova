@@ -88,7 +88,9 @@ notify_on_state_change = vm_and_task_state
 [conductor]
 use_local=true
 
+<% if cell_config['use_cells'] %>
 [cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
 cell_type=compute
+<% end -%>

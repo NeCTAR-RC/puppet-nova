@@ -58,7 +58,6 @@ memcached_servers=<%= cell_config['memcached_servers'] %>
 network_manager=nova.network.manager.FlatDHCPManager
 
 # Quota
-quota_driver=nova.quota.NoopQuotaDriver
 <% if @cell_config['reservation_expire'] %>reservation_expire=<%= cell_config['reservation_expire'] %><% end %>
 
 # Extra
@@ -68,6 +67,10 @@ quota_driver=nova.quota.NoopQuotaDriver
 
 [conductor]
 use_local=true
+
+<% if cell_config['use_cells'] %>
+# Quota
+quota_driver=nova.quota.NoopQuotaDriver
 
 [cells]
 enable=true
@@ -79,3 +82,4 @@ cell_type=compute
 <% if @cell_config['cells_expire_reservations'] %>expire_reservations=<%= cell_config['cells_expire_reservations'] %><% end %>
 <% if @cell_config['cells_scheduler_direct_only_cells'] %>scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %><% end %>
 heal_update_number=<%= cell_config['cells_heal_update_number'] %>
+<% end -%>
