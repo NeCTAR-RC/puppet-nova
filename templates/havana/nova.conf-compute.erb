@@ -85,8 +85,10 @@ notify_on_state_change = vm_and_task_state
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
 
+<% if not @use_conductor -%>
 [conductor]
 use_local=true
+<% end -%>
 
 <% if cell_config['use_cells'] -%>
 [cells]
