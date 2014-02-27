@@ -13,6 +13,7 @@ class nova::node (
   $keystone_protocol = hiera('keystone::protocol')
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
+  $use_conductor = hiera('nova::use_conductor', false)
 
   realize Package['python-memcache']
   realize Package['python-mysqldb']
