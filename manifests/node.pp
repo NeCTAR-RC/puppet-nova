@@ -19,7 +19,8 @@ class nova::node (
   realize Package['python-mysqldb']
 
   package {'nova-common':
-    ensure => present,
+    ensure  => present,
+    require => User['nova'],
   }
 
   group { 'nova':
