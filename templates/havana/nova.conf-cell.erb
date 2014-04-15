@@ -62,7 +62,13 @@ network_manager=nova.network.manager.FlatDHCPManager
 
 # Extra
 <% extra_config.keys.sort.each do |key| -%>
-<%= key %> = <%= extra_config[key] %>
+<%   if extra_config[key].is_a? Array -%>
+<%     extra_config[key].each do |value| -%>
+<%=      key %> = <%= value %>
+<%     end -%>
+<%   else -%>
+<%=    key %> = <%= extra_config[key] %>
+<%   end -%>
 <% end -%>
 
 <% if not @use_conductor -%>
