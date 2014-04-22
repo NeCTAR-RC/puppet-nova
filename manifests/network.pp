@@ -1,4 +1,8 @@
-class nova::network($gateway, $dns_server_list) {
+class nova::network(
+             $gateway, 
+             $dns_server_list,
+             $dnsmasq_procs='2',
+) {
 
   require nova::node
 
@@ -27,7 +31,7 @@ class nova::network($gateway, $dns_server_list) {
     'service_nova_network':
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-network';
     'service_dnsmasq':  # RE is used to prevent check_procs matching its self.
-    check_command => '/usr/lib/nagios/plugins/check_procs -c 2:2 --ereg-argument-array /usr/sbin/dnsmas[q]';
+    check_command => "/usr/lib/nagios/plugins/check_procs -c ${dnsmasq_procs}:${dnsmasq_procs} --ereg-argument-array /usr/sbin/dnsmas[q]";
   }
 
 }
