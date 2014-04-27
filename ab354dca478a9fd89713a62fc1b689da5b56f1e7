@@ -1,0 +1,9 @@
+Change-Id: Iab354dca478a9fd89713a62fc1b689da5b56f1e7
+Code-Review+1: Sam Morrison <sam.morrison@unimelb.edu.au>
+Verified+1: Jenkins <rc-melbourne@nectar.org.au>
+Code-Review+1: Edan Scriven <edan.scriven@uqconnect.edu.au>
+Submitted-by: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-at: Mon, 28 Apr 2014 09:35:32 +1000
+Reviewed-on: https://review.rc.nectar.org.au/1280
+Project: NeCTAR-RC/puppet-nova
+Branch: refs/heads/master
