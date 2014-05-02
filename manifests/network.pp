@@ -2,6 +2,7 @@ class nova::network(
              $gateway, 
              $dns_server_list,
              $dnsmasq_procs='2',
+             $mtu=undef
 ) {
 
   require nova::node
