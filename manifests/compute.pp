@@ -31,7 +31,7 @@ class nova::compute {
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-compute';
   }
 
-  $instances_mount = hiera('nova::node::instance_mount', undef)
+  $instances_mount = hiera('nova::node::instances_mount', undef)
 
   if $instances_mount {
 
