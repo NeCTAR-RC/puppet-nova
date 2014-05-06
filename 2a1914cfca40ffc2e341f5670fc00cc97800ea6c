@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3//+GE\u003d",
+        "filename": "templates/dnsmasq.conf.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-05-06T01:21:22Z",
+      "side": 1,
+      "message": "Should be \u003c%\u003d @mtu %\u003e because we want a new line after this option",
+      "revId": "2a1914cfca40ffc2e341f5670fc00cc97800ea6c",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
