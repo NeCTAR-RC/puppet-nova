@@ -9,7 +9,7 @@ class nova::cloudcontroller($extra_config={}) {
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
 
-  realize Package['python-mysqldb']
+  include mysql::python
   realize Package['python-keystone']
 
   package {'nova-common':

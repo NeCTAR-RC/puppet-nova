@@ -16,7 +16,7 @@ class nova::node (
   $use_conductor = hiera('nova::use_conductor', false)
 
   realize Package['python-memcache']
-  realize Package['python-mysqldb']
+  include mysql::python
 
   package {'nova-common':
     ensure  => present,
