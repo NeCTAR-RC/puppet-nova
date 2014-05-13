@@ -89,6 +89,6 @@ cell_type=compute
 <% if @cell_config['cells_capabilities'] %>capabilities="<%= cell_config['cells_capabilities'] %>"<% end %>
 <% if @cell_config['cells_expire_reservations'] %>expire_reservations=<%= cell_config['cells_expire_reservations'] %><% end %>
 <% if @cell_config['cells_scheduler_direct_only_cells'] %>scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %><% end %>
-<% if @cell_config['reserve_percent'] %>reserve_percent=<%= cell_config['reserve_percent'] %><% end %>
+<% if @cell_config['cells_reserve_percent'] %>reserve_percent=<%= cell_config['cells_reserve_percent'] %><% end %>
 heal_update_number=<%= cell_config['cells_heal_update_number'] %>
 <% end -%>
