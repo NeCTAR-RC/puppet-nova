@@ -7,6 +7,7 @@ class nova::cloudcontroller($extra_config={}) {
   $keystone_protocol = hiera('keystone::protocol')
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
+  $conductor_config = hiera_hash('nova::conductor_config')
   $use_conductor = hiera('nova::use_conductor', false)
 
   include mysql::python
