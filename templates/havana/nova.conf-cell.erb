@@ -71,9 +71,19 @@ network_manager=nova.network.manager.FlatDHCPManager
 <%   end -%>
 <% end -%>
 
-<% if not @use_conductor -%>
 [conductor]
+<% if not @use_conductor -%>
 use_local=true
+<% else -%>
+	<% conductor_config.keys.sort.each do |key| -%>
+	<%   if conductor_config[key].is_a? Array -%>
+	<%     conductor_config[key].each do |value| -%>
+	<%=      key %> = <%= value %>
+	<%     end -%>
+	<%   else -%>
+	<%=    key %> = <%= conductor_config[key] %>
+	<%   end -%>
+	<% end -%>
 <% end -%>
 
 <% if cell_config['use_cells'] %>
