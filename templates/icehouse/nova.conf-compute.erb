@@ -64,12 +64,14 @@ novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
 # Quota
 quota_fixed_ips=-1
 
+<%- if @send_notifications -%>
 # Notifications
 notification_driver = nova.openstack.common.notifier.rpc_notifier
 notification_driver = ceilometer.compute.nova_notifier
 instance_usage_audit = True
 instance_usage_audit_period = hour
 notify_on_state_change = vm_and_task_state
+<%- end -%>
 
 <% extra_config.keys.sort.each do |key| -%>
 <%= key %> = <%= extra_config[key] %>

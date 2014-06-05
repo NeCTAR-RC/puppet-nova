@@ -14,6 +14,7 @@ class nova::node (
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
+  $send_notifications = hiera('nova::send_notifications', true)
 
   realize Package['python-memcache']
   include mysql::python
