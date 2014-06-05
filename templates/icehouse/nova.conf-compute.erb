@@ -48,18 +48,12 @@ rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
 # Networking
 network_manager=nova.network.manager.FlatDHCPManager
-network_size=<%= cell_config['network_size'] %>
 force_dhcp_release=True
 dhcp_domain=<%= cell_config['dhcp_domain'] %>
 dhcpbridge_flagfile=/etc/nova/nova.conf
 dnsmasq_config_file=/etc/nova/dnsmasq.conf
 routing_source_ip=<%= ipaddress %>
 multi_host=True
-fixed_range=<%= cell_config['fixed_ip_range'] %>
-flat_network_dns=<%= cell_config['flat_network_dns'] %>
-flat_network_dhcp_start=<%= cell_config['flat_network_dhcp_start'] %>
-flat_network_bridge=<%= cell_config['network_bridge'] %>
-flat_interface=<%= cell_config['flat_interface'] %>
 allow_same_net_traffic=false
 
 # VNC
