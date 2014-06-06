@@ -71,6 +71,9 @@ vncserver_listen=0.0.0.0
 vncserver_proxyclient_address=<%= vncserver_proxyclient_address %>
 novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
 
+# Metadata
+metadata_workers = <%= metadata_workers %>
+
 # Quota
 quota_fixed_ips=-1
 

@@ -30,10 +30,11 @@ class nova::api-metadata {
     notify  => Service['nova-api-metadata'],
     require => Package['nova-api-metadata'],
   }
+  $workers = $nova::node::metadata_workers + 1
 
   nagios::nrpe::service {
     'service_nova_api_metadata':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-api-metadata';
+      check_command => "/usr/lib/nagios/plugins/check_procs -c ${workers}:${workers} -u nova -a /usr/bin/nova-api-metadata";
   }
 
 }
