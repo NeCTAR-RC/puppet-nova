@@ -1,4 +1,4 @@
-class nova::conductor {
+class nova::conductor($workers=0) {
 
   require nova::cloudcontroller
 
@@ -13,9 +13,13 @@ class nova::conductor {
     subscribe => File['/etc/nova/nova.conf'],
     require   => Package['nova-conductor'],
   }
-
+  if $workers == 0 {
+    $cores = $processorcount + 1
+  } else {
+    $cores = $workers
+  }
   nagios::nrpe::service {
     'service_nova_conductor':
-      check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-conductor';
+      check_command => "/usr/lib/nagios/plugins/check_procs -c ${cores}:${cores} -u nova -a /usr/bin/nova-conductor";
   }
 }
