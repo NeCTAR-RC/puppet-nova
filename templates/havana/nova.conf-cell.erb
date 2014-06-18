@@ -71,10 +71,11 @@ network_manager=nova.network.manager.FlatDHCPManager
 <%   end -%>
 <% end -%>
 
-<% if not @use_conductor -%>
 [conductor]
+<% if not @use_conductor -%>
 use_local=true
 <% end -%>
+workers = <%= conductor_workers %>
 
 <%- if @icehouse_compat -%>
 [upgrade_levels]
