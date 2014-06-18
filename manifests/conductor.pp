@@ -1,6 +1,7 @@
 class nova::conductor($workers=0) {
 
   require nova::cloudcontroller
+  $openstack_version = hiera('openstack_version')
 
   package { 'nova-conductor':
     ensure  => present,
@@ -14,7 +15,11 @@ class nova::conductor($workers=0) {
     require   => Package['nova-conductor'],
   }
   if $workers == 0 {
-    $cores = $processorcount + 1
+    if $openstack_version == 'havana' {
+      $cores = 1
+    } else {
+      $cores = $processorcount + 1
+    }
   } else {
     $cores = $workers
   }
