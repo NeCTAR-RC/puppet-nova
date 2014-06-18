@@ -52,7 +52,7 @@ force_dhcp_release=True
 dhcp_domain=<%= cell_config['dhcp_domain'] %>
 dhcpbridge_flagfile=/etc/nova/nova.conf
 dnsmasq_config_file=/etc/nova/dnsmasq.conf
-routing_source_ip=<%= ipaddress %>
+routing_source_ip=<%= routing_source_ip %>
 multi_host=True
 allow_same_net_traffic=false
 
