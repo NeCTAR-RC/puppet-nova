@@ -3,6 +3,7 @@ class nova::node (
   $instances_mount=undef,
   $extra_config={},
   $vncserver_proxyclient_address=$ipaddress,
+  $routing_source_ip=$ipaddress,
   $metadata_workers=1,
   $libvirt_type='kvm')
 {
