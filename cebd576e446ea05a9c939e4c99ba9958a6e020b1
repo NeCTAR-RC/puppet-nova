@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3//8o0\u003d",
+        "filename": "manifests/cells.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-03T07:00:12Z",
+      "side": 1,
+      "message": "Should be in a separate file\nhttp://puppet-lint.com/checks/autoloader_layout/",
+      "revId": "cebd576e446ea05a9c939e4c99ba9958a6e020b1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAT3//8ow\u003d",
+        "filename": "manifests/cells.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-03T07:00:12Z",
+      "side": 1,
+      "message": "No need for quotes",
+      "revId": "cebd576e446ea05a9c939e4c99ba9958a6e020b1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAT3//8oo\u003d",
+        "filename": "manifests/cells.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-03T07:00:12Z",
+      "side": 1,
+      "message": "\"hiera\" spelling",
+      "revId": "cebd576e446ea05a9c939e4c99ba9958a6e020b1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAAT3//8os\u003d",
+        "filename": "manifests/cells.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-03T07:00:12Z",
+      "side": 1,
+      "message": "nova-cells-1 should be in single quotes",
+      "revId": "cebd576e446ea05a9c939e4c99ba9958a6e020b1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
