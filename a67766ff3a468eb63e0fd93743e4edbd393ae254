@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3//8io\u003d",
+        "filename": "templates/havana/nova.conf-cell.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-23T05:34:04Z",
+      "side": 1,
+      "message": "No default and I think it\u0027s better to lookup \u0027nova::conductor::workers\u0027 variable from within the manifest with hiera() and then reference the variable from here. That way the function get\u0027s called from one place and better for maintainability.",
+      "revId": "a67766ff3a468eb63e0fd93743e4edbd393ae254",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
