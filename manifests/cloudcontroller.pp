@@ -12,7 +12,6 @@ class nova::cloudcontroller($extra_config={}) {
   $icehouse_compat = hiera('nova::icehouse_compat', false)
 
   include mysql::python
-  realize Package['python-keystone']
 
   package {'nova-common':
     ensure => installed,
