@@ -89,8 +89,10 @@ use_local=true
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
 
+<%- if @icehouse_compat -%>
 [upgrade_levels]
 compute=icehouse-compat
+<% end -%>
 
 <% if cell_config['use_cells'] -%>
 [cells]

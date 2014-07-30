@@ -76,6 +76,11 @@ network_manager=nova.network.manager.FlatDHCPManager
 use_local=true
 <% end -%>
 
+<%- if @icehouse_compat -%>
+[upgrade_levels]
+compute=icehouse-compat
+<% end -%>
+
 <% if cell_config['use_cells'] %>
 # Quota
 quota_driver=nova.quota.NoopQuotaDriver

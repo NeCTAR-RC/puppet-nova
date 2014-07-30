@@ -16,6 +16,7 @@ class nova::node (
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
   $send_notifications = hiera('nova::send_notifications', true)
+  $icehouse_compat = hiera('nova::icehouse_compat', false)
 
   realize Package['python-memcache']
   include mysql::python

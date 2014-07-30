@@ -8,6 +8,7 @@ class nova::cloudcontroller($extra_config={}) {
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
+  $icehouse_compat = hiera('nova::icehouse_compat', false)
 
   include mysql::python
   realize Package['python-keystone']

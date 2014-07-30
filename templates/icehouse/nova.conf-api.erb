@@ -82,9 +82,11 @@ reservation_expire=600
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
 
+<%- if @icehouse_compat -%>
 [upgrade_levels]
 baseapi = havana
 compute=icehouse-compat
+<%- end -%>
 
 <% if cell_config['use_cells'] %>
 # Cells class overrides
@@ -98,4 +100,4 @@ cell_type=api
 <% if @cell_config['cells_instance_update_num_instances'] %>instance_update_num_instances=<%= cell_config['cells_instance_update_num_instances'] %><% end %>
 <% if @cell_config['cells_scheduler_direct_only_cells'] %>scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %><% end %>
 heal_update_number=<%= cell_config['cells_heal_update_number'] %>
-<% end %>
+<%- end -%>
