@@ -71,7 +71,7 @@ network_manager=nova.network.manager.FlatDHCPManager
 <% if not @use_conductor -%>
 use_local=true
 <% end -%>
-workers = <%= scope.function_hiera(['nova::conductor::workers']) %>
+workers = <%= @conductor_workers %>
 
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
