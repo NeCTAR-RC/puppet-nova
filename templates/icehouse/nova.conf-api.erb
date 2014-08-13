@@ -78,6 +78,11 @@ reservation_expire=600
 <%   end -%>
 <% end -%>
 
+<%- if cell_config['use_cells'] -%>
+# Cells class overrides
+security_group_api=nova-cells
+<%- end -%>
+
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
@@ -88,10 +93,7 @@ baseapi = havana
 compute=icehouse-compat
 <%- end -%>
 
-<% if cell_config['use_cells'] %>
-# Cells class overrides
-security_group_api=nova-cells
-
+<%- if cell_config['use_cells'] -%>
 [cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
