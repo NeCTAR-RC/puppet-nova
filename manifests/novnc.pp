@@ -24,7 +24,7 @@ class nova::novnc {
 
   nagios::service {
     'http_novncproxy':
-      check_command => 'http_port!6080';
+      check_command => 'check_novnc!6080';
   }
 
   firewall { '100 novnc':
