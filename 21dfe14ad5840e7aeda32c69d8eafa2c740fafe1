@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_f1c36236",
+        "filename": "files/icehouse/policy.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2014-09-15T14:15:18Z",
+      "side": 1,
+      "message": "rule:monitoring_or_default ?",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "21dfe14ad5840e7aeda32c69d8eafa2c740fafe1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
