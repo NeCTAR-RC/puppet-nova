@@ -22,6 +22,30 @@
       "revId": "21dfe14ad5840e7aeda32c69d8eafa2c740fafe1",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_71e772e5",
+        "filename": "files/icehouse/policy.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000084
+      },
+      "writtenOn": "2014-09-15T23:57:36Z",
+      "side": 1,
+      "message": "i don\u0027t think that the rule:monitoring_or_default rule should be used here because this is an admin api.\n\nthe _or_default part basically grants the owner access to the api, they already can access their instances with the computue:get_all rule.  This compute:get_all_tenants relates to the --all-tenants option for the nova command.",
+      "parentUuid": "7af0899e_f1c36236",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "21dfe14ad5840e7aeda32c69d8eafa2c740fafe1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
