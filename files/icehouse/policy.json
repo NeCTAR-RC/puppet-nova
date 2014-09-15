@@ -17,6 +17,7 @@
     "compute:start": "rule:admin_or_owner",
     "compute:stop": "rule:admin_or_owner",
     "compute:unlock_override": "rule:admin_api",
+    "compute::get": "rule:admin_api or rule:monitoring",
 
     "compute:shelve": "rule:admin_api",
     "compute:shelve_offload": "rule:admin_api",
