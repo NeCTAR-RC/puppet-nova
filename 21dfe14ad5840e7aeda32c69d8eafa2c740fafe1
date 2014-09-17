@@ -46,6 +46,30 @@
       "revId": "21dfe14ad5840e7aeda32c69d8eafa2c740fafe1",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_f1f1a296",
+        "filename": "files/icehouse/policy.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2014-09-17T12:22:17Z",
+      "side": 1,
+      "message": "Yeah sorry brain-fade - I was thinking of the default rule for keystone: https://review.rc.nectar.org.au/#/c/1624/1/files/icehouse/policy.json\nNothing to see here.",
+      "parentUuid": "7af0899e_71e772e5",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "21dfe14ad5840e7aeda32c69d8eafa2c740fafe1",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
