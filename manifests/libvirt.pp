@@ -1,5 +1,10 @@
 class nova::libvirt($uid, $host_uuid=false, $config={}) {
 
+  package {'ebtables':
+    ensure => present,
+    before => Package['libvirt-bin'],
+  }
+
   package { 'libvirt-bin':
     ensure  => present,
     require => User['libvirt-qemu'],
@@ -8,7 +13,7 @@ class nova::libvirt($uid, $host_uuid=false, $config={}) {
   package {'pm-utils':
     ensure => installed,
   }
-  
+
   service { 'libvirt-bin':
     ensure => running,
   }
