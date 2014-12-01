@@ -17,13 +17,15 @@ class nova::compute {
                    File['/etc/nova/nova.conf']],
   }
 
-  file { '/etc/nova/rootwrap.d/compute.filters':
-    ensure  => present,
-    owner   => root,
-    group   => root,
-    mode    => '0644',
-    source  => "puppet:///modules/nova/${openstack_version}/compute.filters",
-    require => Package['nova-compute'],
+  if $openstack_version == 'havana' {
+    file { '/etc/nova/rootwrap.d/compute.filters':
+      ensure  => present,
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      source  => "puppet:///modules/nova/${openstack_version}/compute.filters",
+      require => Package['nova-compute'],
+    }
   }
 
   nagios::nrpe::service {
@@ -47,9 +49,9 @@ class nova::compute {
     }
 
     mount { '/var/lib/nova/instances':
+      ensure  => mounted,
       device  => $instances_mount,
       fstype  => hiera('nfs::type', 'nfs'),
-      ensure  => mounted,
       options => hiera('nfs::options', '_netdev,auto'),
       atboot  => true,
       require => [ Package['nova-compute'],
