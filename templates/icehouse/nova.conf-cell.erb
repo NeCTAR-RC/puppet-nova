@@ -102,5 +102,7 @@ capabilities="<%= cell_config['cells_capabilities'] %>"
 expire_reservations=<%= cell_config['cells_expire_reservations'] %>
 <% end %><% if @cell_config['cells_scheduler_direct_only_cells'] -%>
 scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %>
+<% end %><% if @cell_config['cells_call_timeout'] -%>
+call_timeout="<%= cell_config['cells_call_timeout'] %>"
 <% end %>
 <% end -%>
