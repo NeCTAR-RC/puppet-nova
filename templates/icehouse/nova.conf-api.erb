@@ -59,6 +59,11 @@ rabbit_use_ssl=True
 <% end %>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
+<% if cell_config['rpc_response_timeout'] -%>
+# RPC
+rpc_response_timeout=<%= cell_config['rpc_response_timeout'] %>
+
+<% end -%>
 # Memcached
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
