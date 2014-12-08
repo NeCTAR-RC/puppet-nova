@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1af78d9a_94912a55",
+        "filename": "manifests/compute.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-12-08T05:07:57Z",
+      "side": 1,
+      "message": "Correct, we are pushing it out currently but it is exactly the same as in the package",
+      "parentUuid": "1af78d9a_94c00a7e",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 34
+      },
+      "revId": "f90f7a1a32870aa880039455b238b7b0ffb3d79b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1af78d9a_d468d289",
         "filename": "templates/juno/nova.conf-api.erb",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "1af78d9a_d49bb270",
+        "filename": "templates/juno/nova.conf-api.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-12-08T05:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1af78d9a_d468d289",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 16
+      },
+      "revId": "f90f7a1a32870aa880039455b238b7b0ffb3d79b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1af78d9a_140a5ad2",
         "filename": "templates/juno/nova.conf-compute.erb",
         "patchSetId": 1
@@ -59,6 +107,24 @@
       "writtenOn": "2014-12-08T02:42:11Z",
       "side": 1,
       "message": "the line :\n\n routing_source_ip\u003d\u003c%\u003d routing_source_ip %\u003e\n\nwas removed is there any particular reason",
+      "revId": "f90f7a1a32870aa880039455b238b7b0ffb3d79b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1af78d9a_f49eae62",
+        "filename": "templates/juno/nova.conf-compute.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-12-08T05:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1af78d9a_140a5ad2",
       "revId": "f90f7a1a32870aa880039455b238b7b0ffb3d79b",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
