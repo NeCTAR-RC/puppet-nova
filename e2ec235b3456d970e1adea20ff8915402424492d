@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1af78d9a_5f46bb24",
+        "filename": "templates/juno/nova.conf-api.erb",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-12-11T00:29:15Z",
+      "side": 1,
+      "message": "I\u0027m guessing this will need to change later...",
+      "revId": "e2ec235b3456d970e1adea20ff8915402424492d",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
