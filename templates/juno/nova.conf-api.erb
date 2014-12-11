@@ -31,7 +31,6 @@ multi_instance_display_name_template='Server %(uuid)s'
 keystone_ec2_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0/ec2tokens
 keystone_auth_url=<%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
 
-
 # Storage Service
 s3_host=<%= cell_config['s3_host'] %>
 s3_dmz=<%= cell_config['s3_host'] %>
@@ -43,15 +42,16 @@ image_decryption_dir=/var/lib/nova/tmp
 
 # RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] %>
+<% if cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True
-<% end %>
+<% end -%>
 rabbit_userid=<%= cell_config['rabbit_user'] %>
 rabbit_password=<%= cell_config['rabbit_pass'] %>
 rabbit_durable_queues=True
-<% if cell_config['rabbit_ssl'] %>
+<% if cell_config['rabbit_ssl'] -%>
 rabbit_use_ssl=True
-<% end %>
+kombu_ssl_version=TLSv1
+<% end -%>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
 # Memcached
@@ -114,4 +114,3 @@ admin_user = <%= cell_config['keystone_user'] %>
 admin_password = <%= cell_config['keystone_password'] %>
 signing_dir = /var/lib/nova/keystone-signing
 memcached_servers = <%= cell_config['memcached_servers'] %>
-
