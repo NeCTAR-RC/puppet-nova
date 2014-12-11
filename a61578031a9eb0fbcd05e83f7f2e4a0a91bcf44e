@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1af78d9a_7fca97a2",
+        "filename": "templates/icehouse/nova.conf-cell.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-12-11T00:08:35Z",
+      "side": 1,
+      "message": "I added a - to the end tags so no whitespace",
+      "parentUuid": "1af78d9a_7ff3b70a",
+      "revId": "a61578031a9eb0fbcd05e83f7f2e4a0a91bcf44e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1af78d9a_1feef322",
         "filename": "templates/icehouse/nova.conf-cell.erb",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-12-11T00:03:42Z",
       "side": 1,
       "message": "capacity_aggregate_key\u003d",
+      "revId": "a61578031a9eb0fbcd05e83f7f2e4a0a91bcf44e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1af78d9a_5fcfdbb0",
+        "filename": "templates/icehouse/nova.conf-cell.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2014-12-11T00:08:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1af78d9a_1feef322",
       "revId": "a61578031a9eb0fbcd05e83f7f2e4a0a91bcf44e",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
