@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1af78d9a_7ff3b70a",
+        "filename": "templates/icehouse/nova.conf-cell.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-12-11T00:03:42Z",
+      "side": 1,
+      "message": "Could you leave this as-is? It makes the config file cleaner and avoids restarting the cells services unnecessarily when a new config option is added since no whitespace is added.",
+      "revId": "a61578031a9eb0fbcd05e83f7f2e4a0a91bcf44e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1af78d9a_1feef322",
+        "filename": "templates/icehouse/nova.conf-cell.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2014-12-11T00:03:42Z",
+      "side": 1,
+      "message": "capacity_aggregate_key\u003d",
+      "revId": "a61578031a9eb0fbcd05e83f7f2e4a0a91bcf44e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
