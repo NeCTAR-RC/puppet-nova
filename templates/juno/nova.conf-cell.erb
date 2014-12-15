@@ -31,15 +31,16 @@ keystone_auth_url=<%= scope.function_hiera(['keystone::protocol']) %>://<%= scop
 
 # RabbitMQ
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] %>
+<% if cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True
-<% end %>
+<% end -%>
 rabbit_userid=<%= cell_config['rabbit_user'] %>
 rabbit_password=<%= cell_config['rabbit_pass'] %>
 rabbit_durable_queues=True
-<% if cell_config['rabbit_ssl'] %>
+<% if cell_config['rabbit_ssl'] -%>
 rabbit_use_ssl=True
-<% end %>
+kombu_ssl_version=TLSv1
+<% end -%>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 <% if cell_config['rabbit_max_retries'] %>rabbit_max_retries=<%= cell_config['rabbit_max_retries'] %><% end %>
 
