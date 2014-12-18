@@ -11,7 +11,7 @@
     "compute:create": "",
     "compute:create:attach_network": "",
     "compute:create:attach_volume": "",
-    "compute:create:forced_host": "is_admin:True",
+    "compute:create:forced_host": "rule:admin_api or role:force_host",
     "compute:get_all": "rule:monitoring_or_default",
     "compute:get_all_tenants": "rule:admin_api or rule:monitoring",
     "compute:start": "rule:admin_or_owner",
