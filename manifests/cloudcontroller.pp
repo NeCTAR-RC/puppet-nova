@@ -10,6 +10,7 @@ class nova::cloudcontroller($extra_config={}) {
   $use_conductor = hiera('nova::use_conductor', false)
   $conductor_workers = hiera('nova::conductor::workers', 0)
   $icehouse_compat = hiera('nova::icehouse_compat', false)
+  $upgrade_level = hiera('nova::upgrade_level', false)
 
   include mysql::python
 
