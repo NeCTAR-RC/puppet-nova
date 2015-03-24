@@ -84,9 +84,11 @@ api_servers=<%= cell_config['glance_servers'] %>
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
 
-<%- if @icehouse_compat -%>
+
+<%- if @upgrade_level -%>
 [upgrade_levels]
-compute=icehouse-compat
+compute=<%= upgrade_level %>
+network=<%= upgrade_level %>
 <% end -%>
 
 <% if cell_config['use_cells'] -%>
