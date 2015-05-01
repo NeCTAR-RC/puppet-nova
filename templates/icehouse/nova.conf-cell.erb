@@ -118,4 +118,7 @@ call_timeout="<%= cell_config['cells_call_timeout'] %>"
 <% if @cell_config['capacity_aggregate_key'] -%>
 capacity_aggregate_key="<%= cell_config['capacity_aggregate_key'] %>"
 <% end -%>
+<% if @cell_config['reserve_percent'] -%> 
+reserve_percent=<%= cell_config['reserve_percent'] %> 
+<% end -%> 
 <% end -%>
