@@ -58,6 +58,10 @@ notify_on_state_change = vm_and_task_state
 # Also needed due to bug
 rabbit_durable_queues=True
 
+heal_instance_info_cache_interval=1800
+instance_build_timeout = 3600
+reboot_timeout = 1800
+
 <% extra_config.keys.sort.each do |key| -%>
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
@@ -88,15 +92,14 @@ api_servers=<%= cell_config['glance_servers'] %>
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
-
-
 <%- if @upgrade_level -%>
+
 [upgrade_levels]
 compute=<%= upgrade_level %>
 network=<%= upgrade_level %>
 <% end -%>
-
 <% if cell_config['use_cells'] -%>
+
 [cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
