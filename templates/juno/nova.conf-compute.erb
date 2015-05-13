@@ -29,20 +29,6 @@ reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
 # Memcache
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
-# RabbitMQ
-rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] -%>
-rabbit_ha_queues=True
-<% end -%>
-rabbit_userid=<%= cell_config['rabbit_user'] %>
-rabbit_password=<%= cell_config['rabbit_pass'] %>
-rabbit_durable_queues=True
-<% if cell_config['rabbit_ssl'] -%>
-rabbit_use_ssl=True
-kombu_ssl_version=TLSv1
-<% end -%>
-rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
-
 # Networking
 network_manager=nova.network.manager.FlatDHCPManager
 force_dhcp_release=True
@@ -66,7 +52,7 @@ quota_fixed_ips=-1
 
 <%- if @send_notifications -%>
 # Notifications
-notification_driver = nova.openstack.common.notifier.rpc_notifier
+notification_driver = messaging
 notification_driver = ceilometer.compute.nova_notifier
 instance_usage_audit = True
 instance_usage_audit_period = hour
@@ -76,6 +62,23 @@ notify_on_state_change = vm_and_task_state
 <% extra_config.keys.sort.each do |key| -%>
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
+
+# Also needed due to bug
+rabbit_durable_queues=True
+
+[oslo_messaging_rabbit]
+rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
+<% if cell_config['rabbit_ha'] -%>
+rabbit_ha_queues=True
+<% end -%>
+rabbit_userid=<%= cell_config['rabbit_user'] %>
+rabbit_password=<%= cell_config['rabbit_pass'] %>
+ampq_durable_queues=True
+<% if cell_config['rabbit_ssl'] -%>
+rabbit_use_ssl=True
+kombu_ssl_version=TLSv1
+<% end -%>
+rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
