@@ -30,7 +30,11 @@ class nova::api-metadata {
     notify  => Service['nova-api-metadata'],
     require => Package['nova-api-metadata'],
   }
-  $workers = $nova::node::metadata_workers + 1
+  if $openstack_version == 'icehouse' {
+    $workers = $nova::node::metadata_workers + 1
+  } else {
+    $workers = $nova::node::metadata_workers
+  }
 
   nagios::nrpe::service {
     'service_nova_api_metadata':
