@@ -20,7 +20,7 @@ class nova::node (
   $send_notifications = hiera('nova::send_notifications', true)
   $icehouse_compat = hiera('nova::icehouse_compat', false)
 
-  realize Package['python-memcache']
+  include memcached::python
   include mysql::python
 
   package {'nova-common':

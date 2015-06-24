@@ -13,7 +13,7 @@ class nova::consoleauth {
     require   => Package['nova-consoleauth'],
   }
 
-  realize Package['python-memcache']
+  include memcached::python
 
   nagios::nrpe::service {
     'service_nova_consoleauth':
