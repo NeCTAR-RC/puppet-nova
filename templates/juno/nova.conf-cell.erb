@@ -29,21 +29,6 @@ keystone_ec2_url = <%= scope.function_hiera(['keystone::protocol']) %>://<%= sco
 auth_strategy=keystone
 keystone_auth_url=<%= scope.function_hiera(['keystone::protocol']) %>://<%= scope.function_hiera(['keystone::host']) %>:5000/v2.0
 
-# RabbitMQ
-rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] -%>
-rabbit_ha_queues=True
-<% end -%>
-rabbit_userid=<%= cell_config['rabbit_user'] %>
-rabbit_password=<%= cell_config['rabbit_pass'] %>
-rabbit_durable_queues=True
-<% if cell_config['rabbit_ssl'] -%>
-rabbit_use_ssl=True
-kombu_ssl_version=TLSv1
-<% end -%>
-rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
-<% if cell_config['rabbit_max_retries'] %>rabbit_max_retries=<%= cell_config['rabbit_max_retries'] %><% end %>
-
 # Memcached
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
@@ -63,6 +48,20 @@ network_manager=nova.network.manager.FlatDHCPManager
 <%=    key %> = <%= extra_config[key] %>
 <%   end -%>
 <% end -%>
+
+[oslo_messaging_rabbit]
+rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
+<% if cell_config['rabbit_ha'] -%>
+rabbit_ha_queues=True
+<% end -%>
+rabbit_userid=<%= cell_config['rabbit_user'] %>
+rabbit_password=<%= cell_config['rabbit_pass'] %>
+ampq_durable_queues=True
+<% if cell_config['rabbit_ssl'] -%>
+rabbit_use_ssl=True
+kombu_ssl_version=TLSv1
+<% end -%>
+rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
