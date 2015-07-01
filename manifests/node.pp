@@ -73,4 +73,10 @@ class nova::node (
   include nova::network
   include nova::api-metadata
 
+  if $openstack_version == 'juno' {
+    file {'/usr/lib/python2.7/dist-packages/nova/openstack/common/rpc/':
+      ensure => absent,
+      force  => true,
+    }
+  }
 }
