@@ -64,6 +64,7 @@ reservation_expire=600
 security_group_api=nova-cells
 <%- end -%>
 
+rabbit_durable_queues=True
 [oslo_messaging_rabbit]
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
 <% if cell_config['rabbit_ha'] -%>

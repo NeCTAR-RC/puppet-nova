@@ -49,6 +49,7 @@ network_manager=nova.network.manager.FlatDHCPManager
 <%   end -%>
 <% end -%>
 
+rabbit_durable_queues=True
 [oslo_messaging_rabbit]
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
 <% if cell_config['rabbit_ha'] -%>
