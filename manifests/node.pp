@@ -19,6 +19,7 @@ class nova::node (
   $use_conductor = hiera('nova::use_conductor', false)
   $send_notifications = hiera('nova::send_notifications', true)
   $icehouse_compat = hiera('nova::icehouse_compat', false)
+  $logdebug = hiera('nova::logdebug', false)
 
   include memcached::python
   include mysql::python
