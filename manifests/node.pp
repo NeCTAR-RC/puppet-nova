@@ -6,6 +6,7 @@ class nova::node (
   $vncserver_proxyclient_address=$ipaddress,
   $routing_source_ip=$ipaddress,
   $metadata_workers=1,
+  $driver='libvirt.LibvirtDriver',
   $libvirt_type='kvm')
 {
 
