@@ -11,6 +11,8 @@ class nova::cloudcontroller($extra_config={}) {
   $conductor_workers = hiera('nova::conductor::workers', 0)
   $icehouse_compat = hiera('nova::icehouse_compat', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
+  $use_neutron = hiera('nova::use_neutron', false)
+  $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
 
   include mysql::python
 

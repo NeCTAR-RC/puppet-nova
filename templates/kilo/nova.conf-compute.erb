@@ -66,6 +66,14 @@ reboot_timeout = 1800
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
 
+<%- if @use_neutron -%>
+#networking
+network_api_class = nova.network.neutronv2.api.API
+security_group_api = neutron
+linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+<%- end -%>
+
 [libvirt]
 use_virtio_for_bridges=True
 <% libvirt_config.keys.sort.each do |key| -%>
@@ -85,6 +93,17 @@ rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
 <% end -%>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+
+<%- if @use_neutron -%>
+[neutron]
+url = <%= neutron_url %>
+auth_strategy = keystone
+admin_auth_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
+admin_tenant_name = <%= keystone_service_tenant %>
+admin_username = <%= cell_config['keystone_user'] %>
+admin_password = <%= cell_config['keystone_password'] %>
+service_metadata_proxy=True
+<%- end -%>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>

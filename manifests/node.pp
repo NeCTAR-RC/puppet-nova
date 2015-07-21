@@ -20,6 +20,8 @@ class nova::node (
   $use_conductor = hiera('nova::use_conductor', false)
   $send_notifications = hiera('nova::send_notifications', true)
   $icehouse_compat = hiera('nova::icehouse_compat', false)
+  $use_neutron = hiera('nova::use_neutron', false)
+  $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
 
   include memcached::python
   include mysql::python
@@ -71,13 +73,20 @@ class nova::node (
 
   include nova::libvirt
   include nova::compute
-  include nova::network
   include nova::api-metadata
 
   if $openstack_version == 'juno' {
     file {'/usr/lib/python2.7/dist-packages/nova/openstack/common/rpc/':
       ensure => absent,
       force  => true,
+    }
+  }
+
+  if !$use_neutron {
+    include nova::network
+  } else {
+    package{'nova-network':
+      ensure => absent,
     }
   }
 }

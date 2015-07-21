@@ -64,6 +64,14 @@ reservation_expire=600
 security_group_api=nova-cells
 <%- end -%>
 
+<%- if @use_neutron -%>
+#networking
+network_api_class = nova.network.neutronv2.api.API
+security_group_api = neutron
+linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+<%- end -%>
+
 rabbit_durable_queues=True
 [oslo_messaging_rabbit]
 rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
@@ -78,6 +86,17 @@ rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
 <% end -%>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+
+<%- if @use_neutron -%>
+[neutron]
+url = <%= neutron_url %>
+auth_strategy = keystone
+admin_auth_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
+admin_tenant_name = <%= keystone_service_tenant %>
+admin_username = <%= cell_config['keystone_user'] %>
+admin_password = <%= cell_config['keystone_password'] %>
+service_metadata_proxy=True
+<%- end -%>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
