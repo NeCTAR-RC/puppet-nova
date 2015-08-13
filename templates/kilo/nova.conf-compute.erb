@@ -1,0 +1,108 @@
+[DEFAULT]
+state_path=/var/lib/nova
+lock_path=/var/lock/nova
+bindir=/usr/bin
+rootwrap_config=/etc/nova/rootwrap.conf
+auth_strategy=keystone
+
+# Logging
+<% if @logdebug -%>
+verbose=True
+debug=True
+<%- end -%>
+log_dir=/var/log/nova
+use_syslog=true
+syslog_log_facility=LOG_DAEMON
+
+remove_unused_base_images=False
+running_deleted_instance_action=reap
+
+rabbit_durable_queues=True
+
+ram_allocation_ratio=<%= cell_config['ram_allocation_ratio'] %>
+cpu_allocation_ratio=<%= cell_config['cpu_allocation_ratio'] %>
+reserved_host_memory_mb=<%= cell_config['reserved_host_memory'] %>
+reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
+
+# Memcache
+memcached_servers=<%= cell_config['memcached_servers'] %>
+
+# Networking
+network_manager=nova.network.manager.FlatDHCPManager
+force_dhcp_release=True
+dhcp_domain=<%= cell_config['dhcp_domain'] %>
+dhcpbridge_flagfile=/etc/nova/nova.conf
+dnsmasq_config_file=/etc/nova/dnsmasq.conf
+multi_host=True
+allow_same_net_traffic=false
+routing_source_ip=<%= routing_source_ip %>
+disable_dhcp_opts=true
+
+# VNC
+vncserver_listen=0.0.0.0
+vncserver_proxyclient_address=<%= vncserver_proxyclient_address %>
+novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
+
+# Metadata
+metadata_workers = <%= metadata_workers %>
+
+# Quota
+quota_fixed_ips=-1
+
+<%- if @send_notifications -%>
+# Notifications
+notification_driver = messaging
+notification_driver = ceilometer.compute.nova_notifier
+instance_usage_audit = True
+instance_usage_audit_period = hour
+notify_on_state_change = vm_and_task_state
+<%- end -%>
+
+heal_instance_info_cache_interval=1800
+instance_build_timeout = 3600
+reboot_timeout = 1800
+
+<% extra_config.keys.sort.each do |key| -%>
+<%= key %> = <%= extra_config[key] %>
+<% end -%>
+
+[libvirt]
+use_virtio_for_bridges=True
+<% libvirt_config.keys.sort.each do |key| -%>
+<%= key %> = <%= libvirt_config[key] %>
+<% end -%>
+
+[oslo_messaging_rabbit]
+rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
+<% if cell_config['rabbit_ha'] -%>
+rabbit_ha_queues=True
+<% end -%>
+rabbit_userid=<%= cell_config['rabbit_user'] %>
+rabbit_password=<%= cell_config['rabbit_pass'] %>
+ampq_durable_queues=True
+<% if cell_config['rabbit_ssl'] -%>
+rabbit_use_ssl=True
+kombu_ssl_version=TLSv1
+<% end -%>
+rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+
+[glance]
+api_servers=<%= cell_config['glance_servers'] %>
+num_retries=3
+
+[database]
+connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
+idle_timeout=60
+<%- if @upgrade_level -%>
+
+[upgrade_levels]
+compute=<%= upgrade_level %>
+network=<%= upgrade_level %>
+<% end -%>
+<% if cell_config['use_cells'] -%>
+
+[cells]
+enable=true
+name=<%= cell_config['cells_name'] %>
+cell_type=compute
+<% end -%>
