@@ -15,6 +15,7 @@ class nova::cloudcontroller($extra_config={}) {
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
 
   include mysql::python
+  include memcached::python
 
   package {'nova-common':
     ensure => installed,

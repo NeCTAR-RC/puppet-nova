@@ -13,8 +13,6 @@ class nova::consoleauth {
     require   => Package['nova-consoleauth'],
   }
 
-  include memcached::python
-
   nagios::nrpe::service {
     'service_nova_consoleauth':
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-consoleauth';

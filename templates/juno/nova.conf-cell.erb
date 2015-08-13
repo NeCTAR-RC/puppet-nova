@@ -86,6 +86,9 @@ service_metadata_proxy=True
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
 
+[cinder]
+endpoint_template=http://<%= cell_config['cinder_host'] %>:8776/v1/%(project_id)s
+
 [conductor]
 <% if not @use_conductor -%>
 use_local=true

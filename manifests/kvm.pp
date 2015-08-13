@@ -1,9 +1,9 @@
 class nova::kvm($gid) {
 
-  package {'nova-compute-kvm':
-    ensure  => installed,
-    require => Package['nova-common'],
-  }
+#  package {'nova-compute-kvm':
+#    ensure  => installed,
+#    require => Package['nova-common'],
+#  }
 
   file { '/dev/kvm':
     group   => kvm,
