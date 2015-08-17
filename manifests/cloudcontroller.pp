@@ -13,6 +13,7 @@ class nova::cloudcontroller($extra_config={}) {
   $upgrade_level = hiera('nova::upgrade_level', false)
   $use_neutron = hiera('nova::use_neutron', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
+  $sql_idle_timeout = hiera('nova::sql_idle_timeout', '60')
 
   include mysql::python
   include memcached::python
