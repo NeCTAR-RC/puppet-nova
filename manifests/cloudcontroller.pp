@@ -1,4 +1,9 @@
-class nova::cloudcontroller($extra_config={}) {
+# Base class for a nova controller, sets up nova.conf
+class nova::cloudcontroller(
+  $extra_config={},
+  $cell_type='compute',
+)
+{
 
   require nova
 

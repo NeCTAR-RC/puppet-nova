@@ -111,7 +111,7 @@ quota_driver=nova.quota.NoopQuotaDriver
 [cells]
 enable=true
 name=<%= cell_config['cells_name'] %>
-cell_type=compute
+cell_type=<%= cell_type %>
 <% if @cell_config['cells_instance_updated_at_threshold'] %>instance_updated_at_threshold=<%= cell_config['cells_instance_updated_at_threshold'] %><% end %>
 <% if @cell_config['cells_instance_update_num_instances'] %>instance_update_num_instances=<%= cell_config['cells_instance_update_num_instances'] %><% end %>
 <% if @cell_config['cells_capabilities'] %>capabilities="<%= cell_config['cells_capabilities'] %>"<% end %>
