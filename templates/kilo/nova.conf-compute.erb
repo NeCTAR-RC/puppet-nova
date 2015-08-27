@@ -109,6 +109,11 @@ service_metadata_proxy=True
 api_servers=<%= cell_config['glance_servers'] %>
 num_retries=3
 
+<%- if @cinder_endpoint_template -%>
+[cinder]
+endpoint_template=<%= cinder_endpoint_template %>
+<%- end -%>
+
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
