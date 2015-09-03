@@ -1,7 +1,5 @@
 class nova::api-metadata {
 
-  require nova::node
-
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')
   $keystone_protocol = hiera('keystone::protocol')
