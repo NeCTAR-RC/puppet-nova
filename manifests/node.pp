@@ -74,7 +74,6 @@ class nova::node (
 
   include nova::libvirt
   include nova::compute
-  include nova::api-metadata
 
   if $openstack_version == 'juno' {
     file {'/usr/lib/python2.7/dist-packages/nova/openstack/common/rpc/':
@@ -85,6 +84,18 @@ class nova::node (
 
   if !$use_neutron {
     include nova::network
+    include nova::api-metadata
+
+    file { '/etc/nova/api-paste.ini':
+      ensure  => present,
+      owner   => nova,
+      group   => nova,
+      mode    => '0640',
+      content => template("nova/${openstack_version}/api-paste.ini.erb"),
+      notify  => Service['nova-api-metadata'],
+      require => Package['nova-api-metadata'],
+    }
+
   } else {
     package{'nova-network':
       ensure => absent,

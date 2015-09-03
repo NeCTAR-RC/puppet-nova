@@ -1,7 +1,5 @@
 class nova::api-metadata {
 
-  require nova::node
-
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')
   $keystone_protocol = hiera('keystone::protocol')
@@ -21,15 +19,6 @@ class nova::api-metadata {
     require   => Package['nova-api-metadata'],
   }
 
-  file { '/etc/nova/api-paste.ini':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0640',
-    content => template("nova/${openstack_version}/api-paste.ini.erb"),
-    notify  => Service['nova-api-metadata'],
-    require => Package['nova-api-metadata'],
-  }
   if $openstack_version == 'icehouse' {
     $workers = $nova::node::metadata_workers + 1
   } else {
