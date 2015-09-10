@@ -8,7 +8,7 @@ class nova::api-metadata {
 
   package { 'nova-api-metadata':
     ensure  => present,
-    require => User['nova'],
+    require => Package['nova-common'],
   }
 
   service { 'nova-api-metadata':
