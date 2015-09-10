@@ -103,6 +103,9 @@ admin_tenant_name = <%= keystone_service_tenant %>
 admin_username = <%= cell_config['keystone_user'] %>
 admin_password = <%= cell_config['keystone_password'] %>
 service_metadata_proxy=True
+<%- if @default_networks -%>
+default_networks = <%= default_networks.join(',') %>
+<%- end -%>
 <%- end -%>
 
 [glance]

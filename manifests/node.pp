@@ -7,7 +7,9 @@ class nova::node (
   $routing_source_ip=$ipaddress,
   $metadata_workers=1,
   $driver='libvirt.LibvirtDriver',
-  $libvirt_type='kvm')
+  $libvirt_type='kvm',
+  $default_networks=false,
+)
 {
 
   require nova
