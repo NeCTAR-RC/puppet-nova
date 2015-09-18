@@ -24,6 +24,9 @@ cpu_allocation_ratio=<%= cell_config['cpu_allocation_ratio'] %>
 reserved_host_memory_mb=<%= cell_config['reserved_host_memory'] %>
 reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
 
+# needs a default in Kilo
+default_ephemeral_format=ext4
+
 # Memcache
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
