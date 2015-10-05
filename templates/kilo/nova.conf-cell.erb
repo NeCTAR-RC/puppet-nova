@@ -71,6 +71,7 @@ rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
 <% end -%>
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+heartbeat_timeout_threshold=60
 
 <%- if @use_neutron -%>
 [neutron]
