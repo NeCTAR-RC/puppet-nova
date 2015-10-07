@@ -99,7 +99,7 @@ class nova::node (
     }
 
   } else {
-    package{'nova-network':
+    package{['nova-network', 'nova-api-metadata']:
       ensure => absent,
     }
   }
