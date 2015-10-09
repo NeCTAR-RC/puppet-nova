@@ -112,6 +112,8 @@ cross_az_attach=False
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
 idle_timeout=60
+<% if @cell_config['db_max_pool_size'] %>max_pool_size=<%= cell_config['db_max_pool_size'] %><% end %>
+<% if @cell_config['db_max_overflow'] %>max_overflow=<%= cell_config['db_max_overflow'] %><% end %>
 
 <%- if @upgrade_level -%>
 [upgrade_levels]
