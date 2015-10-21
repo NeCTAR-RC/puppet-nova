@@ -30,17 +30,6 @@ default_ephemeral_format=ext4
 # Memcache
 memcached_servers=<%= cell_config['memcached_servers'] %>
 
-# Networking
-network_manager=nova.network.manager.FlatDHCPManager
-force_dhcp_release=True
-dhcp_domain=<%= cell_config['dhcp_domain'] %>
-dhcpbridge_flagfile=/etc/nova/nova.conf
-dnsmasq_config_file=/etc/nova/dnsmasq.conf
-multi_host=True
-allow_same_net_traffic=false
-routing_source_ip=<%= routing_source_ip %>
-disable_dhcp_opts=true
-
 # VNC
 vncserver_listen=0.0.0.0
 vncserver_proxyclient_address=<%= vncserver_proxyclient_address %>
@@ -69,13 +58,11 @@ reboot_timeout = 1800
 <%= key %> = <%= extra_config[key] %>
 <% end -%>
 
-<%- if @use_neutron -%>
 #networking
 network_api_class = nova.network.neutronv2.api.API
 security_group_api = neutron
 linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
-<%- end -%>
 
 [libvirt]
 use_virtio_for_bridges=True
@@ -98,7 +85,6 @@ kombu_ssl_version=TLSv1
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 heartbeat_timeout_threshold=60
 
-<%- if @use_neutron -%>
 [neutron]
 url = <%= neutron_url %>
 auth_strategy = keystone
@@ -110,22 +96,15 @@ service_metadata_proxy=True
 <%- if @default_networks -%>
 default_networks = <%= default_networks.join(',') %>
 <%- end -%>
-<%- end -%>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
 num_retries=3
-
 <%- if @cinder_endpoint_template -%>
+
 [cinder]
 endpoint_template=<%= cinder_endpoint_template %>
 <%- end -%>
-
-[database]
-connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
-idle_timeout=60
-<% if @cell_config['db_max_pool_size'] %>max_pool_size=<%= cell_config['db_max_pool_size'] %><% end %>
-<% if @cell_config['db_max_overflow'] %>max_overflow=<%= cell_config['db_max_overflow'] %><% end %>
 <%- if @upgrade_level -%>
 
 [upgrade_levels]
