@@ -27,6 +27,13 @@ class nova::libvirt($uid, $host_uuid=false, $config={}) {
     require => Package['libvirt-bin'],
   }
 
+  file { '/etc/libvirt/qemu.conf':
+    ensure  => present,
+    content => template('nova/qemu.conf.erb'),
+    notify  => Service['libvirt-bin'],
+    require => Package['libvirt-bin'],
+  }
+
   file { '/etc/default/libvirt-bin':
     ensure  => present,
     source  => 'puppet:///modules/nova/libvirt-bin',
