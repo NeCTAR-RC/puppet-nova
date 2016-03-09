@@ -1,4 +1,10 @@
-class nova::libvirt($uid, $host_uuid=false, $config={}) {
+class nova::libvirt(
+  $uid,
+  $host_uuid=false,
+  $config={},
+  $qemu_config={}
+)
+{
 
   ensure_packages(['ebtables', 'pm-utils'])
 
@@ -23,6 +29,13 @@ class nova::libvirt($uid, $host_uuid=false, $config={}) {
   file { '/etc/libvirt/libvirtd.conf':
     ensure  => present,
     content => template('nova/libvirtd.conf.erb'),
+    notify  => Service['libvirt-bin'],
+    require => Package['libvirt-bin'],
+  }
+
+  file { '/etc/libvirt/qemu.conf':
+    ensure  => present,
+    content => template('nova/qemu.conf.erb'),
     notify  => Service['libvirt-bin'],
     require => Package['libvirt-bin'],
   }
