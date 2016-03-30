@@ -9,6 +9,7 @@ class nova::node (
   $driver='libvirt.LibvirtDriver',
   $libvirt_type='kvm',
   $default_networks=false,
+  $remove_unused_base_images=false,
 )
 {
 
