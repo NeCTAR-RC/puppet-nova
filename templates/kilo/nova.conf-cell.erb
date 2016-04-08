@@ -132,4 +132,7 @@ capacity_aggregate_key="<%= cell_config['capacity_aggregate_key'] %>"
 <% if @cell_config['reserve_percent'] -%>
 reserve_percent=<%= cell_config['reserve_percent'] %>
 <% end -%>
+<% if @cell_config['free_disk_units_needed'] -%>
+free_disk_units_needed=<%= cell_config['free_disk_units_needed'] %>
+<% end -%>
 <% end -%>
