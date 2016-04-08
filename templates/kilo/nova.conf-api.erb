@@ -97,6 +97,9 @@ admin_tenant_name = <%= keystone_service_tenant %>
 admin_username = <%= cell_config['keystone_user'] %>
 admin_password = <%= cell_config['keystone_password'] %>
 service_metadata_proxy=True
+<%- if @cell_config['floating_provider_network_filter'] -%>
+floating_provider_network_filter=<%= cell_config['floating_provider_network_filter'] %>
+<%- end -%>
 <%- end -%>
 
 [glance]
