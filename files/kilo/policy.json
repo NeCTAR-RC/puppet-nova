@@ -285,7 +285,7 @@
     "os_compute_api:os-hide-server-addresses:discoverable": "rule:default",
     "os_compute_api:os-hosts": "rule:admin_api",
     "os_compute_api:os-hosts:discoverable": "rule:default",
-    "os_compute_api:os-hypervisors": "rule:admin_api",
+    "os_compute_api:os-hypervisors": "rule:admin_api or rule:monitoring",
     "os_compute_api:os-hypervisors:discoverable": "rule:default",
     "os_compute_api:images:discoverable": "rule:default",
     "os_compute_api:image-size": "rule:default",
