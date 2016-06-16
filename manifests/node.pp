@@ -64,7 +64,7 @@ class nova::node (
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0600',
+    mode    => '0640',
     require => Package['nova-common'],
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }

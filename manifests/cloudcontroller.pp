@@ -31,7 +31,7 @@ class nova::cloudcontroller(
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0600',
+    mode    => '0640',
     content => template("nova/${openstack_version}/nova.conf-cell.erb"),
     require => Package['nova-common'],
   }
@@ -40,7 +40,7 @@ class nova::cloudcontroller(
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0600',
+    mode    => '0640',
     content => template("nova/${openstack_version}/api-paste.ini.erb"),
     require => Package['nova-common'],
   }
@@ -49,7 +49,7 @@ class nova::cloudcontroller(
     ensure  => present,
     owner   => nova,
     group   => nova,
-    mode    => '0600',
+    mode    => '0640',
     source  => "puppet:///modules/nova/${openstack_version}/policy.json",
     require => Package['nova-common'],
   }
