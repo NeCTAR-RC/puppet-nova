@@ -12,7 +12,8 @@ debug=True
 <%- end -%>
 log_dir=/var/log/nova
 use_syslog=true
-syslog_log_facility=LOG_DAEMON
+use_stderr=false
+syslog_log_facility=LOG_LOCAL7
 
 # Cert
 project_cert_subject=/C=AU/O=NeCTAR/CN=project-ca-%.16s-%s
