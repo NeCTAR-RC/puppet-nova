@@ -48,6 +48,10 @@ listen_tcp = 1
 # Override the default configuration which binds to all network
 # interfaces. This can be a numeric IPv4/6 address, or hostname
 #
+# If the libvirtd service is started in parallel with network
+# startup (e.g. with systemd), binding to addresses other than
+# the wildcards (0.0.0.0/::) might not be available yet.
+#
 #listen_addr = "192.168.0.1"
 
 
@@ -56,14 +60,14 @@ listen_tcp = 1
 # Alternatively can disable for all services on a host by
 # stopping the Avahi daemon
 #
-# This is enabled by default, uncomment this to disable it
-#mdns_adv = 0
+# This is disabled by default, uncomment this to enable it
+#mdns_adv = 1
 
 # Override the default mDNS advertizement name. This must be
 # unique on the immediate broadcast network.
 #
 # The default is "Virtualization Host HOSTNAME", where HOSTNAME
-# is subsituted for the short hostname of the machine (without domain)
+# is substituted for the short hostname of the machine (without domain)
 #
 #mdns_name = "Virtualization Host Joe Demo"
 
@@ -72,6 +76,11 @@ listen_tcp = 1
 #
 # UNIX socket access controls
 #
+
+# Beware that if you are changing *any* of these options, and you use
+# socket activation with systemd, you need to adjust the settings in
+# the libvirtd.socket file as well since it could impose a security
+# risk if you rely on file permission checking only.
 
 # Set the UNIX domain socket group ownership. This can be used to
 # allow a 'trusted' set of users access to management capabilities
@@ -83,9 +92,9 @@ unix_sock_group = "libvirtd"
 # Set the UNIX socket permissions for the R/O socket. This is used
 # for monitoring VM status only
 #
-# Default allows any user. If setting group ownership may want to
-# restrict this to:
-#unix_sock_ro_perms = "0777"
+# Default allows any user. If setting group ownership, you may want to
+# restrict this too.
+unix_sock_ro_perms = "0777"
 
 # Set the UNIX socket permissions for the R/W socket. This is used
 # for full management of VMs
@@ -94,7 +103,7 @@ unix_sock_group = "libvirtd"
 # the default will change to allow everyone (eg, 0777)
 #
 # If not using PolicyKit and setting group ownership for access
-# control then you may want to relax this to:
+# control, then you may want to relax this too.
 unix_sock_rw_perms = "0770"
 
 # Set the name of the directory in which sockets will be found/created.
@@ -113,7 +122,7 @@ unix_sock_rw_perms = "0770"
 #  - sasl: use SASL infrastructure. The actual auth scheme is then
 #          controlled from /etc/sasl2/libvirt.conf. For the TCP
 #          socket only GSSAPI & DIGEST-MD5 mechanisms will be used.
-#          For non-TCP or TLS sockets,  any scheme is allowed.
+#          For non-TCP or TLS sockets, any scheme is allowed.
 #
 #  - polkit: use PolicyKit to authenticate. This is only suitable
 #            for use on the UNIX sockets. The default policy will
@@ -155,6 +164,15 @@ auth_tcp = "none"
 #auth_tls = "none"
 
 
+# Change the API access control scheme
+#
+# By default an authenticated user is allowed access
+# to all APIs. Access drivers can place restrictions
+# on this. By default the 'nop' driver is enabled,
+# meaning no access control checks are done once a
+# client has authenticated with libvirtd
+#
+#access_drivers = [ "polkit" ]
 
 #################################################################
 #
@@ -187,6 +205,15 @@ auth_tcp = "none"
 #
 
 
+# Flag to disable verification of our own server certificates
+#
+# When libvirtd starts it performs some sanity checks against
+# its own certificates.
+#
+# Default is to always run sanity checks. Uncommenting this
+# will disable sanity checks which is not a good idea
+#tls_no_sanity_certificate = 1
+
 # Flag to disable verification of client certificates
 #
 # Client certificate verification is the primary authentication mechanism.
@@ -198,7 +225,7 @@ auth_tcp = "none"
 #tls_no_verify_certificate = 1
 
 
-# A whitelist of allowed x509  Distinguished Names
+# A whitelist of allowed x509 Distinguished Names
 # This list may contain wildcards such as
 #
 #    "C=GB,ST=London,L=London,O=Red Hat,CN=*"
@@ -237,80 +264,100 @@ auth_tcp = "none"
 
 # The maximum number of concurrent client connections to allow
 # over all sockets combined.
-#max_clients = 20
+#max_clients = 5000
 <% if config['max_clients'] %>
 max_clients = <%= config['max_clients'] %>
 <% end %>
 
+# The maximum length of queue of connections waiting to be
+# accepted by the daemon. Note, that some protocols supporting
+# retransmission may obey this so that a later reattempt at
+# connection succeeds.
+#max_queued_clients = 1000
+
+# The maximum length of queue of accepted but not yet
+# authenticated clients. The default value is zero, meaning
+# the feature is disabled.
+#max_anonymous_clients = 20
+
 # The minimum limit sets the number of workers to start up
 # initially. If the number of active clients exceeds this,
-# then more threads are spawned, upto max_workers limit.
+# then more threads are spawned, up to max_workers limit.
 # Typically you'd want max_workers to equal maximum number
 # of clients allowed
 #min_workers = 5
 #max_workers = 20
-<% if config['max_workers'] %>
+<%- if config['max_workers'] -%>
 max_workers = <%= config['max_workers'] %>
-<% end %>
-<% if config['min_workers'] %>
+<%- end -%>
+<%- if config['min_workers'] -%>
 min_workers = <%= config['min_workers'] %>
-<% end %>
+<%- end -%>
 
+# The number of priority workers. If all workers from above
+# pool are stuck, some calls marked as high priority
+# (notably domainDestroy) can be executed in this pool.
+#prio_workers = 5
 
 # Total global limit on concurrent RPC calls. Should be
 # at least as large as max_workers. Beyond this, RPC requests
-# will be read into memory and queued. This directly impact
+# will be read into memory and queued. This directly impacts
 # memory usage, currently each request requires 256 KB of
-# memory. So by default upto 5 MB of memory is used
+# memory. So by default up to 5 MB of memory is used
 #
 # XXX this isn't actually enforced yet, only the per-client
 # limit is used so far
 #max_requests = 20
-<% if config['max_requests'] %>
+<%- if config['max_requests'] -%>
 max_requests = <%= config['max_requests'] %>
-<% end %>
+<%- end -%>
 
 # Limit on concurrent requests from a single client
 # connection. To avoid one client monopolizing the server
 # this should be a small fraction of the global max_requests
 # and max_workers parameter
 #max_client_requests = 5
-<% if config['max_client_requests'] %>
+<%- if config['max_client_requests'] -%>
 max_client_requests = <%= config['max_client_requests'] %>
-<% end %>
-
+<%- end -%>
 
 #################################################################
 #
 # Logging controls
 #
 
-# Logging level: 4 errors, 3 warnings, 2 informations, 1 debug
+# Logging level: 4 errors, 3 warnings, 2 information, 1 debug
 # basically 1 will log everything possible
-log_level = 3
+# Note: Journald may employ rate limiting of the messages logged
+# and thus lock up the libvirt daemon. To use the debug level with
+# journald you have to specify it explicitly in 'log_outputs', otherwise
+# only information level messages will be logged.
+#log_level = 3
 
 # Logging filters:
 # A filter allows to select a different logging level for a given category
 # of logs
-# The format for a filter is:
+# The format for a filter is one of:
 #    x:name
-#      where name is a match string e.g. remote or qemu
-# the x prefix is the minimal level where matching messages should be logged
+#    x:+name
+#      where name is a string which is matched against source file name,
+#      e.g., "remote", "qemu", or "util/json", the optional "+" prefix
+#      tells libvirt to log stack trace for each message matching name,
+#      and x is the minimal level where matching messages should be logged:
 #    1: DEBUG
 #    2: INFO
 #    3: WARNING
 #    4: ERROR
 #
-# Multiple filter can be defined in a single @filters, they just need to be
+# Multiple filters can be defined in a single @filters, they just need to be
 # separated by spaces.
 #
-# e.g:
-# log_filters="3:remote 4:event"
-# to only get warning or errors from the remote layer and only errors from
-# the event layer.
+# e.g. to only get warning or errors from the remote layer and only errors
+# from the event layer:
+#log_filters="3:remote 4:event"
 
 # Logging outputs:
-# An output is one of the places to save logging informations
+# An output is one of the places to save logging information
 # The format for an output can be:
 #    x:stderr
 #      output goes to stderr
@@ -318,17 +365,26 @@ log_level = 3
 #      use syslog for the output and use the given name as the ident
 #    x:file:file_path
 #      output to a file, with the given filepath
+#    x:journald
+#      output to journald logging system
 # In all case the x prefix is the minimal level, acting as a filter
 #    1: DEBUG
 #    2: INFO
 #    3: WARNING
 #    4: ERROR
 #
-# Multiple output can be defined, they just need to be separated by spaces.
-# e.g.:
-# log_outputs="3:syslog:libvirtd"
-# to log all warnings and errors to syslog under the libvirtd ident
+# Multiple outputs can be defined, they just need to be separated by spaces.
+# e.g. to log all warnings and errors to syslog under the libvirtd ident:
+#log_outputs="3:syslog:libvirtd"
 log_outputs="3:syslog:libvirtd 2:file:/var/log/libvirt/libvirtd.log"
+#
+
+# Log debug buffer size:
+#
+# This configuration option is no longer used, since the global
+# log buffer functionality has been removed. Please configure
+# suitable log_outputs/log_filters settings to obtain logs.
+#log_buffer_size = 64
 
 
 ##################################################################
@@ -361,6 +417,31 @@ log_outputs="3:syslog:libvirtd 2:file:/var/log/libvirt/libvirtd.log"
 # it with the output of the 'uuidgen' command and then
 # uncomment this entry
 #host_uuid = "00000000-0000-0000-0000-000000000000"
-<% if host_uuid %>
+<%- if host_uuid -%>
 host_uuid = "<%= host_uuid %>"
-<% end %>
+<%- end -%>
+
+###################################################################
+# Keepalive protocol:
+# This allows libvirtd to detect broken client connections or even
+# dead clients.  A keepalive message is sent to a client after
+# keepalive_interval seconds of inactivity to check if the client is
+# still responding; keepalive_count is a maximum number of keepalive
+# messages that are allowed to be sent to the client without getting
+# any response before the connection is considered broken.  In other
+# words, the connection is automatically closed approximately after
+# keepalive_interval * (keepalive_count + 1) seconds since the last
+# message received from the client.  If keepalive_interval is set to
+# -1, libvirtd will never send keepalive requests; however clients
+# can still send them and the daemon will send responses.  When
+# keepalive_count is set to 0, connections will be automatically
+# closed after keepalive_interval seconds of inactivity without
+# sending any keepalive messages.
+#
+#keepalive_interval = 5
+#keepalive_count = 5
+#
+# If set to 1, libvirtd will refuse to talk to clients that do not
+# support keepalive protocol.  Defaults to 0.
+#
+#keepalive_required = 1
