@@ -10,8 +10,9 @@ verbose=True
 debug=True
 <%- end -%>
 log_dir=/var/log/nova
+use_stderr=false
 use_syslog=true
-syslog_log_facility=LOG_DAEMON
+syslog_log_facility=LOG_USER
 
 remove_unused_base_images=<%= remove_unused_base_images %>
 running_deleted_instance_action=reap
