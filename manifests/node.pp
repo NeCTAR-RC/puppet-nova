@@ -26,6 +26,7 @@ class nova::node (
   $use_neutron = hiera('nova::use_neutron', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
+  $upgrade_level = hiera('nova::upgrade_level', false)
 
   include memcached::python
   include mysql::python
