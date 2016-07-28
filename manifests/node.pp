@@ -22,8 +22,6 @@ class nova::node (
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
   $send_notifications = hiera('nova::send_notifications', true)
-  $icehouse_compat = hiera('nova::icehouse_compat', false)
-  $use_neutron = hiera('nova::use_neutron', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
@@ -86,23 +84,4 @@ class nova::node (
     }
   }
 
-  if !$use_neutron {
-    include nova::network
-    include nova::api-metadata
-
-    file { '/etc/nova/api-paste.ini':
-      ensure  => present,
-      owner   => nova,
-      group   => nova,
-      mode    => '0640',
-      content => template("nova/${openstack_version}/api-paste.ini.erb"),
-      notify  => Service['nova-api-metadata'],
-      require => Package['nova-api-metadata'],
-    }
-
-  } else {
-    package{'nova-network':
-      ensure => absent,
-    }
-  }
 }

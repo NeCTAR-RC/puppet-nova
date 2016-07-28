@@ -14,9 +14,7 @@ class nova::cloudcontroller(
   $cell_config = hiera_hash('nova::cell_config')
   $use_conductor = hiera('nova::use_conductor', false)
   $conductor_workers = hiera('nova::conductor::workers', 0)
-  $icehouse_compat = hiera('nova::icehouse_compat', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
-  $use_neutron = hiera('nova::use_neutron', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
 
