@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_85572102",
+        "filename": "files/liberty/policy.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-08-09T02:26:05Z",
+      "side": 1,
+      "message": "is this rule still used?",
+      "range": {
+        "startLine": 6,
+        "startChar": 5,
+        "endLine": 6,
+        "endChar": 15
+      },
+      "revId": "ed4880dc75e00a6fbfee5a4f0ee2485467239a5b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_a55c1d27",
+        "filename": "files/liberty/policy.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-08-09T02:26:05Z",
+      "side": 1,
+      "message": "will it be a good idea to rename this?",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "ed4880dc75e00a6fbfee5a4f0ee2485467239a5b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_054b115a",
+        "filename": "files/liberty/policy.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-08-09T02:26:05Z",
+      "side": 1,
+      "message": "can we put this above the monitoring rule so that it\u0027s easier to read?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 70
+      },
+      "revId": "ed4880dc75e00a6fbfee5a4f0ee2485467239a5b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
