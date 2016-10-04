@@ -426,7 +426,7 @@
     "os_compute_api:os-personality:discoverable": "",
     "os_compute_api:os-preserve-ephemeral-rebuild:discoverable": "",
     "os_compute_api:os-quota-sets:discoverable": "",
-    "os_compute_api:os-quota-sets:show": "rule:admin_or_owner",
+    "os_compute_api:os-quota-sets:show": "rule:monitoring_or_default or rule:quota_admin",
     "os_compute_api:os-quota-sets:defaults": "",
     "os_compute_api:os-quota-sets:update": "rule:admin_api",
     "os_compute_api:os-quota-sets:delete": "rule:admin_api",
