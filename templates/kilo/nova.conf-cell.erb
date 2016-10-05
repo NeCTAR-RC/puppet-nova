@@ -50,13 +50,11 @@ network_manager=nova.network.manager.FlatDHCPManager
 <%   end -%>
 <% end -%>
 
-<%- if @use_neutron -%>
 #networking
 network_api_class = nova.network.neutronv2.api.API
 security_group_api = neutron
 linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
-<%- end -%>
 
 rabbit_durable_queues=True
 [oslo_messaging_rabbit]
@@ -74,7 +72,6 @@ kombu_ssl_version=TLSv1
 rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
 heartbeat_timeout_threshold=60
 
-<%- if @use_neutron -%>
 [neutron]
 url = <%= neutron_url %>
 auth_strategy = keystone
@@ -83,7 +80,6 @@ admin_tenant_name = <%= keystone_service_tenant %>
 admin_username = <%= cell_config['keystone_user'] %>
 admin_password = <%= cell_config['keystone_password'] %>
 service_metadata_proxy=True
-<%- end -%>
 
 [glance]
 api_servers=<%= cell_config['glance_servers'] %>
