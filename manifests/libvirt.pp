@@ -43,7 +43,8 @@ class nova::libvirt(
 
   file { '/etc/default/libvirt-bin':
     ensure  => present,
-    source  => 'puppet:///modules/nova/libvirt-bin',
+    source  => ["puppet:///modules/nova/libvirt-bin-${::lsbdistcodename}",
+                'puppet:///modules/nova/libvirt-bin'],
     notify  => Service['libvirt-bin'],
     require => Package['libvirt-bin'],
   }
