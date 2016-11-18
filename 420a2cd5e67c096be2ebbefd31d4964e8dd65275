@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_a25eafe7",
+        "filename": "manifests/libvirt.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2016-11-18T03:47:02Z",
+      "side": 1,
+      "message": "actually, why not have a fallback like\n\n [\"puppet:///modules/nova/libvirt-bin-${::lsbdistcodename}\",\"puppet:///modules/nova/libvirt-bin\"]",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 73
+      },
+      "revId": "420a2cd5e67c096be2ebbefd31d4964e8dd65275",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
