@@ -26,7 +26,6 @@ class nova::cells (
 
     service {"${name}":
       ensure    => running,
-      provider  => upstart,
       subscribe => File['/etc/nova/nova.conf'],
       require   => [File["/etc/init/${name}.conf"], Package['nova-cells']],
     }

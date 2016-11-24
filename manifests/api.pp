@@ -9,7 +9,6 @@ class nova::api {
   service { 'nova-api':
     ensure     => running,
     enable     => true,
-    provider   => upstart,
     subscribe  => [ File['/etc/nova/nova.conf'],
                     File['/etc/nova/api-paste.ini']],
   }

@@ -24,7 +24,6 @@ class nova::network(
   service { 'nova-network':
     ensure    => running,
     enable    => true,
-    provider  => upstart,
     subscribe => File['/etc/nova/nova.conf'],
   }
 

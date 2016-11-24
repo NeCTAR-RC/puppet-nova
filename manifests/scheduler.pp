@@ -9,7 +9,6 @@ class nova::scheduler {
   service { 'nova-scheduler':
     ensure    => running,
     enable    => true,
-    provider  => upstart,
     subscribe => File['/etc/nova/nova.conf'],
     require   => Package['nova-scheduler'],
   }

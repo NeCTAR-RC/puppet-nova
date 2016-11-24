@@ -14,7 +14,6 @@ class nova::api-metadata {
   service { 'nova-api-metadata':
     ensure    => running,
     enable    => true,
-    provider  => upstart,
     subscribe => File['/etc/nova/nova.conf'],
     require   => Package['nova-api-metadata'],
   }

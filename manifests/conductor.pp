@@ -10,7 +10,6 @@ class nova::conductor($workers=0) {
   service { 'nova-conductor':
     ensure    => running,
     enable    => true,
-    provider  => upstart,
     subscribe => File['/etc/nova/nova.conf'],
     require   => Package['nova-conductor'],
   }

@@ -12,7 +12,6 @@ class nova::compute {
   service { 'nova-compute':
     ensure    => running,
     enable    => true,
-    provider  => upstart,
     subscribe => [ File['/etc/nova/nova-compute.conf'],
                    File['/etc/nova/nova.conf']],
   }
