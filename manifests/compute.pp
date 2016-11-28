@@ -16,17 +16,6 @@ class nova::compute {
                    File['/etc/nova/nova.conf']],
   }
 
-  if $openstack_version == 'havana' {
-    file { '/etc/nova/rootwrap.d/compute.filters':
-      ensure  => present,
-      owner   => root,
-      group   => root,
-      mode    => '0644',
-      source  => "puppet:///modules/nova/${openstack_version}/compute.filters",
-      require => Package['nova-compute'],
-    }
-  }
-
   nagios::nrpe::service {
     'service_nova_compute':
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-compute';

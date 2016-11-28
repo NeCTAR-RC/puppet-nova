@@ -14,11 +14,7 @@ class nova::conductor($workers=0) {
     require   => Package['nova-conductor'],
   }
   if $workers == 0 {
-    if $openstack_version == 'havana' {
-      $cores = 1
-    } else {
-      $cores = $processorcount + 1
-    }
+    $cores = $::processorcount + 1
   } else {
     $cores = $workers
   }
