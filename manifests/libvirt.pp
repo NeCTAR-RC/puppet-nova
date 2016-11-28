@@ -7,7 +7,7 @@ class nova::libvirt(
 )
 {
 
-  ensure_packages(['ebtables', 'pm-utils'])
+  ensure_packages(['ebtables', 'pm-utils', 'genisoimage'])
 
   package { 'libvirt-bin':
     ensure  => present,
