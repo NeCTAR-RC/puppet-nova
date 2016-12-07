@@ -20,7 +20,7 @@ user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
 
 # API server
 api_paste_config=/etc/nova/api-paste.ini
-enabled_apis=osapi_compute
+enabled_apis=osapi_compute, metadata
 osapi_compute_workers=<%= workers %>
 multi_instance_display_name_template='Server %(uuid)s'
 default_floating_pool = public
@@ -100,7 +100,7 @@ num_retries=3
 <%- if @cinder_endpoint_template -%>
 endpoint_template=<%= cinder_endpoint_template %>
 <%- end -%>
-cross_az_attach=False
+#cross_az_attach=False
 
 [database]
 connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
