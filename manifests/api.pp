@@ -6,6 +6,9 @@ class nova::api {
     ensure  => present,
   }
 
+  $metadata_proxy_shared_secret = hiera(
+    'neutron::agents::metadata::shared_secret', false
+  )
   service { 'nova-api':
     ensure     => running,
     enable     => true,
