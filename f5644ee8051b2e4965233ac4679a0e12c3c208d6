@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_ea48855d",
+        "filename": "manifests/api-metadata.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2016-12-08T08:12:32Z",
+      "side": 1,
+      "message": "notify: this class is deprecated: use ::nova::api::metadata",
+      "revId": "f5644ee8051b2e4965233ac4679a0e12c3c208d6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
