@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_0a5f71e6",
+        "filename": "manifests/api.pp",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-12-08T23:36:32Z",
+      "side": 1,
+      "message": "this is in the wrong place, needs to be in cloud controller api where the template is defined",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 3
+      },
+      "revId": "64d67aeb3ecfb4e3f779b0b440c4fe585ba95cad",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
