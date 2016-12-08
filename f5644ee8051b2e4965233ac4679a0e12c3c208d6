@@ -16,6 +16,69 @@
       "revId": "f5644ee8051b2e4965233ac4679a0e12c3c208d6",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_4a6fb9c5",
+        "filename": "manifests/api/metadata.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-12-08T22:14:12Z",
+      "side": 1,
+      "message": "these can go to",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "f5644ee8051b2e4965233ac4679a0e12c3c208d6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_2a7a6d88",
+        "filename": "manifests/api/metadata.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-12-08T22:14:12Z",
+      "side": 1,
+      "message": "this can be cleaned up, we don\u0027t have any icehouse anymore",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 3
+      },
+      "revId": "f5644ee8051b2e4965233ac4679a0e12c3c208d6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_6a747599",
+        "filename": "manifests/api/nagios-checks.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-12-08T22:14:12Z",
+      "side": 1,
+      "message": "deprecation notice here too please",
+      "revId": "f5644ee8051b2e4965233ac4679a0e12c3c208d6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
