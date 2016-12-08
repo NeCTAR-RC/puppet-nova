@@ -1,4 +1,4 @@
-class nova::api-metadata {
+class nova::api::metadata {
 
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')
