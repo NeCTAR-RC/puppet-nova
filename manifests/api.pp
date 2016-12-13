@@ -14,9 +14,6 @@ class nova::api {
   }
 
   nagios::service {
-    'http_ec2':
-      check_command => 'check_ec2!8773',
-      servicegroups => 'openstack-endpoints';
     'http_nova-api':
       check_command => 'http_port!8774',
       servicegroups => 'openstack-endpoints';
