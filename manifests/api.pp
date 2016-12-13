@@ -1,4 +1,5 @@
 class nova::api {
+  $openstack_version = hiera('openstack_version')
 
   require nova::cloudcontroller::api
 
@@ -13,10 +14,16 @@ class nova::api {
                     File['/etc/nova/api-paste.ini']],
   }
 
+  # ec2api removed from nova in mitaka
+  if ($openstack_version == 'kilo' or
+      $openstack_version == 'liberty') {
+    nagios::service {
+      'http_ec2':
+        check_command => 'check_ec2!8773',
+        servicegroups => 'openstack-endpoints';
+    }
+  }
   nagios::service {
-    'http_ec2':
-      check_command => 'check_ec2!8773',
-      servicegroups => 'openstack-endpoints';
     'http_nova-api':
       check_command => 'http_port!8774',
       servicegroups => 'openstack-endpoints';
