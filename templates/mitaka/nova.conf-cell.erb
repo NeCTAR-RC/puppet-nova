@@ -105,6 +105,9 @@ idle_timeout=60
 <% if @cell_config['db_max_pool_size'] %>max_pool_size=<%= cell_config['db_max_pool_size'] %><% end %>
 <% if @cell_config['db_max_overflow'] %>max_overflow=<%= cell_config['db_max_overflow'] %><% end %>
 
+[api_database]
+connection=mysql://<%= cell_config['api_db_user'] %>:<%= cell_config['api_db_pass'] %>@<%= cell_config['api_db_host'] %>/<%= cell_config['api_db_name'] %>
+
 <%- if @upgrade_level -%>
 [upgrade_levels]
 scheduler=<%= upgrade_level %>

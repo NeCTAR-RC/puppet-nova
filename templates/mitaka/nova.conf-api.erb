@@ -113,7 +113,7 @@ max_overflow=<%= cell_config['db_max_overflow'] %>
 <%- end -%>
 
 [api_database]
-connection=mysql://<%= cell_config['db_user'] %>_api:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>_api
+connection=mysql://<%= cell_config['api_db_user'] %>:<%= cell_config['api_db_pass'] %>@<%= cell_config['api_db_host'] %>/<%= cell_config['api_db_name'] %>
 
 <%- if @upgrade_level -%>
 
