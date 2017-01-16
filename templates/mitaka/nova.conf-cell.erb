@@ -24,6 +24,9 @@ scheduler_default_filters=<%= cell_config['scheduler_default_filters'] %>
 compute_fill_first_cost_fn_weight=<%= cell_config['compute_fill_weight'] %>
 multi_instance_display_name_template='Server %(uuid)s'
 
+block_device_allocate_retries=120
+block_device_allocate_retries_interval=10
+
 # Quota
 <% if @cell_config['reservation_expire'] %>reservation_expire=<%= cell_config['reservation_expire'] %><% end %>
 
