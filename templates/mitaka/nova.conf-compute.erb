@@ -78,7 +78,7 @@ rabbit_ha_queues=True
 <% end -%>
 rabbit_userid=<%= cell_config['rabbit_user'] %>
 rabbit_password=<%= cell_config['rabbit_pass'] %>
-ampq_durable_queues=True
+amqp_durable_queues=True
 <% if cell_config['rabbit_ssl'] -%>
 rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
