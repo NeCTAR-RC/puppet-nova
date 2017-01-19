@@ -28,7 +28,16 @@ class nova::api {
       check_command => 'http_port!8774',
       servicegroups => 'openstack-endpoints';
   }
-  $procs = ($nova::cloudcontroller::api::workers * 2) + 1
+
+  # remove after nova-api has been upgraded to mitaka
+  if $openstack_version == 'liberty' {
+    # liberty has same amount of osapi_compute and ec2 workers, so * 2
+    $procs = ($nova::cloudcontroller::api::workers * 2) + 1
+  }
+  else {
+    # mitaka has only osapi_compute workers
+    $procs = $nova::cloudcontroller::api::workers + 1
+  }
 
   nagios::nrpe::service {
     'service_nova_api':
@@ -42,4 +51,3 @@ class nova::api {
   }
 
 }
-
