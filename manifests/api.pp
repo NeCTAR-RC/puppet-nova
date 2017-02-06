@@ -45,9 +45,14 @@ class nova::api {
   }
 
   firewall { '100 nova-api and ec2':
-    dport   => [8773, 8774],
+    dport  => [8773, 8774],
     proto  => tcp,
     action => accept,
   }
 
+  firewall { '101 nova-api-metadata':
+    dport  => [8775],
+    proto  => tcp,
+    action => accept,
+  }
 }
