@@ -50,4 +50,9 @@ class nova::api {
     action => accept,
   }
 
+  firewall { '101 nova-api-metadata':
+    dport   => [8775],
+    proto  => tcp,
+    action => accept,
+  }
 }
