@@ -44,10 +44,9 @@ class nova::api {
       check_command => "/usr/lib/nagios/plugins/check_procs -c ${procs}:${procs} -u nova -a /usr/bin/nova-api";
   }
 
-  firewall { '100 nova-api and ec2':
-    dport   => [8773, 8774],
+  firewall { '100 nova-api and ec2 and metadata':
+    dport  => [8773, 8774, 8775],
     proto  => tcp,
     action => accept,
   }
-
 }
