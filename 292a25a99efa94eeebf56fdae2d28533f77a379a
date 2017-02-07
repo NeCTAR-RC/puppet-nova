@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5adbc538_9f720ee4",
+        "filename": "manifests/api.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-02-07T22:52:31Z",
+      "side": 1,
+      "message": "metadata_workers?",
+      "range": {
+        "startLine": 39,
+        "startChar": 81,
+        "endLine": 39,
+        "endChar": 88
+      },
+      "revId": "292a25a99efa94eeebf56fdae2d28533f77a379a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
