@@ -54,7 +54,10 @@ class nova::cloudcontroller(
 
 }
 
-class nova::cloudcontroller::api($workers=2) inherits nova::cloudcontroller {
+class nova::cloudcontroller::api(
+  $workers          = 2,
+  $metadata_workers = 1,
+) inherits nova::cloudcontroller {
 
   $metadata_proxy_shared_secret = hiera(
     'neutron::agents::metadata::shared_secret', false

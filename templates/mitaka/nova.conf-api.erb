@@ -22,6 +22,7 @@ user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
 api_paste_config=/etc/nova/api-paste.ini
 enabled_apis=osapi_compute, metadata
 osapi_compute_workers=<%= workers %>
+metadata_workers=<%= metadata_workers %>
 multi_instance_display_name_template='Server %(uuid)s'
 default_floating_pool = public
 
