@@ -35,8 +35,8 @@ class nova::api {
     $procs = ($nova::cloudcontroller::api::workers * 2) + 1
   }
   else {
-    # mitaka has only osapi_compute workers
-    $procs = $nova::cloudcontroller::api::workers + 1
+    # mitaka has osapi_compute and metadata workers
+    $procs = $nova::cloudcontroller::api::workers + $nova::cloudcontroller::api::workers + 1
   }
 
   nagios::nrpe::service {
