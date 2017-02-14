@@ -20,8 +20,9 @@ user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
 
 # API server
 api_paste_config=/etc/nova/api-paste.ini
-enabled_apis=ec2,osapi_compute
+enabled_apis=ec2,osapi_compute,metadata
 osapi_compute_workers=<%= workers %>
+metadata_workers=<%= metadata_workers %>
 ec2_workers=<%= workers %>
 ec2_host=<%= cell_config['ec2_host'] %>
 ec2_scheme=https
@@ -87,6 +88,9 @@ auth_section = credentials
 service_metadata_proxy=True
 <%- if @cell_config['floating_provider_network_filter'] -%>
 floating_provider_network_filter=<%= cell_config['floating_provider_network_filter'] %>
+<%- end -%>
+<%- if @metadata_proxy_shared_secret -%>
+metadata_proxy_shared_secret = <%= metadata_proxy_shared_secret %>
 <%- end -%>
 
 [credentials]
