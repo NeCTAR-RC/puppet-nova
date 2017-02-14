@@ -31,8 +31,9 @@ class nova::api {
 
   # remove after nova-api has been upgraded to mitaka
   if $openstack_version == 'liberty' {
-    # liberty has same amount of osapi_compute and ec2 workers, so * 2
-    $procs = ($nova::cloudcontroller::api::workers * 2) + 1
+    # liberty has same amount of osapi_compute and ec2 workers, so * 2 + metadata
+    $procs = ($nova::cloudcontroller::api::workers * 2) +
+               $nova::cloudcontroller::api::metadata_workers 1
   }
   else {
     # mitaka has osapi_compute and metadata workers

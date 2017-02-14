@@ -6,7 +6,7 @@ use = egg:Paste#urlmap
 /: meta
 
 [pipeline:meta]
-pipeline = ec2faultwrap logrequest metaapp
+pipeline = healthcheck ec2faultwrap logrequest metaapp
 
 [app:metaapp]
 paste.app_factory = nova.api.metadata.handler:MetadataRequestHandler.factory
