@@ -68,25 +68,15 @@ class nova::node (
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
   }
 
-  file { '/etc/nova/rootwrap.d':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => Package['nova-common'],
-  }
-
   case $libvirt_type {
-    'kvm':   { include nova::kvm }
-    'lxc':   { include nova::lxc }
+    'kvm':   { include ::nova::kvm }
+    'lxc':   { include ::nova::lxc }
     default: {  }
   }
 
-  include nova::libvirt
-  include nova::compute
+  include ::nova::rootwrap
+  include ::nova::libvirt
+  include ::nova::compute
 
   if $openstack_version == 'juno' {
     file {'/usr/lib/python2.7/dist-packages/nova/openstack/common/rpc/':
