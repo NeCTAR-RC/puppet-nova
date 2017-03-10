@@ -390,8 +390,8 @@ cgroup_device_acl = [
 #max_processes = 0
 #max_files = 0
 
-<%- if qemu_config['max_files'] -%>
-max_files = <%= qemu_config['max_files'] %>
+<%- if @qemu_config['max_files'] -%>
+max_files = <%= @qemu_config['max_files'] %>
 <%- end -%>
 
 
