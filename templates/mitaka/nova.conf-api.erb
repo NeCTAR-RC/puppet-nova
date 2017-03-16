@@ -35,12 +35,12 @@ reservation_expire=600
 
 # Extra
 <% @extra_config.keys.sort.each do |key| -%>
-<%   if extra_config[key].is_a? Array -%>
-<%     extra_config[key].each do |value| -%>
+<%   if @extra_config[key].is_a? Array -%>
+<%     @extra_config[key].each do |value| -%>
 <%=      key %> = <%= value %>
 <%     end -%>
 <%   else -%>
-<%=    key %> = <%= extra_config[key] %>
+<%=    key %> = <%= @extra_config[key] %>
 <%   end -%>
 <% end -%>
 
