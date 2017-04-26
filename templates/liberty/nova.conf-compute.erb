@@ -14,15 +14,15 @@ use_stderr=false
 use_syslog=true
 syslog_log_facility=LOG_USER
 
-remove_unused_base_images=<%= remove_unused_base_images %>
+remove_unused_base_images=<%= @remove_unused_base_images %>
 running_deleted_instance_action=reap
 
 rabbit_durable_queues=True
 
-ram_allocation_ratio=<%= cell_config['ram_allocation_ratio'] %>
-cpu_allocation_ratio=<%= cell_config['cpu_allocation_ratio'] %>
-reserved_host_memory_mb=<%= cell_config['reserved_host_memory'] %>
-reserved_host_disk_mb=<%= cell_config['reserved_host_disk'] %>
+ram_allocation_ratio=<%= @cell_config['ram_allocation_ratio'] %>
+cpu_allocation_ratio=<%= @cell_config['cpu_allocation_ratio'] %>
+reserved_host_memory_mb=<%= @cell_config['reserved_host_memory'] %>
+reserved_host_disk_mb=<%= @cell_config['reserved_host_disk'] %>
 
 block_device_allocate_retries=120
 block_device_allocate_retries_interval=10
@@ -31,10 +31,10 @@ block_device_allocate_retries_interval=10
 default_ephemeral_format=ext4
 
 # Memcache
-memcached_servers=<%= cell_config['memcached_servers'] %>
+memcached_servers=<%= @cell_config['memcached_servers'] %>
 
 # Metadata
-metadata_workers = <%= metadata_workers %>
+metadata_workers = <%= @metadata_workers %>
 
 <%- if @send_notifications -%>
 # Notifications
@@ -49,8 +49,8 @@ heal_instance_info_cache_interval=1800
 instance_build_timeout = 3600
 reboot_timeout = 1800
 
-<% extra_config.keys.sort.each do |key| -%>
-<%= key %> = <%= extra_config[key] %>
+<% @extra_config.keys.sort.each do |key| -%>
+<%= key %> = <%= @extra_config[key] %>
 <% end -%>
 
 #networking
@@ -64,64 +64,64 @@ lock_path = $state_path/lock
 
 [libvirt]
 use_virtio_for_bridges=True
-<% libvirt_config.keys.sort.each do |key| -%>
-<%= key %> = <%= libvirt_config[key] %>
+<% @libvirt_config.keys.sort.each do |key| -%>
+<%= key %> = <%= @libvirt_config[key] %>
 <% end -%>
 
 [oslo_messaging_rabbit]
-rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] -%>
+rabbit_hosts="<%= @cell_config['rabbit_hosts'] %>"
+<% if @cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True
 <% end -%>
-rabbit_userid=<%= cell_config['rabbit_user'] %>
-rabbit_password=<%= cell_config['rabbit_pass'] %>
+rabbit_userid=<%= @cell_config['rabbit_user'] %>
+rabbit_password=<%= @cell_config['rabbit_pass'] %>
 ampq_durable_queues=True
-<% if cell_config['rabbit_ssl'] -%>
+<% if @cell_config['rabbit_ssl'] -%>
 rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
 <% end -%>
-rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+rabbit_virtual_host=<%= @cell_config['rabbit_virtual_host'] %>
 heartbeat_timeout_threshold=60
 
 [neutron]
-url = <%= neutron_url %>
+url = <%= @neutron_url %>
 auth_section = credentials
 service_metadata_proxy=True
 <%- if @default_networks -%>
-default_networks = <%= default_networks.join(',') %>
+default_networks = <%= @default_networks.join(',') %>
 <%- end -%>
 
 [credentials]
 auth_plugin = v3password
-auth_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v3
-username = <%= cell_config['keystone_user'] %>
-password = <%= cell_config['keystone_password'] %>
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
 user_domain_name = default
-project_name = <%= keystone_service_tenant %>
+project_name = <%= @keystone_service_tenant %>
 project_domain_name = default
 
 [vnc]
 vncserver_listen=0.0.0.0
-vncserver_proxyclient_address=<%= vncserver_proxyclient_address %>
-novncproxy_base_url=http://<%= cell_config['vnc_host'] %>:6080/vnc_auto.html
+vncserver_proxyclient_address=<%= @vncserver_proxyclient_address %>
+novncproxy_base_url=http://<%= @cell_config['vnc_host'] %>:6080/vnc_auto.html
 
 [glance]
-api_servers=<%= cell_config['glance_servers'] %>
+api_servers=<%= @cell_config['glance_servers'] %>
 num_retries=3
 <%- if @cinder_endpoint_template -%>
 
 [cinder]
-endpoint_template=<%= cinder_endpoint_template %>
+endpoint_template=<%= @cinder_endpoint_template %>
 <%- end -%>
 <%- if @upgrade_level -%>
 
 [upgrade_levels]
-compute=<%= upgrade_level %>
+compute=<%= @upgrade_level %>
 <% end -%>
-<% if cell_config['use_cells'] -%>
+<% if @cell_config['use_cells'] -%>
 
 [cells]
 enable=true
-name=<%= cell_config['cells_name'] %>
+name=<%= @cell_config['cells_name'] %>
 cell_type=compute
 <% end -%>
