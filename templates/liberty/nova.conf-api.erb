@@ -21,28 +21,28 @@ user_cert_subject=/C=AU/O=NeCTAR/CN=%.16s-%.16s-%s
 # API server
 api_paste_config=/etc/nova/api-paste.ini
 enabled_apis=ec2,osapi_compute,metadata
-osapi_compute_workers=<%= workers %>
-metadata_workers=<%= metadata_workers %>
-ec2_workers=<%= workers %>
-ec2_host=<%= cell_config['ec2_host'] %>
+osapi_compute_workers=<%= @workers %>
+metadata_workers=<%= @metadata_workers %>
+ec2_workers=<%= @workers %>
+ec2_host=<%= @cell_config['ec2_host'] %>
 ec2_scheme=https
 multi_instance_display_name_template='Server %(uuid)s'
 
 # Authentication
-keystone_ec2_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0/ec2tokens
-keystone_auth_url=<%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
+keystone_ec2_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v2.0/ec2tokens
+keystone_auth_url=<%= @keystone_protocol %>://<%= @keystone_host %>:5000/v2.0
 
 # Storage Service
-s3_host=<%= cell_config['s3_host'] %>
-s3_dmz=<%= cell_config['s3_host'] %>
+s3_host=<%= @cell_config['s3_host'] %>
+s3_dmz=<%= @cell_config['s3_host'] %>
 s3_port=8888
-<% if scope.function_hiera(['swift::protocol']) == 'https' %>
+<% if scope().call_function('hiera', ['swift::protocol']) == 'https' %>
 s3_use_ssl=True
 <% end %>
 image_decryption_dir=/var/lib/nova/tmp
 
 # Memcached
-memcached_servers=<%= cell_config['memcached_servers'] %>
+memcached_servers=<%= @cell_config['memcached_servers'] %>
 
 # Quota
 max_age = 10
@@ -50,13 +50,13 @@ until_refresh = 5
 reservation_expire=600
 
 # Extra
-<% extra_config.keys.sort.each do |key| -%>
-<%   if extra_config[key].is_a? Array -%>
-<%     extra_config[key].each do |value| -%>
+<% @extra_config.keys.sort.each do |key| -%>
+<%   if @extra_config[key].is_a? Array -%>
+<%     @extra_config[key].each do |value| -%>
 <%=      key %> = <%= value %>
 <%     end -%>
 <%   else -%>
-<%=    key %> = <%= extra_config[key] %>
+<%=    key %> = <%= @extra_config[key] %>
 <%   end -%>
 <% end -%>
 
@@ -68,37 +68,37 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
 rabbit_durable_queues=True
 [oslo_messaging_rabbit]
-rabbit_hosts="<%= cell_config['rabbit_hosts'] %>"
-<% if cell_config['rabbit_ha'] -%>
+rabbit_hosts="<%= @cell_config['rabbit_hosts'] %>"
+<% if @cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True
 <% end -%>
-rabbit_userid=<%= cell_config['rabbit_user'] %>
-rabbit_password=<%= cell_config['rabbit_pass'] %>
+rabbit_userid=<%= @cell_config['rabbit_user'] %>
+rabbit_password=<%= @cell_config['rabbit_pass'] %>
 ampq_durable_queues=True
-<% if cell_config['rabbit_ssl'] -%>
+<% if @cell_config['rabbit_ssl'] -%>
 rabbit_use_ssl=True
 kombu_ssl_version=TLSv1
 <% end -%>
-rabbit_virtual_host=<%= cell_config['rabbit_virtual_host'] %>
+rabbit_virtual_host=<%= @cell_config['rabbit_virtual_host'] %>
 heartbeat_timeout_threshold=60
 
 [neutron]
-url = <%= neutron_url %>
+url = <%= @neutron_url %>
 auth_section = credentials
 service_metadata_proxy=True
 <%- if @cell_config['floating_provider_network_filter'] -%>
-floating_provider_network_filter=<%= cell_config['floating_provider_network_filter'] %>
+floating_provider_network_filter=<%= @cell_config['floating_provider_network_filter'] %>
 <%- end -%>
 <%- if @metadata_proxy_shared_secret -%>
-metadata_proxy_shared_secret = <%= metadata_proxy_shared_secret %>
+metadata_proxy_shared_secret = <%= @metadata_proxy_shared_secret %>
 <%- end -%>
 
 [credentials]
 auth_plugin = v3password
-auth_url = <%= keystone_protocol %>://<%= keystone_host %>:5000/v3
-username = <%= cell_config['keystone_user'] %>
-password = <%= cell_config['keystone_password'] %>
-project_name = <%= keystone_service_tenant %>
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+project_name = <%= @keystone_service_tenant %>
 user_domain_name = default
 project_domain_name = default
 
@@ -106,52 +106,52 @@ project_domain_name = default
 lock_path = $state_path/lock
 
 [glance]
-api_servers=<%= cell_config['glance_servers'] %>
+api_servers=<%= @cell_config['glance_servers'] %>
 num_retries=3
 
 [cinder]
 <%- if @cinder_endpoint_template -%>
-endpoint_template=<%= cinder_endpoint_template %>
+endpoint_template=<%= @cinder_endpoint_template %>
 <%- end -%>
 cross_az_attach=False
 
 [database]
-connection=mysql://<%= cell_config['db_user'] %>:<%= cell_config['db_pass'] %>@<%= cell_config['db_host'] %>/<%= cell_config['db_name'] %>
+connection=mysql://<%= @cell_config['db_user'] %>:<%= @cell_config['db_pass'] %>@<%= @cell_config['db_host'] %>/<%= @cell_config['db_name'] %>
 idle_timeout=60
 <%- if @cell_config['db_max_pool_size'] -%>
-max_pool_size=<%= cell_config['db_max_pool_size'] %>
+max_pool_size=<%= @cell_config['db_max_pool_size'] %>
 <%- end -%>
 <%- if @cell_config['db_max_overflow'] -%>
-max_overflow=<%= cell_config['db_max_overflow'] %>
+max_overflow=<%= @cell_config['db_max_overflow'] %>
 <%- end -%>
 <%- if @upgrade_level -%>
 
 [upgrade_levels]
-compute=<%= upgrade_level %>
+compute=<%= @upgrade_level %>
 <% end -%>
-<%- if cell_config['use_cells'] -%>
+<%- if @cell_config['use_cells'] -%>
 
 [cells]
 enable=true
-name=<%= cell_config['cells_name'] %>
+name=<%= @cell_config['cells_name'] %>
 cell_type=api
 <%- if @cell_config['cells_instance_updated_at_threshold'] -%>
-instance_updated_at_threshold=<%= cell_config['cells_instance_updated_at_threshold'] %>
+instance_updated_at_threshold=<%= @cell_config['cells_instance_updated_at_threshold'] %>
 <%- end -%>
 <%- if @cell_config['cells_instance_update_num_instances'] -%>
-instance_update_num_instances=<%= cell_config['cells_instance_update_num_instances'] %>
+instance_update_num_instances=<%= @cell_config['cells_instance_update_num_instances'] %>
 <%- end -%>
 <%- if @cell_config['cells_scheduler_direct_only_cells'] -%>
-scheduler_direct_only_cells=<%= cell_config['cells_scheduler_direct_only_cells'] %>
+scheduler_direct_only_cells=<%= @cell_config['cells_scheduler_direct_only_cells'] %>
 <%- end -%>
-heal_update_number=<%= cell_config['cells_heal_update_number'] %>
+heal_update_number=<%= @cell_config['cells_heal_update_number'] %>
 <%- end -%>
 
 [keystone_authtoken]
-auth_uri = <%= keystone_protocol %>://<%= keystone_host %>:5000/v2.0
-identity_uri = <%= keystone_protocol %>://<%= keystone_host %>:35357
-admin_tenant_name = <%= keystone_service_tenant %>
-admin_user = <%= cell_config['keystone_user'] %>
-admin_password = <%= cell_config['keystone_password'] %>
+auth_uri = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v2.0
+identity_uri = <%= @keystone_protocol %>://<%= @keystone_host %>:35357
+admin_tenant_name = <%= @keystone_service_tenant %>
+admin_user = <%= @cell_config['keystone_user'] %>
+admin_password = <%= @cell_config['keystone_password'] %>
 signing_dir = /var/lib/nova/keystone-signing
-memcached_servers = <%= cell_config['memcached_servers'] %>
+memcached_servers = <%= @cell_config['memcached_servers'] %>
