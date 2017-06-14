@@ -29,6 +29,9 @@ class nova::libvirt(
 
   file { '/etc/libvirt/libvirtd.conf':
     ensure  => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '06440',
     content => template('nova/libvirtd.conf.erb'),
     notify  => Service['libvirt-bin'],
     require => Package['libvirt-bin'],
@@ -36,13 +39,19 @@ class nova::libvirt(
 
   file { '/etc/libvirt/qemu.conf':
     ensure  => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '06440',
     content => template('nova/qemu.conf.erb'),
     notify  => Service['libvirt-bin'],
     require => Package['libvirt-bin'],
   }
 
   file { '/etc/default/libvirt-bin':
-    ensure  => present,
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '06440',
     source  => ["puppet:///modules/nova/libvirt-bin-${::lsbdistcodename}",
                 'puppet:///modules/nova/libvirt-bin'],
     notify  => Service['libvirt-bin'],
