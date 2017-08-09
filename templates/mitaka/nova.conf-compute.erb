@@ -50,6 +50,7 @@ reboot_timeout = 1800
 use_neutron=True
 linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
+my_ip=<%= @my_ip %>
 
 [oslo_concurrency]
 lock_path = $state_path/lock

@@ -10,6 +10,7 @@ class nova::node (
   $libvirt_type='kvm',
   $default_networks=false,
   $remove_unused_base_images=false,
+  $my_ip=$::ipaddress,
 )
 {
 
