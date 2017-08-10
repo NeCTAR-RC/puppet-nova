@@ -1,0 +1,8 @@
+Verified+1: Jenkins <no-reply+jenkins@nectar.org.au>
+Code-Review+1: Andy Botting <andrew.botting@unimelb.edu.au>
+Code-Review+1: Matthew Armsby <Matthew.Armsby@utas.edu.au>
+Submitted-by: Sam Morrison <sam.morrison@unimelb.edu.au>
+Submitted-at: Thu, 10 Aug 2017 16:02:24 +1000
+Reviewed-on: https://review.rc.nectar.org.au/10631
+Project: NeCTAR-RC/puppet-nova
+Branch: refs/heads/master
