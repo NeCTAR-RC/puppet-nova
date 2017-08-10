@@ -140,6 +140,9 @@ instance_update_num_instances=<%= @cell_config['cells_instance_update_num_instan
 scheduler_direct_only_cells=<%= @cell_config['cells_scheduler_direct_only_cells'] %>
 <%- end -%>
 heal_update_number=<%= @cell_config['cells_heal_update_number'] %>
+<%- if @cell_config['free_disk_units_needed'] -%>
+free_disk_units_needed=<%= @cell_config['free_disk_units_needed'] %>
+<%- end -%>
 <%- end -%>
 
 [keystone_authtoken]
