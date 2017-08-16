@@ -1,5 +1,0 @@
-dhcp-option=3,<%= gateway %>
-dhcp-option=6,<% dns_server_list.each do |dns_server| -%><%= dns_server -%>,<% end -%>8.8.8.8
-<% if @mtu -%>
-dhcp-option=26,<%= @mtu %>
-<%- end -%>
