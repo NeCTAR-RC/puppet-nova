@@ -89,7 +89,7 @@ lock_path = $state_path/lock
 driver=messagingv2
 
 [cache]
-enable=True
+enabled=True
 backend=oslo_cache.memcache_pool
 memcache_servers=<%= @cell_config['memcached_servers'] %>
 
