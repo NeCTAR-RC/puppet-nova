@@ -7,6 +7,7 @@ class nova::compute {
   package { 'nova-compute':
     ensure  => present,
     require => User['nova'],
+    tag     => 'openstack',
   }
 
   service { 'nova-compute':

@@ -3,6 +3,7 @@ class nova::kvm($gid) {
   package {'nova-compute-kvm':
     ensure  => installed,
     require => Package['nova-common'],
+    tag     => 'openstack',
   }
 
   file { '/dev/kvm':

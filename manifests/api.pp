@@ -4,7 +4,8 @@ class nova::api {
   require nova::cloudcontroller::api
 
   package { 'nova-api':
-    ensure  => present,
+    ensure => present,
+    tag    => 'openstack',
   }
 
   service { 'nova-api':

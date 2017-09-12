@@ -4,6 +4,7 @@ class nova::novnc {
 
   package { 'nova-novncproxy':
     ensure => installed,
+    tag    => 'openstack',
   }
 
   service { 'nova-novncproxy':
