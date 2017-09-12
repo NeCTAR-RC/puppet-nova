@@ -4,6 +4,7 @@ class nova::spiceproxy {
 
   package { 'nova-spiceproxy':
     ensure => installed,
+    tag    => 'openstack',
   }
 
   service { 'nova-spiceproxy':

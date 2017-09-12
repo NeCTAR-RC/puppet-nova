@@ -4,6 +4,7 @@ class nova::scheduler {
 
   package { 'nova-scheduler':
     ensure  => present,
+    tag     => 'openstack',
   }
 
   service { 'nova-scheduler':
