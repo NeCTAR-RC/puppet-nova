@@ -10,6 +10,7 @@ class nova::network(
   package { 'nova-network':
     ensure  => present,
     require => User['nova'],
+    tag     => 'openstack',
   }
 
   file { '/etc/nova/dnsmasq.conf':

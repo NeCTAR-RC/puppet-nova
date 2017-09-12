@@ -3,7 +3,8 @@ class nova::cert {
   require nova::cloudcontroller
 
   package { 'nova-cert':
-    ensure  => installed,
+    ensure => installed,
+    tag    => 'openstack',
   }
 
   file { '/var/lib/nova/CA/openssl.cnf':

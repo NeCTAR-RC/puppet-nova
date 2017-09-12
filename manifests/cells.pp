@@ -5,7 +5,8 @@ class nova::cells (
   require nova::cloudcontroller
 
   package { 'nova-cells':
-    ensure  => installed,
+    ensure => installed,
+    tag    => 'openstack',
   }
 
   service { 'nova-cells':

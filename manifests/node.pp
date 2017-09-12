@@ -33,6 +33,7 @@ class nova::node (
   package {'nova-common':
     ensure  => present,
     require => User['nova'],
+    tag     => 'openstack',
   }
 
   group { 'nova':

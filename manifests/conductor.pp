@@ -4,7 +4,8 @@ class nova::conductor($workers=0) {
   $openstack_version = hiera('openstack_version')
 
   package { 'nova-conductor':
-    ensure  => present,
+    ensure => present,
+    tag    => 'openstack',
   }
 
   service { 'nova-conductor':
