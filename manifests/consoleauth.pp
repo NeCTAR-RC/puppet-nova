@@ -1,4 +1,6 @@
-class nova::consoleauth {
+class nova::consoleauth (
+  $enabled = true,
+){
 
   require nova::cloudcontroller
 
@@ -6,9 +8,14 @@ class nova::consoleauth {
     ensure => installed,
   }
 
+  $service_ensure = $enabled ? {
+    true  => 'running',
+    false => 'stopped',
+  }
+
   service { 'nova-consoleauth':
-    ensure    => running,
-    enable    => true,
+    ensure    => $service_ensure,
+    enable    => $enabled,
     subscribe => File['/etc/nova/nova.conf'],
     require   => Package['nova-consoleauth'],
   }
