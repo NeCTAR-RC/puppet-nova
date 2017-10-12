@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80271c3e_4138efbc",
+        "filename": "manifests/consoleauth.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2017-10-12T01:05:25Z",
+      "side": 1,
+      "message": "shouldn\u0027t we make it like upstream modules and do\n\nservice_ensure \u003d \u0027running\u0027",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "d67908389f8c79fce0ef71d546d34334f5327b0f",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
