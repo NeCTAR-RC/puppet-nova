@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c102a464_a2d22f8d",
+        "filename": "templates/newton/nova.conf-compute.erb",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000130
+      },
+      "writtenOn": "2017-11-01T02:05:39Z",
+      "side": 1,
+      "message": "To maintain backwards compatability, probably test something like:\n\u003c%- if @cell_config[\u0027vnc_host\u0027] \u003d~ /^:\\/\\// -%\u003e\nnovncproxy_base_url\u003d\u003c%\u003d @cell_config[\u0027vnc_host\u0027] %\u003e\n\u003c%- else -%\u003e\nnovncproxy_base_url\u003dhttp://\u003c%\u003d @cell_config[\u0027vnc_host\u0027] %\u003e:6080/vnc_auto.html\n\u003c%- end %-\u003e",
+      "revId": "cc8c605268df71f31c44eb073cf6dc723e568dd7",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
