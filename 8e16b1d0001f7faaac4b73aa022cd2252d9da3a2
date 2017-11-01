@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0182cc77_3cf39676",
+        "filename": "manifests/node.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2017-11-01T06:52:57Z",
+      "side": 1,
+      "message": "if we change this to\n if $cell_config[\u0027novncproxy_base_url\u0027]\nwe can have novncproxy_base_url override vnc_host, and mark vnc_host for deprecation (after some time), similar to how openstack does it.",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "8e16b1d0001f7faaac4b73aa022cd2252d9da3a2",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
