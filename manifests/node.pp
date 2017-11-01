@@ -27,6 +27,13 @@ class nova::node (
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
 
+  if $cell_config['vnc_host'] {
+    $vnc_host = $cell_config['vnc_host']
+    $novncproxy_base_url = "http://${vnc_host}:6080/vnc_auto.html"
+  } else {
+    $novncproxy_base_url = $cell_config['novncproxy_base_url']
+  }
+
   include memcached::python
   include mysql::python
 

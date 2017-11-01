@@ -103,7 +103,7 @@ project_domain_name = default
 [vnc]
 vncserver_listen=0.0.0.0
 vncserver_proxyclient_address=<%= @vncserver_proxyclient_address %>
-novncproxy_base_url=http://<%= @cell_config['vnc_host'] %>:6080/vnc_auto.html
+novncproxy_base_url=<%= @novncproxy_base_url %>
 
 [glance]
 api_servers=<%= @cell_config['glance_servers'] %>
