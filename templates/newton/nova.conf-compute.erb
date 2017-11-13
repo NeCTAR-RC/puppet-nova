@@ -103,6 +103,15 @@ user_domain_name = Default
 project_name = <%= @keystone_service_tenant %>
 project_domain_name = Default
 
+[placement]
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+user_domain_name = Default
+project_name = <%= @keystone_service_tenant %>
+project_domain_name = Default
+
 [vnc]
 vncserver_listen=0.0.0.0
 vncserver_proxyclient_address=<%= @vncserver_proxyclient_address %>
