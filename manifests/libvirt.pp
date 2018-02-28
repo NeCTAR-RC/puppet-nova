@@ -9,12 +9,20 @@ class nova::libvirt(
 
   ensure_packages(['ebtables', 'pm-utils', 'genisoimage'])
 
+  $openstack_version = hiera('openstack_version')
+
+  if $openstack_version[0] > 'n' {
+    $libvirt_service = 'libvirtd'
+  } else {
+    $libvirt_service = 'libvirt-bin'
+  }
+
   package { 'libvirt-bin':
     ensure  => present,
     require => User['libvirt-qemu'],
   }
 
-  service { 'libvirt-bin':
+  service { $libvirt_service:
     ensure => running,
   }
 
@@ -33,7 +41,7 @@ class nova::libvirt(
     group   => 'root',
     mode    => '0644',
     content => template('nova/libvirtd.conf.erb'),
-    notify  => Service['libvirt-bin'],
+    notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
 
@@ -43,18 +51,18 @@ class nova::libvirt(
     group   => 'root',
     mode    => '0644',
     content => template('nova/qemu.conf.erb'),
-    notify  => Service['libvirt-bin'],
+    notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
 
-  file { '/etc/default/libvirt-bin':
+  file { "/etc/default/${$libvirt_service}":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     source  => ["puppet:///modules/nova/libvirt-bin-${::lsbdistcodename}",
                 'puppet:///modules/nova/libvirt-bin'],
-    notify  => Service['libvirt-bin'],
+    notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
 
