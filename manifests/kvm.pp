@@ -1,7 +1,7 @@
-class nova::kvm($gid) {
+class nova::kvm($gid, $package_ensure='installed') {
 
   package {'nova-compute-kvm':
-    ensure  => installed,
+    ensure  => $package_ensure,
     require => Package['nova-common'],
     tag     => 'openstack',
   }
