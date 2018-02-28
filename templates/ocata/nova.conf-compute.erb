@@ -1,0 +1,131 @@
+[DEFAULT]
+state_path=/var/lib/nova
+bindir=/usr/bin
+rootwrap_config=/etc/nova/rootwrap.conf
+
+# Logging
+<% if @logdebug -%>
+verbose=True
+debug=True
+<%- end -%>
+log_dir=/var/log/nova
+use_stderr=false
+use_syslog=true
+syslog_log_facility=LOG_USER
+
+transport_url="<%= @cell_config['transport_url'] %>"
+
+remove_unused_base_images=<%= @remove_unused_base_images %>
+running_deleted_instance_action=reap
+
+ram_allocation_ratio=<%= @cell_config['ram_allocation_ratio'] %>
+cpu_allocation_ratio=<%= @cell_config['cpu_allocation_ratio'] %>
+reserved_host_memory_mb=<%= @cell_config['reserved_host_memory'] %>
+reserved_host_disk_mb=<%= @cell_config['reserved_host_disk'] %>
+
+block_device_allocate_retries=120
+block_device_allocate_retries_interval=10
+
+# needs a default in Kilo
+default_ephemeral_format=ext4
+
+# Metadata
+metadata_workers = <%= @metadata_workers %>
+
+# Notifications
+instance_usage_audit = True
+instance_usage_audit_period = hour
+notify_on_state_change = vm_and_task_state
+
+heal_instance_info_cache_interval=1800
+instance_build_timeout = 3600
+reboot_timeout = 1800
+
+<% @extra_config.keys.sort.each do |key| -%>
+<%= key %> = <%= @extra_config[key] %>
+<% end -%>
+
+#networking
+linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+<%- if @my_ip -%>
+my_ip=<%= @my_ip %>
+<%- end -%>
+
+[oslo_concurrency]
+lock_path = $state_path/lock
+
+<%- if @send_notifications -%>
+[oslo_messaging_notifications]
+driver=messagingv2
+driver = ceilometer.compute.nova_notifier
+<%- end -%>
+
+[cache]
+enabled=True
+backend=oslo_cache.memcache_pool
+memcache_servers=<%= @cell_config['memcached_servers'] %>
+
+[libvirt]
+use_virtio_for_bridges=True
+<% @libvirt_config.keys.sort.each do |key| -%>
+<%= key %> = <%= @libvirt_config[key] %>
+<% end -%>
+
+[oslo_messaging_rabbit]
+<% if @cell_config['rabbit_ha'] -%>
+rabbit_ha_queues=True
+<% end -%>
+amqp_durable_queues=True
+<% if @cell_config['rabbit_ssl'] -%>
+ssl=True
+ssl_version=TLSv1
+rabbit_use_ssl=True
+kombu_ssl_version=TLSv1
+<% end -%>
+heartbeat_timeout_threshold=60
+
+[neutron]
+url = <%= @neutron_url %>
+service_metadata_proxy=True
+<%- if @default_networks -%>
+default_networks = <%= @default_networks.join(',') %>
+<%- end -%>
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+user_domain_name = Default
+project_name = <%= @keystone_service_tenant %>
+project_domain_name = Default
+
+[placement]
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+user_domain_name = Default
+project_name = <%= @keystone_service_tenant %>
+project_domain_name = Default
+os_region_name=<%= @cell_config['placement_region'] %>
+
+[vnc]
+vncserver_listen=0.0.0.0
+vncserver_proxyclient_address=<%= @vncserver_proxyclient_address %>
+novncproxy_base_url=<%= @novncproxy_base_url %>
+
+[glance]
+api_servers=<%= @cell_config['glance_servers'] %>
+num_retries=3
+<%- if @cinder_endpoint_template -%>
+
+[cinder]
+endpoint_template=<%= @cinder_endpoint_template %>
+<%- end -%>
+<% if @cell_config['use_cells'] -%>
+
+[cells]
+enable=true
+name=<%= @cell_config['cells_name'] %>
+cell_type=compute
+<% end -%>

@@ -43,12 +43,24 @@ class nova::cloudcontroller(
     require => Package['nova-common'],
   }
 
-  file { '/etc/nova/policy.json':
+  if $openstack_version[0] < 'o' {
+    $policy_file = 'policy.json'
+    $old_policy = 'policy.yaml'
+  } else {
+    $policy_file = 'policy.yaml'
+    $old_policy = 'policy.json'
+  }
+
+  file { "/etc/nova/${old_policy}":
+    ensure => absent,
+  }
+
+  file { "/etc/nova/${policy_file}":
     ensure  => present,
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    source  => "puppet:///modules/nova/${openstack_version}/policy.json",
+    source  => "puppet:///modules/nova/${openstack_version}/${policy_file}",
     require => Package['nova-common'],
   }
 
