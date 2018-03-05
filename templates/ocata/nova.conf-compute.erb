@@ -35,7 +35,6 @@ metadata_workers = <%= @metadata_workers %>
 # Notifications
 instance_usage_audit = True
 instance_usage_audit_period = hour
-notify_on_state_change = vm_and_task_state
 
 heal_instance_info_cache_interval=1800
 instance_build_timeout = 3600
@@ -60,6 +59,11 @@ lock_path = $state_path/lock
 driver=messagingv2
 driver = ceilometer.compute.nova_notifier
 <%- end -%>
+
+[notifications]
+notify_api_faults = true
+notify_cell_instance_faults = true
+notify_on_state_change = vm_and_task_state
 
 [cache]
 enabled=True

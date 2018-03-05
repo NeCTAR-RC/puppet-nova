@@ -87,6 +87,11 @@ os_region_name=<%= @cell_config['placement_region'] %>
 [oslo_messaging_notifications]
 driver=messagingv2
 
+[notifications]
+notify_api_faults = true
+notify_cell_instance_faults = true
+notify_on_state_change = vm_and_task_state
+
 [cache]
 enabled=True
 backend=oslo_cache.memcache_pool
