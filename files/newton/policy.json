@@ -80,7 +80,7 @@
     "compute:snapshot_volume_backed": "rule:admin_or_owner",
     "compute:backup": "rule:admin_or_owner",
 
-    "compute:resize": "rule:admin_api",
+    "compute:resize": "rule:admin_or_owner",
     "compute:confirm_resize": "rule:admin_or_owner",
     "compute:revert_resize": "rule:admin_or_owner",
 
