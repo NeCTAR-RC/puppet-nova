@@ -44,6 +44,9 @@ max_age = 10
 until_refresh = 5
 reservation_expire=600
 
+[oslo_policy]
+policy_file=/etc/nova/policy.yaml
+
 [oslo_messaging_rabbit]
 <% if @cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True
