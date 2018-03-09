@@ -44,6 +44,7 @@ reboot_timeout = 1800
 <% end -%>
 
 #networking
+use_neutron=True
 linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 <%- if @my_ip -%>
