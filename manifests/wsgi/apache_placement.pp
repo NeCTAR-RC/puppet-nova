@@ -75,22 +75,23 @@
 #   class { 'nova::wsgi::apache': }
 #
 class nova::wsgi::apache_placement (
-  $servername     = $::fqdn,
-  $api_port       = 80,
-  $bind_host      = undef,
-  $path           = '/placement',
-  $ssl            = true,
-  $workers        = 1,
-  $ssl_cert       = undef,
-  $ssl_key        = undef,
-  $ssl_chain      = undef,
-  $ssl_ca         = undef,
-  $ssl_crl_path   = undef,
-  $ssl_crl        = undef,
-  $ssl_certs_dir  = undef,
-  $threads        = $::os_workers,
-  $priority       = '10',
-  $ensure_package = 'present',
+  $servername      = $::fqdn,
+  $api_port        = 80,
+  $bind_host       = undef,
+  $path            = '/placement',
+  $ssl             = true,
+  $workers         = 1,
+  $ssl_cert        = undef,
+  $ssl_key         = undef,
+  $ssl_chain       = undef,
+  $ssl_ca          = undef,
+  $ssl_crl_path    = undef,
+  $ssl_crl         = undef,
+  $ssl_certs_dir   = undef,
+  $threads         = $::os_workers,
+  $priority        = '10',
+  $ensure_package  = 'present',
+  $access_log_file = false,
 ) {
 
   include ::nova::params
@@ -144,6 +145,7 @@ class nova::wsgi::apache_placement (
     wsgi_script_dir     => $::nova::params::nova_wsgi_script_path,
     wsgi_script_file    => 'nova-placement-api',
     wsgi_script_source  => $::nova::params::placement_wsgi_script_source,
+    access_log_file     => $access_log_file,
   }
 
 }
