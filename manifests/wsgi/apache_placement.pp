@@ -91,6 +91,7 @@ class nova::wsgi::apache_placement (
   $threads        = $::os_workers,
   $priority       = '10',
   $ensure_package = 'present',
+  $access_log_file= false,
 ) {
 
   include ::nova::params
@@ -144,6 +145,7 @@ class nova::wsgi::apache_placement (
     wsgi_script_dir     => $::nova::params::nova_wsgi_script_path,
     wsgi_script_file    => 'nova-placement-api',
     wsgi_script_source  => $::nova::params::placement_wsgi_script_source,
+    access_log_file     => $access_log_file,
   }
 
 }
