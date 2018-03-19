@@ -1,3 +1,4 @@
+# Nova compute manifest
 class nova::compute {
 
   require nova::node
@@ -10,11 +11,28 @@ class nova::compute {
     tag     => 'openstack',
   }
 
+  # Mitigation for iptables rule ordering issue
+  if $openstack_version[0] >= 'n' {
+
+    include ::systemd
+
+    file { '/etc/systemd/system/nova-compute.service.d':
+      ensure => directory,
+    }
+    file { '/etc/systemd/system/nova-compute.service.d/override.conf':
+      ensure  => present,
+      source  => 'puppet:///modules/nova/nova-compute-service-override.conf',
+      require => File['/etc/systemd/system/nova-compute.service.d'],
+    } ~> Exec['systemctl-daemon-reload'] ~> Service['nova-compute']
+  }
+
   service { 'nova-compute':
     ensure    => running,
     enable    => true,
-    subscribe => [ File['/etc/nova/nova-compute.conf'],
-                   File['/etc/nova/nova.conf']],
+    subscribe => [
+      File['/etc/nova/nova-compute.conf'],
+      File['/etc/nova/nova.conf']
+    ],
   }
 
   file {'/etc/nova/rootwrap.d/compute.filters':
@@ -51,8 +69,10 @@ class nova::compute {
       fstype  => hiera('nfs::type', 'nfs'),
       options => hiera('nfs::options', '_netdev,auto'),
       atboot  => true,
-      require => [ Package['nova-compute'],
-                   Package['nfs-common']],
+      require => [
+        Package['nova-compute'],
+        Package['nfs-common'],
+      ],
     }
   }
 }
