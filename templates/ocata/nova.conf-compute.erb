@@ -71,7 +71,6 @@ backend=oslo_cache.memcache_pool
 memcache_servers=<%= @cell_config['memcached_servers'] %>
 
 [libvirt]
-use_virtio_for_bridges=True
 <% @libvirt_config.keys.sort.each do |key| -%>
 <%= key %> = <%= @libvirt_config[key] %>
 <% end -%>
