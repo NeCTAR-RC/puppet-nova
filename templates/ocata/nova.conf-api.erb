@@ -155,3 +155,5 @@ project_name = <%= @keystone_service_tenant %>
 user_domain_name = Default
 project_domain_name = Default
 memcached_servers = <%= @cell_config['memcached_servers'] %>
+memcache_pool_unused_timeout = 30
+memcache_pool_maxsize = 5
