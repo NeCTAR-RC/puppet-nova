@@ -158,5 +158,5 @@ admin_user = <%= @cell_config['keystone_user'] %>
 admin_password = <%= @cell_config['keystone_password'] %>
 signing_dir = /var/lib/nova/keystone-signing
 memcached_servers = <%= @cell_config['memcached_servers'] %>
-memcache_pool_unused_timeout = 30
-memcache_pool_maxsize = 5
+memcache_pool_unused_timeout = 15
+memcache_pool_maxsize = 3
