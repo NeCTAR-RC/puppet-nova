@@ -154,6 +154,10 @@ password = <%= @cell_config['keystone_password'] %>
 project_name = <%= @keystone_service_tenant %>
 user_domain_name = Default
 project_domain_name = Default
+<%- if @cell_config['keystone_authtoken_memcached_servers'] -%>
+memcached_servers = <%= @cell_config['keystone_authtoken_memcached_servers'] %>
+<%-  else -%>
 memcached_servers = <%= @cell_config['memcached_servers'] %>
+<%- end -%>
 memcache_pool_unused_timeout = 15
 memcache_pool_maxsize = 3
