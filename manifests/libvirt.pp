@@ -35,6 +35,11 @@ class nova::libvirt(
     managehome => false,
   }
 
+  group {'libvirtd':
+    ensure => present,
+    system => true,
+  }
+
   file { '/etc/libvirt/libvirtd.conf':
     ensure  => present,
     owner   => 'root',
