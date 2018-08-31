@@ -240,8 +240,8 @@
 
 "os_compute_api:os-shelve:unshelve": "rule:admin_or_owner"
 "os_compute_api:os-simple-tenant-usage:discoverable": "@"
-"os_compute_api:os-simple-tenant-usage:list": "rule:admin_api"
-"os_compute_api:os-simple-tenant-usage:show": "rule:admin_or_owner"
+"os_compute_api:os-simple-tenant-usage:list": "rule:admin_or_monitoring"
+"os_compute_api:os-simple-tenant-usage:show": "rule:monitoring_or_default"
 "os_compute_api:os-suspend-server:discoverable": "@"
 "os_compute_api:os-suspend-server:resume": "rule:admin_or_owner"
 "os_compute_api:os-suspend-server:suspend": "rule:admin_or_owner"
