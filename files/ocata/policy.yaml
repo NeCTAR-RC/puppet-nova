@@ -231,7 +231,10 @@
 "os_compute_api:os-server-usage:discoverable": "@"
 "os_compute_api:os-server-usage": "rule:admin_or_owner"
 "os_compute_api:os-services:discoverable": "@"
-"os_compute_api:os-services": "rule:admin_api"
+
+# Nectar custom
+"os_compute_api:os-services": "rule:admin_or_monitoring"
+
 "os_compute_api:os-shelve:discoverable": "@"
 "os_compute_api:os-shelve:shelve_offload": "rule:admin_api"
 
