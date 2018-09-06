@@ -38,6 +38,10 @@ block_device_allocate_retries_interval=10
 linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 
+<% if @cell_name -%>
+cell_v2_name=<%= @cell_name %>
+<% end -%>
+
 <% if @cell_config['reservation_expire'] -%>
 [quota]
 reservation_expire=<%= @cell_config['reservation_expire'] %>
