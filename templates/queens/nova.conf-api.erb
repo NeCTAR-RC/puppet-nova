@@ -141,6 +141,13 @@ free_disk_units_needed=<%= @cell_config['free_disk_units_needed'] %>
 <%- end -%>
 <%- end -%>
 
+<%- if @pci_alias -%>
+[pci]
+<%- @pci_alias.each do |value| -%>
+pci_alias = <%= value %>
+<%- end -%>
+<%- end -%>
+
 [keystone_authtoken]
 auth_type = v3password
 auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3

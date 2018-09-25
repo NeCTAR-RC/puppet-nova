@@ -3,6 +3,7 @@ class nova::cloudcontroller(
   $extra_config={},
   $cell_type='compute',
   $cell_name=undef,
+  $pci_alias=undef,
 )
 {
 
