@@ -50,6 +50,7 @@ rabbit_ha_queues=True
 amqp_durable_queues=True
 <% if @cell_config['rabbit_ssl'] -%>
 ssl=True
+ssl_version=TLSv1_2
 rabbit_use_ssl=True
 <% end -%>
 heartbeat_timeout_threshold=60
