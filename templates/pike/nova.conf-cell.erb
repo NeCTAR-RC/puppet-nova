@@ -123,6 +123,9 @@ idle_timeout=60
 [api_database]
 connection=mysql+pymysql://<%= @cell_config['api_db_user'] %>:<%= @cell_config['api_db_pass'] %>@<%= @cell_config['api_db_host'] %>/<%= @cell_config['api_db_name'] %>
 
+[upgrade_levels]
+compute=ocata
+
 <%- if @cell_config['use_cells'] -%>
 [quota]
 driver=nova.quota.NoopQuotaDriver
