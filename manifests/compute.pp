@@ -12,7 +12,7 @@ class nova::compute {
   }
 
   # Mitigation for iptables rule ordering issue
-  if $openstack_version[0] >= 'n' {
+  if $openstack_version[0] >= 'n' and $openstack_version[0] < 'q' {
 
     include ::systemd
 
@@ -23,7 +23,12 @@ class nova::compute {
       ensure  => present,
       source  => 'puppet:///modules/nova/nova-compute-service-override.conf',
       require => File['/etc/systemd/system/nova-compute.service.d'],
-    } ~> Exec['systemctl-daemon-reload'] ~> Service['nova-compute']
+      } ~> Exec['systemctl-daemon-reload'] ~> Service['nova-compute']
+  } else {
+    file { '/etc/systemd/system/nova-compute.service.d/override.conf':
+      ensure => absent,
+      notify => Exec['systemctl-daemon-reload'],
+    }
   }
 
   service { 'nova-compute':
