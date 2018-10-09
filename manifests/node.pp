@@ -67,8 +67,8 @@ class nova::node (
 
   file { '/etc/nova/nova.conf':
     ensure  => present,
-    owner   => nova,
-    group   => nova,
+    owner   => 'nova',
+    group   => 'nova',
     mode    => '0640',
     require => Package['nova-common'],
     content => template("nova/${openstack_version}/nova.conf-compute.erb"),
@@ -76,8 +76,8 @@ class nova::node (
 
   file { '/etc/nova/nova-compute.conf':
     ensure  => present,
-    owner   => nova,
-    group   => nova,
+    owner   => 'nova',
+    group   => 'nova',
     mode    => '0640',
     require => Package['nova-common'],
     content => template("nova/${openstack_version}/nova-compute.conf.erb"),
@@ -85,18 +85,10 @@ class nova::node (
 
   case $libvirt_type {
     'kvm':   { include ::nova::kvm }
-    'lxc':   { include ::nova::lxc }
     default: {  }
   }
 
   include ::nova::libvirt
   include ::nova::compute
-
-  if $openstack_version == 'juno' {
-    file {'/usr/lib/python2.7/dist-packages/nova/openstack/common/rpc/':
-      ensure => absent,
-      force  => true,
-    }
-  }
 
 }
