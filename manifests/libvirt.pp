@@ -30,12 +30,18 @@ class nova::libvirt(
     ensure     => present,
     uid        => $uid,
     gid        => 'kvm',
-    shell      => '/bin/false',
+    shell      => '/usr/sbin/nologin',
     home       => '/var/lib/libvirt',
     managehome => false,
   }
 
-  group {'libvirtd':
+  if $::lsbdistcodename == 'xenial' {
+    $libvirt_group = 'libvirtd'
+  } else {
+    $libvirt_group = 'libvirt'
+  }
+
+  group {$libvirt_group:
     ensure => present,
     system => true,
   }
@@ -45,7 +51,7 @@ class nova::libvirt(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('nova/libvirtd.conf.erb'),
+    content => template("nova/libvirtd.conf-${::lsbdistcodename}.erb"),
     notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }

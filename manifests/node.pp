@@ -47,11 +47,17 @@ class nova::node (
     ensure => present,
   }
 
+  if $::lsbdistcodename == 'xenial' {
+    $libvirt_group = 'libvirtd'
+  } else {
+    $libvirt_group = 'libvirt'
+  }
+
   user { 'nova':
     ensure     => present,
     uid        => $nova_uid,
     gid        => nova,
-    groups     => ['libvirtd'],
+    groups     => [$libvirt_group],
     shell      => '/bin/bash',
     home       => '/var/lib/nova',
     managehome => false,

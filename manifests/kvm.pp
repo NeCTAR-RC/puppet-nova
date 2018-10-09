@@ -8,7 +8,7 @@ class nova::kvm($gid, $package_ensure='installed') {
 
   file { '/dev/kvm':
     group   => kvm,
-    mode    => '0770',
+    mode    => '0660',
     require => Group['kvm'],
   }
 
