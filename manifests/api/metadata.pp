@@ -14,16 +14,6 @@ class nova::api::metadata {
     require   => Package['nova-api-metadata'],
   }
 
-  include ::nova::rootwrap
-
-  file {'/etc/nova/rootwrap.d/api-metadata.filters':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File['/etc/nova/rootwrap.d'],
-  }
-
   $workers = $::nova::cloudcontroller::api::workers
 
   nagios::nrpe::service {

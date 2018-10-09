@@ -83,7 +83,6 @@ class nova::node (
     default: {  }
   }
 
-  include ::nova::rootwrap
   include ::nova::libvirt
   include ::nova::compute
 

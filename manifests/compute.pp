@@ -40,14 +40,6 @@ class nova::compute {
     ],
   }
 
-  file {'/etc/nova/rootwrap.d/compute.filters':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => File['/etc/nova/rootwrap.d'],
-  }
-
   nagios::nrpe::service {
     'service_nova_compute':
       check_command => '/usr/lib/nagios/plugins/check_procs -c 1:1 -u nova -a /usr/bin/nova-compute';
