@@ -35,15 +35,25 @@ class nova::libvirt(
     managehome => false,
   }
 
+  # For xenial it uses the old group name
+  if $::lsbdistcodename == 'xenial' {
+    group {'libvirtd':
+      ensure => present,
+      system => true,
+    }
+  }
+  # Ensure this is also on xenial for things like ceilometer module
+  # that expect it to exist
+  group {'libvirt':
+    ensure => present,
+    system => true,
+  }
+
+  # This is used in the template
   if $::lsbdistcodename == 'xenial' {
     $libvirt_group = 'libvirtd'
   } else {
     $libvirt_group = 'libvirt'
-  }
-
-  group {$libvirt_group:
-    ensure => present,
-    system => true,
   }
 
   file { '/etc/libvirt/libvirtd.conf':
