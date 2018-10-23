@@ -130,3 +130,8 @@ enable=true
 name=<%= @cell_config['cells_name'] %>
 cell_type=compute
 <% end -%>
+
+<%- if @upgrade_level -%>
+[upgrade_levels]
+compute=<%= @upgrade_level %>
+<%- end -%>

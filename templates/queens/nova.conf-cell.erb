@@ -123,6 +123,11 @@ connection=mysql+pymysql://<%= @cell_config['db_user'] %>:<%= @cell_config['db_p
 [api_database]
 connection=mysql+pymysql://<%= @cell_config['api_db_user'] %>:<%= @cell_config['api_db_pass'] %>@<%= @cell_config['api_db_host'] %>/<%= @cell_config['api_db_name'] %>
 
+<%- if @upgrade_level -%>
+[upgrade_levels]
+compute=<%= @upgrade_level %>
+
+<%- end -%>
 <%- if @cell_config['use_cells'] -%>
 [quota]
 driver=nova.quota.NoopQuotaDriver
