@@ -119,11 +119,9 @@ novncproxy_base_url=<%= @novncproxy_base_url %>
 [glance]
 api_servers=<%= @cell_config['glance_servers'] %>
 num_retries=3
-<%- if @cinder_endpoint_template -%>
 
 [cinder]
-endpoint_template=<%= @cinder_endpoint_template %>
-<%- end -%>
+cross_az_attach=False
 <% if @cell_config['use_cells'] -%>
 
 [cells]
