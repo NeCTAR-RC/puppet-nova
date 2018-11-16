@@ -106,7 +106,10 @@ num_retries=3
 
 [cinder]
 cross_az_attach=False
-
+<%- if @cinder_endpoint_template -%>
+endpoint_template=<%= @cinder_endpoint_template %>
+<%- end -%>
+ 
 [conductor]
 <% if not @use_conductor -%>
 use_local=true
