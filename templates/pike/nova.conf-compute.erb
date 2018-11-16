@@ -122,6 +122,9 @@ num_retries=3
 
 [cinder]
 cross_az_attach=False
+<%- if @cinder_endpoint_template -%>
+endpoint_template=<%= @cinder_endpoint_template %>
+<%- end -%>
 <% if @cell_config['use_cells'] -%>
 
 [cells]
