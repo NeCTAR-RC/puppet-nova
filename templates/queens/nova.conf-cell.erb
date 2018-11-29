@@ -42,11 +42,6 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 cell_v2_name=<%= @cell_name %>
 <% end -%>
 
-<% if @cell_config['reservation_expire'] -%>
-[quota]
-reservation_expire=<%= @cell_config['reservation_expire'] %>
-<% end -%>
-
 [filter_scheduler]
 enabled_filters=<%= @cell_config['scheduler_default_filters'] %>
 
@@ -132,6 +127,7 @@ compute=<%= @upgrade_level %>
 <%- if @cell_config['use_cells'] -%>
 [quota]
 driver=nova.quota.NoopQuotaDriver
+reservation_expire=600
 
 [cells]
 enable=true
