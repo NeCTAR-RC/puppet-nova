@@ -34,8 +34,8 @@ class nova::node (
     $novncproxy_base_url = "http://${vnc_host}:6080/vnc_auto.html"
   }
 
-  include memcached::python
-  include mariadb::python
+  include ::memcached::python
+  include ::mysql::bindings::python
 
   package {'nova-common':
     ensure  => present,
