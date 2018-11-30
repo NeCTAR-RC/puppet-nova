@@ -21,7 +21,6 @@ class nova::cloudcontroller(
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
 
   include ::memcached::python
-  include ::mysql::bindings::python
 
   package {'nova-common':
     ensure => installed,

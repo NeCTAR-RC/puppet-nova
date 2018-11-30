@@ -35,7 +35,6 @@ class nova::node (
   }
 
   include ::memcached::python
-  include ::mysql::bindings::python
 
   package {'nova-common':
     ensure  => present,
