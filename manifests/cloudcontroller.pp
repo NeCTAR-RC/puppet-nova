@@ -20,7 +20,7 @@ class nova::cloudcontroller(
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
 
-  include mysql::python
+  include mariadb::python
   include memcached::python
 
   package {'nova-common':

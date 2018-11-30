@@ -35,7 +35,7 @@ class nova::node (
   }
 
   include memcached::python
-  include mysql::python
+  include mariadb::python
 
   package {'nova-common':
     ensure  => present,
