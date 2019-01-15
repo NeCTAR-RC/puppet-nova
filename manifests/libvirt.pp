@@ -90,7 +90,7 @@ class nova::libvirt(
   # delete the current virbr0 interface if it exists
   exec { 'virsh-net-destroy-default':
     command => '/usr/bin/virsh net-destroy default',
-    onlyif  => '/sbin/ifconfig virbr0',
+    onlyif  => '/sbin/ip address show dev virbr0',
     notify  => Exec['virsh-net-undefine-default'],
   }
 
