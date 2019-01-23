@@ -11,10 +11,10 @@ class nova::compute {
     tag     => 'openstack',
   }
 
+  include ::systemd
+
   # Mitigation for iptables rule ordering issue
   if $openstack_version[0] >= 'n' and $openstack_version[0] < 'q' {
-
-    include ::systemd
 
     file { '/etc/systemd/system/nova-compute.service.d':
       ensure => directory,
