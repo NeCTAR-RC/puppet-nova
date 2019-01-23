@@ -1,6 +1,8 @@
 # Nova compute manifest
 class nova::compute {
 
+  include ::systemd
+
   require nova::node
 
   $openstack_version = hiera('openstack_version')
@@ -13,8 +15,6 @@ class nova::compute {
 
   # Mitigation for iptables rule ordering issue
   if $openstack_version[0] >= 'n' and $openstack_version[0] < 'q' {
-
-    include ::systemd
 
     file { '/etc/systemd/system/nova-compute.service.d':
       ensure => directory,
