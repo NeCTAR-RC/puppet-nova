@@ -6,6 +6,7 @@
 "default": "rule:admin_or_owner"
 "monitoring": "role:monitoring"
 "monitoring_or_default": "rule:default or rule:read_only"
+"allocation_admin": "role:AllocationAdmin"
 "quota_admin": "role:QuotaAdmin or rule:provisioner"
 "provisioner": "role:provisioner"
 "cloud_admin": "role:cloud_admin"
@@ -25,6 +26,7 @@
 "os_compute_api:os-quota-sets:update": "rule:quota_admin"
 "os_compute_api:os-security-groups": "rule:monitoring_or_default"
 "os_compute_api:os-shelve:shelve": "rule:admin_api"
+"os_compute_api:os-used-limits": "rule:monitoring_or_default or rule:allocation_admin"
 
 "os_compute_api:os-simple-tenant-usage:list": "rule:admin_or_monitoring"
 "os_compute_api:os-simple-tenant-usage:show": "rule:monitoring_or_default"
