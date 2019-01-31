@@ -145,7 +145,7 @@ free_disk_units_needed=<%= @cell_config['free_disk_units_needed'] %>
 <%- if @pci_alias -%>
 [pci]
 <%- @pci_alias.each do |value| -%>
-pci_alias = <%= value %>
+alias = <%= value %>
 <%- end -%>
 <%- end -%>
 
