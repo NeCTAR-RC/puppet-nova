@@ -12,7 +12,7 @@
 "cloud_admin": "role:cloud_admin"
 "read_only": "role:monitoring or role:read_only or role:helpdesk"
 "admin_or_monitoring": "rule:admin_api or rule:read_only or rule:cloud_admin"
-
+"operator_or_admin": "rule:cloud_admin or rule:admin_api"
 
 "os_compute_api:os-aggregates:index": "rule:admin_or_monitoring"
 "os_compute_api:os-aggregates:show": "rule:admin_or_monitoring"
@@ -38,3 +38,7 @@
 "os_compute_api:servers:index:get_all_tenants": "rule:admin_or_monitoring"
 "os_compute_api:servers:index": "rule:monitoring_or_default"
 "os_compute_api:servers:show": "rule:monitoring_or_default"
+
+# Admin and operator policies
+"os_compute_api:os-flavor-access:add_tenant_access": "rule:operator_or_admin"
+"os_compute_api:os-flavor-access:remove_tenant_access": "rule:operator_or_admin"
