@@ -117,9 +117,15 @@ max_pool_size=<%= @cell_config['db_max_pool_size'] %>
 <%- if @cell_config['db_max_overflow'] -%>
 max_overflow=<%= @cell_config['db_max_overflow'] %>
 <%- end -%>
+<%- if @cell_config['connection_recycle_time'] -%>
+connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
+<%- end -%>
 
 [api_database]
 connection=mysql+pymysql://<%= @cell_config['api_db_user'] %>:<%= @cell_config['api_db_pass'] %>@<%= @cell_config['api_db_host'] %>/<%= @cell_config['api_db_name'] %>
+<%- if @cell_config['connection_recycle_time'] -%>
+connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
+<%- end -%>
 
 <%- if @cell_config['use_cells'] -%>
 [cells]
