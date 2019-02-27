@@ -1,5 +1,6 @@
 # api node
 class nova::cloudcontroller::api(
+  $log_file         = undef,
   $workers          = 2,
   $metadata_workers = 1,
 ) inherits nova::cloudcontroller {
