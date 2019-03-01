@@ -42,6 +42,9 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 cell_v2_name=<%= @cell_name %>
 <% end -%>
 
+[scheduler]
+max_placement_results=3000
+
 [filter_scheduler]
 enabled_filters=<%= @cell_config['scheduler_default_filters'] %>
 
