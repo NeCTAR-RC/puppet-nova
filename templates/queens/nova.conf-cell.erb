@@ -126,7 +126,7 @@ connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
 <%- end -%>
 
 [api_database]
-connection=mysql+pymysql://<%= @cell_config['api_db_user'] %>:<%= @cell_config['api_db_pass'] %>@<%= @cell_config['api_db_host'] %>/<%= @cell_config['api_db_name'] %>
+connection=<%= @api_db_connection %>
 <%- if @cell_config['connection_recycle_time'] -%>
 connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
 <%- end -%>
