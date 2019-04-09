@@ -48,6 +48,9 @@ max_placement_results=3000
 [filter_scheduler]
 enabled_filters=<%= @cell_config['scheduler_default_filters'] %>
 
+[oslo_policy]
+policy_file=/etc/nova/policy.yaml
+
 [oslo_messaging_rabbit]
 <% if @cell_config['rabbit_ha'] -%>
 rabbit_ha_queues=True

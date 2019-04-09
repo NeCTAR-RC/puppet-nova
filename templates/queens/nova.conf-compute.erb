@@ -51,6 +51,9 @@ firewall_driver = nova.virt.firewall.NoopFirewallDriver
 my_ip=<%= @my_ip %>
 <%- end -%>
 
+[oslo_policy]
+policy_file=/etc/nova/policy.yaml
+
 [oslo_concurrency]
 lock_path = $state_path/lock
 
