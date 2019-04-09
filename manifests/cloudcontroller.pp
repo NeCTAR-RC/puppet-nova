@@ -19,6 +19,7 @@ class nova::cloudcontroller(
   $upgrade_level = hiera('nova::upgrade_level', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
+  $api_db_connection = hiera('nova::db::api_database_connection')
 
   include ::memcached::python
 
