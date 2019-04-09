@@ -112,6 +112,7 @@ password = <%= @cell_config['keystone_password'] %>
 user_domain_name = Default
 project_name = <%= @keystone_service_tenant %>
 project_domain_name = Default
+os_region_name=<%= @cell_config['placement_region'] %>
 
 [vnc]
 vncserver_listen=0.0.0.0
