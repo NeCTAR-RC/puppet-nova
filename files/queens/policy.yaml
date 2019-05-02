@@ -22,7 +22,7 @@
 "os_compute_api:os-quota-class-sets:show": "rule:quota_admin or quota_class:%(quota_class)s"
 "os_compute_api:os-quota-class-sets:update": "rule:quota_admin"
 "os_compute_api:os-quota-sets:delete": "rule:quota_admin"
-"os_compute_api:os-quota-sets:detail": "rule:quota_admin"
+"os_compute_api:os-quota-sets:detail": "rule:quota_admin or rule:admin_or_monitoring"
 "os_compute_api:os-quota-sets:update": "rule:quota_admin"
 "os_compute_api:os-shelve:shelve": "rule:admin_api"
 "os_compute_api:os-used-limits": "rule:monitoring_or_default or rule:allocation_admin"
