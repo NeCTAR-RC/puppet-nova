@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7abc7b5f_9899ae12",
+        "filename": "manifests/node.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000104
+      },
+      "writtenOn": "2019-06-05T06:28:39Z",
+      "side": 1,
+      "message": "who still has compute nodes \u003c \u0027o\u0027 ?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "ed4814ef2f8b5be871457d78bad22ef29cb0732b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
