@@ -24,6 +24,11 @@ metadata_workers=<%= @metadata_workers %>
 
 image_decryption_dir=/var/lib/nova/tmp
 
+<% if @restrict_zones -%>
+# Nectar Custom
+restrict_zones=<%= @restrict_zones %>
+<% end -%>
+
 # Extra
 <% @extra_config.keys.sort.each do |key| -%>
 <%   if @extra_config[key].is_a? Array -%>
