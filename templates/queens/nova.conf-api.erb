@@ -72,6 +72,9 @@ floating_provider_network_filter=<%= @cell_config['floating_provider_network_fil
 <%- if @metadata_proxy_shared_secret -%>
 metadata_proxy_shared_secret = <%= @metadata_proxy_shared_secret %>
 <%- end -%>
+<%- if @default_networks -%>
+default_networks = <%= @default_networks.join(',') %>
+<%- end -%>
 auth_type = v3password
 auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
 username = <%= @cell_config['keystone_user'] %>

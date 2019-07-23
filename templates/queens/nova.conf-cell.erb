@@ -74,6 +74,9 @@ lock_path = $state_path/lock
 [neutron]
 url = <%= @neutron_url %>
 service_metadata_proxy=True
+<%- if @default_networks -%>
+default_networks = <%= @default_networks.join(',') %>
+<%- end -%>
 auth_type = v3password
 auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
 username = <%= @cell_config['keystone_user'] %>
