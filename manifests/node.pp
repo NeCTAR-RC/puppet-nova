@@ -26,12 +26,23 @@ class nova::node (
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
+  $os_release = $facts['os']['distro']['release']['full'] + 0
 
   if $cell_config['novncproxy_base_url'] {
     $novncproxy_base_url = $cell_config['novncproxy_base_url']
   } else {
     $vnc_host = $cell_config['vnc_host']
     $novncproxy_base_url = "http://${vnc_host}:6080/vnc_auto.html"
+  }
+
+  if $os_release >= 18.04 {
+    file { '/etc/mke2fs.conf':
+      ensure => 'file',
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
+      source => 'puppet:///modules/nova/mke2fs.conf',
+    }
   }
 
   include ::memcached::python
