@@ -37,11 +37,11 @@ class nova::node (
   $os_release = $facts['os']['distro']['release']['full'] + 0
 
   if $os_release >= 18.04 {
-    file { "/etc/mke2fs.conf":
-      ensure => "file",
-      mode => "0644",
-      owner => "root",
-      group => "root",
+    file { '/etc/mke2fs.conf:
+      ensure => 'file',
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
       source => 'puppet:///modules/nova/mke2fs.conf',
     }
   }
