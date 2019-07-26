@@ -34,6 +34,17 @@ class nova::node (
     $novncproxy_base_url = "http://${vnc_host}:6080/vnc_auto.html"
   }
 
+  # NOTE(dlujanski): Workaround to support CentOS6 ephermeral disk on Bionic
+  if versioncmp($facts['os']['distro']['release']['full'], '18.04') >= 0 {
+    file { '/etc/mke2fs.conf':
+      ensure => 'file',
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
+      source => 'puppet:///modules/nova/mke2fs.conf',
+    }
+  }
+
   include ::memcached::python
 
   package {'nova-common':
