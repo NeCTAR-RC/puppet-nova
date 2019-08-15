@@ -16,6 +16,24 @@
       "revId": "2fc200a827ea6c64c94bbbd0843d62606510d66b",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "239292c8_10293d86",
+        "filename": "manifests/node.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2019-08-15T05:01:09Z",
+      "side": 1,
+      "message": "Are you suggesting we lock this down to Bionic only then?",
+      "parentUuid": "092d36af_89aaef20",
+      "revId": "2fc200a827ea6c64c94bbbd0843d62606510d66b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
     }
   ]
 }
