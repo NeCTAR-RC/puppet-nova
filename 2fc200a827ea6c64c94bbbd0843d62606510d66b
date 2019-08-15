@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "092d36af_89aaef20",
+        "filename": "manifests/node.pp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-08-15T04:54:16Z",
+      "side": 1,
+      "message": "This will push it out to bionic and also anything newer than bionic which we prob don\u0027t want as centos6 will be EOL by the time the next ubuntu lts gets deployed?",
+      "revId": "2fc200a827ea6c64c94bbbd0843d62606510d66b",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
