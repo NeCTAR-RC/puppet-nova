@@ -1,0 +1,190 @@
+[DEFAULT]
+state_path=/var/lib/nova
+bindir=/usr/bin
+rootwrap_config=/etc/nova/rootwrap.conf
+
+# Logging
+<% if @logdebug -%>
+debug=True
+<%- end -%>
+<% if @log_file -%>
+log_file=<%= @log_file %>
+<%- end -%>
+log_dir=/var/log/nova
+use_stderr=false
+use_syslog=true
+syslog_log_facility=LOG_USER
+
+transport_url="<%= @cell_config['transport_url'] %>"
+
+# API server
+enabled_apis=osapi_compute, metadata
+osapi_compute_workers=<%= @workers %>
+metadata_workers=<%= @metadata_workers %>
+
+image_decryption_dir=/var/lib/nova/tmp
+
+<% if @restrict_zones -%>
+# Nectar Custom
+restrict_zones=<%= @restrict_zones %>
+<% end -%>
+
+# Extra
+<% @extra_config.keys.sort.each do |key| -%>
+<%   if @extra_config[key].is_a? Array -%>
+<%     @extra_config[key].each do |value| -%>
+<%=      key %> = <%= value %>
+<%     end -%>
+<%   else -%>
+<%=    key %> = <%= @extra_config[key] %>
+<%   end -%>
+<% end -%>
+
+[wsgi]
+api_paste_config=/etc/nova/api-paste.ini
+
+[quota]
+max_age = 10
+until_refresh = 5
+reservation_expire=600
+
+[oslo_policy]
+policy_file=/etc/nova/policy.yaml
+
+[oslo_messaging_rabbit]
+<% if @cell_config['rabbit_ha'] -%>
+rabbit_ha_queues=True
+<% end -%>
+amqp_durable_queues=True
+<% if @cell_config['rabbit_ssl'] -%>
+ssl=True
+ssl_version=TLSv1_2
+rabbit_use_ssl=True
+<% end -%>
+heartbeat_timeout_threshold=60
+
+[neutron]
+endpoint_override = <%= @neutron_url %>
+service_metadata_proxy=True
+<%- if @cell_config['floating_provider_network_filter'] -%>
+floating_provider_network_filter=<%= @cell_config['floating_provider_network_filter'] %>
+<%- end -%>
+<%- if @metadata_proxy_shared_secret -%>
+metadata_proxy_shared_secret = <%= @metadata_proxy_shared_secret %>
+<%- end -%>
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+project_name = <%= @keystone_service_tenant %>
+user_domain_name = Default
+project_domain_name = Default
+
+[placement]
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+user_domain_name = Default
+project_name = <%= @keystone_service_tenant %>
+project_domain_name = Default
+region_name=<%= @cell_config['placement_region'] %>
+
+[oslo_concurrency]
+lock_path = $state_path/lock
+
+[oslo_messaging_notifications]
+driver=messagingv2
+
+[notifications]
+notify_api_faults = true
+notify_cell_instance_faults = true
+notify_on_state_change = vm_and_task_state
+notification_format=unversioned
+
+[cache]
+enabled=True
+backend=oslo_cache.memcache_pool
+memcache_servers=<%= @cell_config['memcached_servers'] %>
+
+[glance]
+api_servers=<%= @cell_config['glance_servers'] %>
+num_retries=3
+
+[cinder]
+<%- if @cinder_endpoint_template -%>
+endpoint_template=<%= @cinder_endpoint_template %>
+<%- end -%>
+#cross_az_attach=False
+
+[database]
+connection=mysql+pymysql://<%= @cell_config['db_user'] %>:<%= @cell_config['db_pass'] %>@<%= @cell_config['db_host'] %>/<%= @cell_config['db_name'] %>
+<%- if @cell_config['db_max_pool_size'] -%>
+max_pool_size=<%= @cell_config['db_max_pool_size'] %>
+<%- end -%>
+<%- if @cell_config['db_max_overflow'] -%>
+max_overflow=<%= @cell_config['db_max_overflow'] %>
+<%- end -%>
+<%- if @cell_config['connection_recycle_time'] -%>
+connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
+<%- end -%>
+
+[api_database]
+connection=<%= @api_db_connection %>
+<%- if @cell_config['connection_recycle_time'] -%>
+connection_recycle_time=<%= @cell_config['connection_recycle_time'] %>
+<%- end -%>
+
+<%- if @pci_alias -%>
+[pci]
+<%- @pci_alias.each do |value| -%>
+alias = <%= value %>
+<%- end -%>
+<%- end -%>
+
+<%- if @upgrade_level -%>
+[upgrade_levels]
+compute=<%= @upgrade_level %>
+<%- end -%>
+
+[keystone_authtoken]
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+project_name = <%= @keystone_service_tenant %>
+user_domain_name = Default
+project_domain_name = Default
+<%- if @cell_config['keystone_authtoken_memcached_servers'] -%>
+memcached_servers = <%= @cell_config['keystone_authtoken_memcached_servers'] %>
+<%-  else -%>
+memcached_servers = <%= @cell_config['memcached_servers'] %>
+<%- end -%>
+memcache_pool_unused_timeout = 15
+memcache_pool_maxsize = 3
+
+[api]
+<%- if @vendordata_dynamic_targets -%>
+vendordata_providers = DynamicJSON
+vendordata_dynamic_targets = '<%= @vendordata_dynamic_targets.join(',') %>'
+vendordata_dynamic_connect_timeout = 5 
+vendordata_dynamic_read_timeout = 30
+<%- end -%>
+
+<%- if @vendordata_dynamic_targets -%>
+[vendordata_dynamic_auth]
+auth_type = v3password
+auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
+username = <%= @cell_config['keystone_user'] %>
+password = <%= @cell_config['keystone_password'] %>
+project_name = <%= @keystone_service_tenant %>
+user_domain_name = Default
+project_domain_name = Default
+<%- if @cell_config['keystone_authtoken_memcached_servers'] -%>
+memcached_servers = <%= @cell_config['keystone_authtoken_memcached_servers'] %>
+<%-  else -%>
+memcached_servers = <%= @cell_config['memcached_servers'] %>
+<%- end -%>
+memcache_pool_unused_timeout = 15
+memcache_pool_maxsize = 3
+<%- end -%>
