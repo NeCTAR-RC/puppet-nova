@@ -39,6 +39,17 @@ restrict_zones=<%= @restrict_zones %>
 <%   end -%>
 <% end -%>
 
+
+[scheduler]
+max_placement_results=3000
+
+[filter_scheduler]
+available_filters=nova.scheduler.filters.all_filters
+<% if @cell_config['scheduler_available_filters'] -%>
+available_filters=<%= @cell_config['scheduler_available_filters'] %>
+<% end -%>
+enabled_filters=<%= @cell_config['scheduler_default_filters'] %>
+
 [oslo_policy]
 policy_file=/etc/nova/policy.yaml
 
@@ -59,6 +70,9 @@ lock_path = $state_path/lock
 
 [neutron]
 service_metadata_proxy=True
+<%- if @default_networks -%>
+default_networks = <%= @default_networks.join(',') %>
+<%- end -%>
 auth_type = v3password
 auth_url = <%= @keystone_protocol %>://<%= @keystone_host %>:5000/v3
 username = <%= @cell_config['keystone_user'] %>
