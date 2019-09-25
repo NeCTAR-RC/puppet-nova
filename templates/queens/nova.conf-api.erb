@@ -180,3 +180,6 @@ memcached_servers = <%= @cell_config['memcached_servers'] %>
 <%- end -%>
 memcache_pool_unused_timeout = 15
 memcache_pool_maxsize = 3
+
+[oslo_middleware]
+enable_proxy_headers_parsing = True
