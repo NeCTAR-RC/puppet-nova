@@ -1,8 +1,6 @@
 # Base class for a nova controller, sets up nova.conf
 class nova::cloudcontroller(
   $extra_config={},
-  $cell_type='compute',
-  $cell_name=undef,
   $pci_alias=undef,
   $default_networks=false,
 )
@@ -15,7 +13,6 @@ class nova::cloudcontroller(
   $keystone_protocol = hiera('keystone::protocol')
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
-  $use_conductor = hiera('nova::use_conductor', false)
   $conductor_workers = hiera('nova::conductor::workers', 0)
   $upgrade_level = hiera('nova::upgrade_level', false)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
@@ -23,6 +20,11 @@ class nova::cloudcontroller(
   $api_db_connection = hiera('nova::db::api_database_connection')
   $restrict_zones = hiera('nova::restrict_zones', false)
 
+   nag::unused_variable{'nova::use_conductor':}
+   nag::unused_variable{'nova::cell_type':}
+   nag::unused_variable{'nova::cell_name':}
+
+  
   include ::memcached::python
 
   package {'nova-common':
@@ -47,24 +49,12 @@ class nova::cloudcontroller(
     require => Package['nova-common'],
   }
 
-  if $openstack_version[0] < 'o' {
-    $policy_file = 'policy.json'
-    $old_policy = 'policy.yaml'
-  } else {
-    $policy_file = 'policy.yaml'
-    $old_policy = 'policy.json'
-  }
-
-  file { "/etc/nova/${old_policy}":
-    ensure => absent,
-  }
-
-  file { "/etc/nova/${policy_file}":
+  file { "/etc/nova/policy.yaml":
     ensure  => present,
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    source  => "puppet:///modules/nova/${openstack_version}/${policy_file}",
+    source  => "puppet:///modules/nova/${openstack_version}/policy.yaml",
     require => Package['nova-common'],
   }
 

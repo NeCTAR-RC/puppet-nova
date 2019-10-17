@@ -128,13 +128,6 @@ cross_az_attach=False
 <%- if @cinder_endpoint_template -%>
 endpoint_template=<%= @cinder_endpoint_template %>
 <%- end -%>
-<% if @cell_config['use_cells'] -%>
-
-[cells]
-enable=true
-name=<%= @cell_config['cells_name'] %>
-cell_type=compute
-<% end -%>
 
 <%- if @upgrade_level -%>
 [upgrade_levels]
