@@ -48,7 +48,9 @@ max_placement_results=3000
 [filter_scheduler]
 available_filters=nova.scheduler.filters.all_filters
 <% if @cell_config['scheduler_available_filters'] -%>
-available_filters=<%= @cell_config['scheduler_available_filters'] %>
+<% @cell_config['scheduler_available_filters'].each do |sched_plugin| -%>
+available_filters=<%= sched_plugin %>
+<% end -%>
 <% end -%>
 enabled_filters=<%= @cell_config['scheduler_default_filters'] %>
 
