@@ -21,7 +21,6 @@ class nova::node (
   $keystone_protocol = hiera('keystone::protocol')
   $keystone_service_tenant = hiera('keystone::service_tenant')
   $cell_config = hiera_hash('nova::cell_config')
-  $use_conductor = hiera('nova::use_conductor', false)
   $send_notifications = hiera('nova::send_notifications', true)
   $neutron_url = hiera('nova::neutron_url', 'http://localhost:9696')
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
