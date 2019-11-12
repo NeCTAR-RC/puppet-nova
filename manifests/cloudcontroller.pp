@@ -20,10 +20,6 @@ class nova::cloudcontroller(
   $api_db_connection = hiera('nova::db::api_database_connection')
   $restrict_zones = hiera('nova::restrict_zones', false)
 
-  nag::unused_variable{'nova::use_conductor':}
-  nag::unused_variable{'nova::cell_type':}
-  nag::unused_variable{'nova::cell_name':}
-
   include ::memcached::python
 
   package {'nova-common':
