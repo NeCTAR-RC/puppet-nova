@@ -5,38 +5,38 @@
 # === Parameters:
 #
 # [*enabled*]
-#   (optional) Whether to run the scheduler service
+#   (Optional) Whether to run the scheduler service
 #   Defaults to true
 #
 # [*manage_service*]
-#   (optional) Whether to start/stop the service
+#   (Optional) Whether to start/stop the service
 #   Defaults to true
 #
 # [*ensure_package*]
-#   (optional) The state of the scheduler package
+#   (Optional) The state of the scheduler package
 #   Defaults to 'present'
 #
 # [*workers*]
-#   (optional) The amount of scheduler workers.
+#   (Optional) The amount of scheduler workers.
 #   Defaults to $::os_workers
 #
 # [*scheduler_driver*]
-#   (optional) Default driver to use for the scheduler
+#   (Optional) Default driver to use for the scheduler
 #   Defaults to 'filter_scheduler'
 #
 # [*discover_hosts_in_cells_interval*]
-#   (optional) This value controls how often (in seconds) the scheduler should
+#   (Optional) This value controls how often (in seconds) the scheduler should
 #   attempt to discover new hosts that have been added to cells.
 #   Defaults to $::os_service_default
 #
 # [*query_placement_for_image_type_support*]
-#   (optional) This setting causes the scheduler to ask placement only for
+#   (Optional) This setting causes the scheduler to ask placement only for
 #   compute hosts that support the ``disk_format`` of the image used in the
 #   request.
 #   Defaults to $::os_service_default
 #
 # [*limit_tenants_to_placement_aggregate*]
-#   (optional) This setting allows to have tenant isolation with placement.
+#   (Optional) This setting allows to have tenant isolation with placement.
 #   It ensures hosts in tenant-isolated host aggregate and availability
 #   zones will only be available to specific set of tenants.
 #   Defaults to $::os_service_default
@@ -63,6 +63,11 @@
 #   aggregate.
 #   Defaults to $::os_service_default
 #
+# [*max_placement_results*]
+#   (Optional) This setting determines the maximum limit on results received
+#   from the placement service during a scheduling operation.
+#   Defaults to $::os_service_default
+#
 class nova::scheduler(
   $enabled                                  = true,
   $manage_service                           = true,
@@ -75,6 +80,7 @@ class nova::scheduler(
   $placement_aggregate_required_for_tenants = $::os_service_default,
   $enable_isolated_aggregate_filtering      = $::os_service_default,
   $query_placement_for_availability_zone    = $::os_service_default,
+  $max_placement_results                    = $::os_service_default,
 ) {
 
   include ::nova::deps
@@ -99,6 +105,6 @@ class nova::scheduler(
     'scheduler/placement_aggregate_required_for_tenants': value => $placement_aggregate_required_for_tenants;
     'scheduler/enable_isolated_aggregate_filtering':      value => $enable_isolated_aggregate_filtering;
     'scheduler/query_placement_for_availability_zone':    value => $query_placement_for_availability_zone;
+    'scheduler/max_placement_results':                  value => $max_placement_results;
   }
-
 }
