@@ -44,6 +44,7 @@ restrict_zones=<%= @restrict_zones %>
 
 [scheduler]
 max_placement_results=3000
+limit_tenants_to_placement_aggregate=True
 
 [filter_scheduler]
 available_filters=nova.scheduler.filters.all_filters
