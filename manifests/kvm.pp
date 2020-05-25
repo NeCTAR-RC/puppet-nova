@@ -1,5 +1,7 @@
 class nova::kvm($gid, $package_ensure='installed') {
 
+  $openstack_version = hiera('openstack_version')
+
   package {'nova-compute-kvm':
     ensure  => $package_ensure,
     require => Package['nova-common'],
@@ -15,6 +17,14 @@ class nova::kvm($gid, $package_ensure='installed') {
   group { 'kvm':
     ensure => present,
     gid    => $gid,
+  }
+
+  if $openstack_version == 'stein' {
+    apt::pin { 'qemu':
+      packages   => 'qemu-*',
+      originator => 'Ubuntu',
+      priority   => 1000,
+    }
   }
 
 }
