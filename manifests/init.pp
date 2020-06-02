@@ -24,7 +24,6 @@ class nova {
                             'nova::cell_config.rabbit_user',
                             'nova::cell_config.rabbit_pass',
                             'nova::cell_config.rabbit_virtual_host',
-                            'nova::cell_config.capacity_aggregate_key',
                             ]
   nag::unused_variable{$unused_cell_variables:
     merge_strategy => 'deep',
