@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a63703e_63fc94b4",
+        "filename": "templates/stein/nova.conf-api.erb",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-06-17T03:48:31Z",
+      "side": 1,
+      "message": "could add a if statement around this so it would restart all the nova controllers when deployed",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 83
+      },
+      "revId": "59f42907d9c68e9f94638cfeb5d53bc1dc305f0e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
