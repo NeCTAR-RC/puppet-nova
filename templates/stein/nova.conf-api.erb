@@ -42,6 +42,9 @@ restrict_zones=<%= @restrict_zones %>
 
 [scheduler]
 max_placement_results=3000
+<%- if @query_placement_for_availability_zone -%>
+query_placement_for_availability_zone=<%= @query_placement_for_availability_zone %>
+<%- end -%>
 
 [filter_scheduler]
 available_filters=nova.scheduler.filters.all_filters

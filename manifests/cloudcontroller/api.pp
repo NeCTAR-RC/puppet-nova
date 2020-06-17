@@ -9,6 +9,8 @@ class nova::cloudcontroller::api(
   $metadata_proxy_shared_secret = hiera(
     'neutron::agents::metadata::shared_secret', false
   )
+  $query_placement_for_availability_zone = hiera(
+    'nova::scheduler::query_placement_for_availability_zone', false)
 
   File['/etc/nova/nova.conf'] {
     content => template("nova/${openstack_version}/nova.conf-api.erb"),
