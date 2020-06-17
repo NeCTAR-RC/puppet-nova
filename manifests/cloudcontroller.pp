@@ -19,6 +19,8 @@ class nova::cloudcontroller(
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
   $api_db_connection = hiera('nova::db::api_database_connection')
   $restrict_zones = hiera('nova::restrict_zones', false)
+  $query_placement_for_availability_zone = hiera(
+    'nova::scheduler::query_placement_for_availability_zone', false)
 
   include ::memcached::python
 
