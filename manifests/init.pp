@@ -69,6 +69,10 @@
 #   (optional) List of addresses for api servers.
 #   Defaults to 'http://localhost:9292'
 #
+# [*glance_num_retries*]
+#   (optional) Number of retries in glance operation
+#   Defaults to $::os_service_default
+#
 # [*rabbit_use_ssl*]
 #   (optional) Boolean. Connect over SSL for RabbitMQ. (boolean value)
 #   Defaults to $::os_service_default
@@ -443,6 +447,7 @@ class nova(
   # these glance params should be optional
   # this should probably just be configured as a glance client
   $glance_api_servers                     = 'http://localhost:9292',
+  $glance_num_retries                     = $::os_service_default,
   $rabbit_use_ssl                         = $::os_service_default,
   $rabbit_heartbeat_timeout_threshold     = $::os_service_default,
   $rabbit_heartbeat_rate                  = $::os_service_default,
@@ -754,6 +759,7 @@ but should be one of: ssh-rsa, ssh-dsa, ssh-ecdsa.")
     'upgrade_levels/intercell':   value => $upgrade_level_intercell;
     'upgrade_levels/network':     value => $upgrade_level_network;
     'upgrade_levels/scheduler':   value => $upgrade_level_scheduler;
+    'glance/num_retries':         value => $glance_num_retries;
   }
 
 }
