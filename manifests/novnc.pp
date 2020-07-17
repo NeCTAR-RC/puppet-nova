@@ -1,6 +1,6 @@
-class nova::novnc {
+class oldnova::novnc {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-novncproxy':
     ensure => installed,

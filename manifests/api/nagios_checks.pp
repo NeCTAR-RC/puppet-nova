@@ -1,5 +1,5 @@
 # These are checks that can be run by the nagios server.
-class nova::api::nagios_checks {
+class oldnova::api::nagios_checks {
   nagios::command {
     'check_ec2_ssl':
       check_command =>

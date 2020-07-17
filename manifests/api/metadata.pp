@@ -1,6 +1,6 @@
 #class to manage nova metadata service
 
-class nova::api::metadata {
+class oldnova::api::metadata {
 
   package { 'nova-api-metadata':
     ensure  => present,
@@ -14,7 +14,7 @@ class nova::api::metadata {
     require   => Package['nova-api-metadata'],
   }
 
-  $workers = $::nova::cloudcontroller::api::workers
+  $workers = hiera('nova::cloudcontroller::api::workers')
 
   nagios::nrpe::service {
     'service_nova_api_metadata':

@@ -74,7 +74,7 @@
 #
 #   class { 'nova::wsgi::apache': }
 #
-class nova::wsgi::apache_placement (
+class oldnova::wsgi::apache_placement (
   $servername      = $::fqdn,
   $api_port        = 80,
   $bind_host       = undef,
@@ -94,20 +94,20 @@ class nova::wsgi::apache_placement (
   $access_log_file = false,
 ) {
 
-  include ::nova::params
+  include ::oldnova::params
   include ::apache
   include ::apache::mod::wsgi
   if $ssl {
     include ::apache::mod::ssl
   }
 
-  nova::generic_service { 'placement-api':
+  oldnova::generic_service { 'placement-api':
     service_name   => false,
-    package_name   => $::nova::params::placement_package_name,
+    package_name   => $::oldnova::params::placement_package_name,
     ensure_package => $ensure_package,
   }
 
-  file { $::nova::params::placement_httpd_config_file:
+  file { $::oldnova::params::placement_httpd_config_file:
     ensure  => present,
     content => "#
     # This file has been cleaned by Puppet.
@@ -119,7 +119,7 @@ class nova::wsgi::apache_placement (
   # Ubuntu requires nova-placement-api to be installed before apache to find wsgi script
   Package<| title == 'nova-placement-api'|> -> Package<| title == 'httpd'|>
   Package<| title == 'nova-placement-api' |> ->
-  File[$::nova::params::placement_httpd_config_file] ~>
+  File[$::oldnova::params::placement_httpd_config_file] ~>
   Service['httpd']
 
   ::openstacklib::wsgi::apache { 'placement_wsgi':
@@ -142,9 +142,9 @@ class nova::wsgi::apache_placement (
     workers             => $workers,
     wsgi_daemon_process => 'placement-api',
     wsgi_process_group  => 'placement-api',
-    wsgi_script_dir     => $::nova::params::nova_wsgi_script_path,
+    wsgi_script_dir     => $::oldnova::params::nova_wsgi_script_path,
     wsgi_script_file    => 'nova-placement-api',
-    wsgi_script_source  => $::nova::params::placement_wsgi_script_source,
+    wsgi_script_source  => $::oldnova::params::placement_wsgi_script_source,
     access_log_file     => $access_log_file,
   }
 

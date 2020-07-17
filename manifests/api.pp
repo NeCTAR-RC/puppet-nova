@@ -1,7 +1,7 @@
-class nova::api {
+class oldnova::api {
   $openstack_version = hiera('openstack_version')
 
-  require nova::cloudcontroller::api
+  require oldnova::cloudcontroller::api
 
   package { 'nova-api':
     ensure => present,

@@ -1,6 +1,6 @@
-class nova::spiceproxy {
+class oldnova::spiceproxy {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-spiceproxy':
     ensure => installed,

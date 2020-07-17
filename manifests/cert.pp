@@ -1,6 +1,6 @@
-class nova::cert {
+class oldnova::cert {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-cert':
     ensure => installed,

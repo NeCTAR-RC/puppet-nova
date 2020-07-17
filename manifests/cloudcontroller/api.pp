@@ -1,9 +1,9 @@
 # api node
-class nova::cloudcontroller::api(
-  $log_file         = undef,
-  $workers          = 2,
-  $metadata_workers = 1,
-) inherits nova::cloudcontroller {
+class oldnova::cloudcontroller::api inherits oldnova::cloudcontroller {
+
+  $log_file = hiera('nova::cloudcontroller::api::log_file')
+  $workers = hiera('nova::cloudcontroller::api::workers', 2)
+  $metadata_workers = hiera('nova::cloudcontroller::api::metadata_workers', 1)
 
   $openstack_version = hiera('openstack_version')
   $metadata_proxy_shared_secret = hiera(
