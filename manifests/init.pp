@@ -1,4 +1,4 @@
-class nova {
+class oldnova {
 
   require nectar
 

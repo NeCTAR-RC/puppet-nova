@@ -1,9 +1,9 @@
 # Nova compute manifest
-class nova::compute {
+class oldnova::compute {
 
   include ::systemd
 
-  require nova::node
+  require oldnova::node
 
   $openstack_version = hiera('openstack_version')
 

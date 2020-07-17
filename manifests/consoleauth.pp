@@ -1,6 +1,6 @@
-class nova::consoleauth {
+class oldnova::consoleauth {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-consoleauth':
     ensure => installed,

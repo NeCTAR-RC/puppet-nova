@@ -1,14 +1,12 @@
 # Libvirt specifics for nova
-class nova::libvirt(
-  $uid,
-  $host_uuid=false,
-  $config={},
-  $qemu_config={}
-)
-{
+class oldnova::libvirt{
 
   ensure_packages(['ebtables', 'pm-utils', 'genisoimage'])
 
+  $uid = hiera('nova::libvirt::uid')
+  $host_uuid = hiera('nova::libvirt::host_uuid', false)
+  $config = hiera('nova::libvirt::config', {})
+  $qemu_config = hiera('nova::libvirt::qemu_config', {})
   $openstack_version = hiera('openstack_version')
 
   if $openstack_version[0] > 'n' {

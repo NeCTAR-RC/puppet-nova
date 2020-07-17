@@ -1,5 +1,7 @@
-class nova::kvm($gid, $package_ensure='installed') {
+class oldnova::kvm {
 
+  $gid = hiera('nova::kvm::gid')
+  $package_ensure = hiera('nova::kvm::package_ensure', 'installed')
   $openstack_version = hiera('openstack_version')
 
   package {'nova-compute-kvm':

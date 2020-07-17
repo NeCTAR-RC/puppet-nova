@@ -1,12 +1,11 @@
 # Base class for a nova controller, sets up nova.conf
-class nova::cloudcontroller(
-  $extra_config={},
-  $pci_alias=undef,
-  $default_networks=false,
-)
-{
+class oldnova::cloudcontroller {
 
-  require nova
+  require oldnova
+
+  $extra_config = hiera('nova::cloudcontroller::extra_config', {})
+  $pci_alias = hiera('nova::cloudcontroller::pci_alias')
+  $default_networks = hiera('nova::cloudcontroller::default_networks', false)
 
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')

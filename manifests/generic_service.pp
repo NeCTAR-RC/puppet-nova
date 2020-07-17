@@ -30,7 +30,7 @@
 #   (optional) Control the ensure parameter for the package ressource.
 #   Defaults to 'present'.
 #
-define nova::generic_service(
+define oldnova::generic_service(
   $package_name,
   $service_name,
   $enabled        = true,
@@ -38,7 +38,7 @@ define nova::generic_service(
   $ensure_package = 'present'
 ) {
 
-  include ::nova::params
+  include oldnova::params
 
   $nova_title = "nova-${name}"
 

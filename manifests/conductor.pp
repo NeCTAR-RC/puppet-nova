@@ -1,6 +1,7 @@
-class nova::conductor($workers=0) {
+class oldnova::conductor {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
+  $workers = hiera('nova::conductor::workers', 0)
   $openstack_version = hiera('openstack_version')
 
   package { 'nova-conductor':
