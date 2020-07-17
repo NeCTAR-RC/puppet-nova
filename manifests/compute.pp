@@ -1,9 +1,9 @@
 # Nova compute manifest
-class nova::compute {
+class oldnova::compute {
 
   include ::systemd
 
-  require nova::node
+  require oldnova::node
 
   $openstack_version = hiera('openstack_version')
 
@@ -21,7 +21,7 @@ class nova::compute {
     }
     file { '/etc/systemd/system/nova-compute.service.d/override.conf':
       ensure  => present,
-      source  => 'puppet:///modules/nova/nova-compute-service-override.conf',
+      source  => 'puppet:///modules/oldnova/nova-compute-service-override.conf',
       require => File['/etc/systemd/system/nova-compute.service.d'],
       } ~> Exec['systemctl-daemon-reload'] ~> Service['nova-compute']
   } else {

@@ -1,14 +1,12 @@
 # Libvirt specifics for nova
-class nova::libvirt(
-  $uid,
-  $host_uuid=false,
-  $config={},
-  $qemu_config={}
-)
-{
+class oldnova::libvirt{
 
   ensure_packages(['ebtables', 'pm-utils', 'genisoimage'])
 
+  $uid = hiera('nova::libvirt::uid')
+  $host_uuid = hiera('nova::libvirt::host_uuid', false)
+  $config = hiera('nova::libvirt::config', {})
+  $qemu_config = hiera('nova::libvirt::qemu_config', {})
   $openstack_version = hiera('openstack_version')
 
   if $openstack_version[0] > 'n' {
@@ -61,7 +59,7 @@ class nova::libvirt(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("nova/libvirtd.conf-${::lsbdistcodename}.erb"),
+    content => template("oldnova/libvirtd.conf-${::lsbdistcodename}.erb"),
     notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
@@ -71,7 +69,7 @@ class nova::libvirt(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('nova/qemu.conf.erb'),
+    content => template('oldnova/qemu.conf.erb'),
     notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
@@ -81,8 +79,8 @@ class nova::libvirt(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    source  => ["puppet:///modules/nova/libvirt-bin-${::lsbdistcodename}",
-                'puppet:///modules/nova/libvirt-bin'],
+    source  => ["puppet:///modules/oldnova/libvirt-bin-${::lsbdistcodename}",
+                'puppet:///modules/oldnova/libvirt-bin'],
     notify  => Service[$libvirt_service],
     require => Package['libvirt-bin'],
   }
