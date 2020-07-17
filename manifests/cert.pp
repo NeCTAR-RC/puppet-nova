@@ -1,6 +1,6 @@
-class nova::cert {
+class oldnova::cert {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-cert':
     ensure => installed,
@@ -8,12 +8,12 @@ class nova::cert {
   }
 
   file { '/var/lib/nova/CA/openssl.cnf':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0644',
-    source  => 'puppet:///modules/nova/openssl.cnf',
-    notify  => Service['nova-cert'],
+    ensure => present,
+    owner  => nova,
+    group  => nova,
+    mode   => '0644',
+    source => 'puppet:///modules/oldnova/openssl.cnf',
+    notify => Service['nova-cert'],
   }
 
   service { 'nova-cert':

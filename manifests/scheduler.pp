@@ -1,6 +1,6 @@
-class nova::scheduler {
+class oldnova::scheduler {
 
-  require nova::cloudcontroller
+  require oldnova::cloudcontroller
 
   package { 'nova-scheduler':
     ensure => present,

@@ -1,12 +1,11 @@
 # Base class for a nova controller, sets up nova.conf
-class nova::cloudcontroller(
-  $extra_config={},
-  $pci_alias=undef,
-  $default_networks=false,
-)
-{
+class oldnova::cloudcontroller {
 
-  require nova
+  require oldnova
+
+  $extra_config = hiera('nova::cloudcontroller::extra_config', {})
+  $pci_alias = hiera('nova::cloudcontroller::pci_alias')
+  $default_networks = hiera('nova::cloudcontroller::default_networks', false)
 
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')
@@ -33,7 +32,7 @@ class nova::cloudcontroller(
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    content => template("nova/${openstack_version}/nova.conf-cell.erb"),
+    content => template("oldnova/${openstack_version}/nova.conf-cell.erb"),
     require => Package['nova-common'],
   }
 
@@ -42,7 +41,7 @@ class nova::cloudcontroller(
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    content => template("nova/${openstack_version}/api-paste.ini.erb"),
+    content => template("oldnova/${openstack_version}/api-paste.ini.erb"),
     require => Package['nova-common'],
   }
 
@@ -51,7 +50,7 @@ class nova::cloudcontroller(
     owner   => nova,
     group   => nova,
     mode    => '0640',
-    source  => "puppet:///modules/nova/${openstack_version}/policy.yaml",
+    source  => "puppet:///modules/oldnova/${openstack_version}/policy.yaml",
     require => Package['nova-common'],
   }
 
