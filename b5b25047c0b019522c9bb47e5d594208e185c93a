@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b39d7ac_59d01254",
+        "filename": "manifests/api/nagios_checks.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-07-20T02:42:16Z",
+      "side": 1,
+      "message": "weren\u0027t these removed from the nova module and move to the profile? Would need to do this here too I think",
+      "range": {
+        "startLine": 2,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "b5b25047c0b019522c9bb47e5d594208e185c93a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e90a27f2_58fc3e99",
+        "filename": "manifests/cloudcontroller.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-07-20T02:42:16Z",
+      "side": 1,
+      "message": "would need to change these to oldnova too (and below)",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 29
+      },
+      "revId": "b5b25047c0b019522c9bb47e5d594208e185c93a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "178d8320_55868712",
+        "filename": "manifests/cloudcontroller/api.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-07-20T02:42:16Z",
+      "side": 1,
+      "message": "oldnova",
+      "range": {
+        "startLine": 16,
+        "startChar": 25,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "b5b25047c0b019522c9bb47e5d594208e185c93a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d38086d_20f03234",
+        "filename": "manifests/libvirt.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-07-20T02:42:16Z",
+      "side": 1,
+      "message": "oldnova (and below)",
+      "range": {
+        "startLine": 62,
+        "startChar": 25,
+        "endLine": 62,
+        "endChar": 29
+      },
+      "revId": "b5b25047c0b019522c9bb47e5d594208e185c93a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf556eed_1475004e",
+        "filename": "manifests/node.pp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2020-07-20T02:42:16Z",
+      "side": 1,
+      "message": "here too",
+      "range": {
+        "startLine": 71,
+        "startChar": 25,
+        "endLine": 71,
+        "endChar": 29
+      },
+      "revId": "b5b25047c0b019522c9bb47e5d594208e185c93a",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": true
+    }
+  ]
+}
