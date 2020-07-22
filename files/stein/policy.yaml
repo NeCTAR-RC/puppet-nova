@@ -38,6 +38,8 @@
 "os_compute_api:servers:index:get_all_tenants": "rule:admin_or_monitoring"
 "os_compute_api:servers:index": "rule:monitoring_or_default"
 "os_compute_api:servers:show": "rule:monitoring_or_default"
+"os_compute_api:servers:show:host_status": "rule:admin_or_monitoring"
+
 "os_compute_api:servers:allow_all_filters": "rule:admin_or_monitoring"
 
 # Admin and operator policies
