@@ -14,11 +14,4 @@ class oldnova::api::metadata {
     require   => Package['nova-api-metadata'],
   }
 
-  $workers = hiera('nova::cloudcontroller::api::workers')
-
-  nagios::nrpe::service {
-    'service_nova_api_metadata':
-      check_command => "/usr/lib/nagios/plugins/check_procs -c ${workers}:${workers} -u nova -a /usr/bin/nova-api-metadata";
-  }
-
 }

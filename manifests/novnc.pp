@@ -18,9 +18,4 @@ class oldnova::novnc {
     ensure => installed,
   }
 
-  firewall { '100 novnc':
-    dport  => 6080,
-    proto  => tcp,
-    action => accept,
-  }
 }
