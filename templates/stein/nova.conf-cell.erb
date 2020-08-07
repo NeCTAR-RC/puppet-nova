@@ -46,6 +46,9 @@ max_placement_results=3000
 <%- if @query_placement_for_availability_zone -%>
 query_placement_for_availability_zone=<%= @query_placement_for_availability_zone %>
 <%- end -%>
+<%- if @limit_tenants_to_placement_aggregate -%>
+limit_tenants_to_placement_aggregate=<%= @limit_tenants_to_placement_aggregate %>
+<%- end -%>
 
 [filter_scheduler]
 available_filters=nova.scheduler.filters.all_filters

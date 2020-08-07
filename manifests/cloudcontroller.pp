@@ -21,6 +21,8 @@ class nova::cloudcontroller(
   $restrict_zones = hiera('nova::restrict_zones', false)
   $query_placement_for_availability_zone = hiera(
     'nova::scheduler::query_placement_for_availability_zone', false)
+  $limit_tenants_to_placement_aggregate = hiera(
+    'nova::scheduler::limit_tenants_to_placement_aggregate', false)
 
   include ::memcached::python
 
