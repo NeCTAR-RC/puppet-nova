@@ -26,6 +26,9 @@ class nova::node (
   $cinder_endpoint_template = hiera('nova::cinder_endpoint_template', false)
   $upgrade_level = hiera('nova::upgrade_level', false)
 
+  $keymgr_backend = hiera('nova::compute::keymgr_backend', undef)
+  $barbican_auth_endpoint = hiera('nova::compute::barbican_auth_endpoint', undef)
+
   if $cell_config['novncproxy_base_url'] {
     $novncproxy_base_url = $cell_config['novncproxy_base_url']
   } else {
