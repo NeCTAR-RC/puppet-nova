@@ -1,5 +1,8 @@
 # Nova compute manifest
-class nova::compute {
+class nova::compute(
+  $keymgr_backend         = undef,
+  $barbican_auth_endpoint = undef,
+) {
 
   include ::systemd
 
