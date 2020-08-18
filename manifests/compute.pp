@@ -1,5 +1,8 @@
 # Nova compute manifest
 class oldnova::compute {
+  $keymgr_backend         = undef,
+  $barbican_auth_endpoint = undef,
+) {
 
   include ::systemd
 

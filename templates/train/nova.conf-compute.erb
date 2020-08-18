@@ -113,6 +113,14 @@ novncproxy_base_url=<%= @novncproxy_base_url %>
 api_servers=<%= @cell_config['glance_servers'] %>
 num_retries=3
 
+<%- if @keymgr_backend -%>
+[key_manager]
+backend = <%= @keymgr_backend %>
+<%- end -%>
+<%- if @barbican_auth_endpoint -%>
+[barbican]
+auth_endpoint = <%= @barbican_auth_endpoint %>
+<%- end -%>
 [cinder]
 cross_az_attach=False
 <%- if @cinder_endpoint_template -%>
