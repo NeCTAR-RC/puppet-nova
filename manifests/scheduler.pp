@@ -14,10 +14,4 @@ class nova::scheduler {
     require   => Package['nova-scheduler'],
   }
 
-  $procs = $::processorcount + 1
-
-  nagios::nrpe::service {
-    'service_nova_scheduler':
-      check_command => "/usr/lib/nagios/plugins/check_procs -c ${procs}:${procs} -u nova -a /usr/bin/nova-scheduler";
-  }
 }
