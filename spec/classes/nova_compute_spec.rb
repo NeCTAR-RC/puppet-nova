@@ -25,6 +25,8 @@ describe 'nova::compute' do
       end
 
       it { is_expected.to contain_nova_config('DEFAULT/allow_resize_to_same_host').with(:value => 'false') }
+      it { is_expected.to contain_nova_config('DEFAULT/reserved_host_memory_mb').with_value('512') }
+      it { is_expected.to contain_nova_config('DEFAULT/reserved_host_disk_mb').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to contain_nova_config('DEFAULT/resize_confirm_window').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to contain_nova_config('DEFAULT/resume_guests_state_on_host_boot').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to_not contain_nova_config('vnc/novncproxy_base_url') }
@@ -86,6 +88,7 @@ describe 'nova::compute' do
           :vncproxy_host                      => '127.0.0.1',
           :force_raw_images                   => false,
           :reserved_host_memory               => '0',
+          :reserved_host_disk                 => '20',
           :heal_instance_info_cache_interval  => '120',
           :config_drive_format                => 'vfat',
           :resize_confirm_window              => '3',
@@ -142,23 +145,18 @@ describe 'nova::compute' do
         is_expected.to contain_nova_config('spice/enabled').with_value(false)
       end
 
+      it { is_expected.to contain_nova_config('DEFAULT/reserved_host_memory_mb').with_value('0') }
+      it { is_expected.to contain_nova_config('DEFAULT/reserved_host_disk_mb').with_value('20') }
       it { is_expected.to contain_nova_config('DEFAULT/heal_instance_info_cache_interval').with_value('120') }
-
       it { is_expected.to contain_nova_config('DEFAULT/force_raw_images').with(:value => false) }
-
       it { is_expected.to contain_nova_config('DEFAULT/resize_confirm_window').with_value('3') }
 
       it { is_expected.to contain_nova_config('DEFAULT/max_concurrent_live_migrations').with_value('4') }
-
       it { is_expected.to contain_nova_config('DEFAULT/sync_power_state_pool_size').with_value('10') }
-
       it { is_expected.to contain_nova_config('DEFAULT/sync_power_state_interval').with_value('0') }
-
       it { is_expected.to contain_nova_config('compute/consecutive_build_service_disable_threshold').with_value('9') }
-
       it { is_expected.to contain_nova_config('DEFAULT/resume_guests_state_on_host_boot').with_value(true) }
       it { is_expected.to contain_nova_config('glance/verify_glance_signatures').with_value(true) }
-
       it { is_expected.to contain_nova_config('compute/live_migration_wait_for_vif_plug').with_value(true) }
 
       it 'configures nova config_drive_format to vfat' do
