@@ -4,7 +4,7 @@ class oldnova::cloudcontroller {
   require oldnova
 
   $extra_config = hiera('nova::cloudcontroller::extra_config', {})
-  $pci_alias = hiera('nova::cloudcontroller::pci_alias')
+  $pci_alias = hiera('nova::cloudcontroller::pci_alias', undef)
   $default_networks = hiera('nova::cloudcontroller::default_networks', false)
 
   $openstack_version = hiera('openstack_version')

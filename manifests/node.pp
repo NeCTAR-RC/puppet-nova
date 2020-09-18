@@ -3,17 +3,15 @@ class oldnova::node {
   require oldnova
 
   $nova_uid = hiera('nova::node::nova_uid')
-  $instances_mount = hiera('nova::node::instances_mount')
   $extra_config = hiera('nova::node::extra_config', {})
   $libvirt_config = hiera('nova::node::libvirt_config', {})
   $vncserver_proxyclient_address = hiera('nova::node::vncserver_proxyclient_address')
-  $routing_source_ip = hiera('nova::node::routing_source_ip')
   $metadata_workers = hiera('nova::node::metadata_workers', 1)
   $driver = hiera('nova::node::driver', 'libvirt.LibvirtDriver')
   $libvirt_type = hiera('nova::node::libvirt_type', 'kvm')
   $default_networks = hiera('nova::node::default_networks', false)
   $remove_unused_base_images = hiera('nova::node::remove_unused_base_images', false)
-  $my_ip = hiera('nova::node::my_ip')
+  $my_ip = hiera('nova::node::my_ip', undef)
 
   $openstack_version = hiera('openstack_version')
   $keystone_host = hiera('keystone::host')
