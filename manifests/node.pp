@@ -5,7 +5,7 @@ class oldnova::node {
   $nova_uid = hiera('nova::node::nova_uid')
   $extra_config = hiera('nova::node::extra_config', {})
   $libvirt_config = hiera('nova::node::libvirt_config', {})
-  $vncserver_proxyclient_address = hiera('nova::node::vncserver_proxyclient_address')
+  $vncserver_proxyclient_address = hiera('nova::node::vncserver_proxyclient_address', $::ipaddress)
   $metadata_workers = hiera('nova::node::metadata_workers', 1)
   $driver = hiera('nova::node::driver', 'libvirt.LibvirtDriver')
   $libvirt_type = hiera('nova::node::libvirt_type', 'kvm')
