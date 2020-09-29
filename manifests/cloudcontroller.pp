@@ -38,22 +38,4 @@ class oldnova::cloudcontroller {
     require => Package['nova-common'],
   }
 
-  file { '/etc/nova/api-paste.ini':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0640',
-    content => template("oldnova/${openstack_version}/api-paste.ini.erb"),
-    require => Package['nova-common'],
-  }
-
-  file { '/etc/nova/policy.yaml':
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0640',
-    source  => "puppet:///modules/oldnova/${openstack_version}/policy.yaml",
-    require => Package['nova-common'],
-  }
-
 }
