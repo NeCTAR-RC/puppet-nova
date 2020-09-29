@@ -26,9 +26,7 @@ class nova::cloudcontroller(
 
   include ::memcached::python
 
-  package {'nova-common':
-    ensure => installed,
-  }
+  ensure_packages(['nova-common'])
 
   file { '/etc/nova/nova.conf':
     ensure  => present,
