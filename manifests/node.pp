@@ -81,27 +81,6 @@ class oldnova::node {
     content => template("oldnova/${openstack_version}/nova-compute.conf.erb"),
   }
 
-  if $openstack_version[0] < 'o' {
-    $policy_file = 'policy.json'
-    $old_policy = 'policy.yaml'
-  } else {
-    $policy_file = 'policy.yaml'
-    $old_policy = 'policy.json'
-  }
-
-  file { "/etc/nova/${old_policy}":
-    ensure => absent,
-  }
-
-  file { "/etc/nova/${policy_file}":
-    ensure  => present,
-    owner   => nova,
-    group   => nova,
-    mode    => '0640',
-    source  => "puppet:///modules/oldnova/${openstack_version}/${policy_file}",
-    require => Package['nova-common'],
-  }
-
   case $libvirt_type {
     'kvm':   { include oldnova::kvm }
     default: {  }
