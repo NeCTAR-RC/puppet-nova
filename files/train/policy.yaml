@@ -24,7 +24,6 @@
 "os_compute_api:os-quota-sets:delete": "rule:quota_admin"
 "os_compute_api:os-quota-sets:detail": "rule:quota_admin or rule:admin_or_monitoring"
 "os_compute_api:os-quota-sets:update": "rule:quota_admin"
-"os_compute_api:os-shelve:shelve": "rule:admin_api or rule:cloud_admin"
 "os_compute_api:os-used-limits": "rule:monitoring_or_default or rule:allocation_admin"
 
 "os_compute_api:os-simple-tenant-usage:list": "rule:admin_or_monitoring"
