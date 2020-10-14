@@ -512,6 +512,7 @@ class nova(
   $purge_config                           = false,
   $my_ip                                  = $::os_service_default,
   $cross_az_attach                        = $::os_service_default,
+  $restrict_zones                         = true,
   # DEPRECATED PARAMETERS
   $notify_api_faults                      = undef,
   $image_service                          = undef,
@@ -754,6 +755,11 @@ but should be one of: ssh-rsa, ssh-dsa, ssh-ecdsa.")
     'upgrade_levels/intercell':   value => $upgrade_level_intercell;
     'upgrade_levels/network':     value => $upgrade_level_network;
     'upgrade_levels/scheduler':   value => $upgrade_level_scheduler;
+  }
+
+  # nectar config option
+  nova_config {
+    'DEFAULT/restrict_zones': value => $restrict_zones;
   }
 
 }
