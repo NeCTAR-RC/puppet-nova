@@ -41,8 +41,15 @@ describe 'nova::compute' do
       it { is_expected.to contain_nova_config('compute/consecutive_build_service_disable_threshold').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to contain_nova_config('DEFAULT/reserved_huge_pages').with_value('<SERVICE DEFAULT>') }
       it { is_expected.to contain_nova_config('compute/live_migration_wait_for_vif_plug').with_value('<SERVICE DEFAULT>') }
-
       it { is_expected.to_not contain_package('cryptsetup').with( :ensure => 'present' )}
+      it { is_expected.to contain_nova_config('DEFAULT/default_access_ip_network_name').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/instance_build_timeout').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/reboot_timeout').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_action').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_poll_interval').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_timeout').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/use_cow_images').with_value('<SERVICE DEFAULT>') }
+      it { is_expected.to contain_nova_config('DEFAULT/virt_mkfs').with_value('<SERVICE DEFAULT>') }
 
       it { is_expected.to_not contain_package('bridge-utils').with(
         :ensure => 'present',
@@ -103,6 +110,14 @@ describe 'nova::compute' do
           :verify_glance_signatures           => true,
           :consecutive_build_service_disable_threshold => '9',
           :live_migration_wait_for_vif_plug   => true,
+          :default_access_ip_network_name     => 'public',
+          :instance_build_timeout             => '300',
+          :reboot_timeout                     => '180',
+          :running_deleted_instance_action    => 'shutdown',
+          :running_deleted_instance_poll_interval => '900',
+          :running_deleted_instance_timeout   => '200',
+          :use_cow_images                     => false,
+          :virt_mkfs                          => 'windows=mkfs.ntfs --force --fast %(target)s',
         }
       end
 
@@ -154,6 +169,14 @@ describe 'nova::compute' do
       it { is_expected.to contain_nova_config('DEFAULT/max_concurrent_live_migrations').with_value('4') }
       it { is_expected.to contain_nova_config('DEFAULT/sync_power_state_pool_size').with_value('10') }
       it { is_expected.to contain_nova_config('DEFAULT/sync_power_state_interval').with_value('0') }
+      it { is_expected.to contain_nova_config('DEFAULT/default_access_ip_network_name').with_value('public') }
+      it { is_expected.to contain_nova_config('DEFAULT/instance_build_timeout').with_value('300') }
+      it { is_expected.to contain_nova_config('DEFAULT/reboot_timeout').with_value('180') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_action').with_value('shutdown') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_poll_interval').with_value('900') }
+      it { is_expected.to contain_nova_config('DEFAULT/running_deleted_instance_timeout').with_value('200') }
+      it { is_expected.to contain_nova_config('DEFAULT/use_cow_images').with_value(false) }
+      it { is_expected.to contain_nova_config('DEFAULT/virt_mkfs').with_value('windows=mkfs.ntfs --force --fast %(target)s') }
       it { is_expected.to contain_nova_config('compute/consecutive_build_service_disable_threshold').with_value('9') }
       it { is_expected.to contain_nova_config('DEFAULT/resume_guests_state_on_host_boot').with_value(true) }
       it { is_expected.to contain_nova_config('glance/verify_glance_signatures').with_value(true) }

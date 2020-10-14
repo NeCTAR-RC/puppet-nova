@@ -1,0 +1,24 @@
+---
+features:
+  - |
+    The new ``nova::compute::default_access_ip_network_name`` parameter
+    has been added to support to set the network name for instances access
+    IPs.
+    The new ``nova::compute::instance_build_timeout`` parameter has been
+    added to support to specify the maximum time for instance to build.
+    The new ``nova::compute::reboot_timeout`` parameter has been added to
+    support to set a time interval after which an instance is hard rebooted
+    automatically.
+    The new ``nova::compute::running_deleted_instance_action`` parameter has
+    been added to support to select the action to be taken when a instance is
+    identified as deleted.
+    The new ``nova::compute::running_deleted_instance_poll_interval``
+    parameter has been added to support to set a time interval to wait
+    between runs for the clean up action.
+    The new ``nova::compute::running_deleted_instance_timeout`` parameter has
+    been added to support to set a time interval to wait for the deleted
+    instances cleanup.
+    The new ``nova::compute::use_cow_images`` parameter has been added to
+    enable use of copy-on-write images.
+    The new ``nova::compute::virt_mkfs`` parameter has been added to support
+    to specify the mkfs commands for ephemeral devices.

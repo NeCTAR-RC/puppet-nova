@@ -177,6 +177,51 @@
 #   (optional) whether to wait for ``network-vif-plugged`` events before starting guest transfer
 #   Defaults to $::os_service_default
 #
+# [*default_access_ip_network_name*]
+#   (optioanal) Name of the network to be used to set access IPs for
+#   instances. If there are multiple IPs to choose from, an arbitrary
+#   one will be chosen.
+#   Defaults to $::os_service_default
+#
+# [*instance_build_timeout*]
+#   (optional) Maximum time in seconds that an instance can take to build.
+#   If this timer expires, instance status will be changed to ERROR.
+#   Enabling this option will make sure an instance will not be stuck
+#   in BUILD state for a longer period.
+#   Defaults to $::os_service_default
+#
+# [*reboot_timeout*]
+#   (optioanl) Time interval after which an instance is hard rebooted
+#   automatically. Setting this option to a time period in seconds will
+#   automatically hard reboot an instance if it has been stuck in a rebooting
+#   state longer than N seconds.
+#   Defaults to $::os_service_default
+#
+# [*running_deleted_instance_action*]
+#   (optional) The compute service periodically checks for instances that
+#   have been deleted in the database but remain running on the compute node.
+#   This option enables action to be taken when such instances are identified
+#   Defaults to $::os_service_default
+#
+# [*running_deleted_instance_poll_interval*]
+#   (optional) Time interval in seconds to wait between runs for the clean up
+#   action. If set to 0, deleted instances check will be disabled.
+#   Defaults to $::os_service_default
+#
+# [*running_deleted_instance_timeout*]
+#   (optional) Time interval in seconds to wait for the instances that have
+#   been marked as deleted in database to be eligible for cleanup.
+#   Defaults to $::os_service_default
+#
+# [*use_cow_images*]
+#   (optional) Enable use of copy-on-write (cow) images.
+#   Defaults to $::os_service_default
+#
+# [*virt_mkfs*]
+#   (optional) Name of the mkfs commands for ephemeral device.
+#   The format is <os_type>=<mkfs command>
+#   Defaults to $::os_service_default
+#
 # DEPRECATED PARAMETERS
 #
 # [*vnc_keymap*]
@@ -240,6 +285,14 @@ class nova::compute (
   $neutron_physnets_numa_nodes_mapping         = {},
   $neutron_tunnel_numa_nodes                   = [],
   $live_migration_wait_for_vif_plug            = $::os_service_default,
+  $default_access_ip_network_name              = $::os_service_default,
+  $instance_build_timeout                      = $::os_service_default,
+  $reboot_timeout                              = $::os_service_default,
+  $running_deleted_instance_action             = $::os_service_default,
+  $running_deleted_instance_poll_interval      = $::os_service_default,
+  $running_deleted_instance_timeout            = $::os_service_default,
+  $use_cow_images                              = $::os_service_default,
+  $virt_mkfs                                   = $::os_service_default,
   # DEPRECATED PARAMETERS
   $vnc_keymap                                  = undef,
   $neutron_enabled                             = undef,
@@ -359,22 +412,29 @@ class nova::compute (
   include ::nova::availability_zone
 
   nova_config {
-    'DEFAULT/reserved_host_memory_mb':           value => $reserved_host_memory;
-    'DEFAULT/reserved_host_disk_mb':             value => $reserved_host_disk;
-    'DEFAULT/reserved_huge_pages':               value => $reserved_huge_pages_real;
-    'DEFAULT/heal_instance_info_cache_interval': value => $heal_instance_info_cache_interval;
-    'DEFAULT/resize_confirm_window':             value => $resize_confirm_window;
-    'DEFAULT/resume_guests_state_on_host_boot':  value => $resume_guests_state_on_host_boot;
-    'key_manager/backend':                       value => $keymgr_backend;
-    'barbican/auth_endpoint':                    value => $barbican_auth_endpoint;
-    'barbican/barbican_endpoint':                value => $barbican_endpoint;
-    'barbican/barbican_api_version':             value => $barbican_api_version;
-    'DEFAULT/max_concurrent_live_migrations':    value => $max_concurrent_live_migrations;
-    'DEFAULT/sync_power_state_pool_size':        value => $sync_power_state_pool_size;
-    'DEFAULT/sync_power_state_interval':         value => $sync_power_state_interval;
-    'compute/consecutive_build_service_disable_threshold':
-      value => $consecutive_build_service_disable_threshold;
-    'compute/live_migration_wait_for_vif_plug':  value => $live_migration_wait_for_vif_plug;
+    'DEFAULT/reserved_host_memory_mb':                     value => $reserved_host_memory;
+    'DEFAULT/reserved_host_disk_mb':                       value => $reserved_host_disk;
+    'DEFAULT/reserved_huge_pages':                         value => $reserved_huge_pages_real;
+    'DEFAULT/heal_instance_info_cache_interval':           value => $heal_instance_info_cache_interval;
+    'DEFAULT/resize_confirm_window':                       value => $resize_confirm_window;
+    'DEFAULT/resume_guests_state_on_host_boot':            value => $resume_guests_state_on_host_boot;
+    'DEFAULT/max_concurrent_live_migrations':              value => $max_concurrent_live_migrations;
+    'DEFAULT/sync_power_state_pool_size':                  value => $sync_power_state_pool_size;
+    'DEFAULT/sync_power_state_interval':                   value => $sync_power_state_interval;
+    'DEFAULT/default_access_ip_network_name':              value => $default_access_ip_network_name;
+    'DEFAULT/instance_build_timeout':                      value => $instance_build_timeout;
+    'DEFAULT/reboot_timeout':                              value => $reboot_timeout;
+    'DEFAULT/running_deleted_instance_action':             value => $running_deleted_instance_action;
+    'DEFAULT/running_deleted_instance_poll_interval':      value => $running_deleted_instance_poll_interval;
+    'DEFAULT/running_deleted_instance_timeout':            value => $running_deleted_instance_timeout;
+    'DEFAULT/use_cow_images':                              value => $use_cow_images;
+    'DEFAULT/virt_mkfs':                                   value => $virt_mkfs;
+    'key_manager/backend':                                 value => $keymgr_backend;
+    'barbican/auth_endpoint':                              value => $barbican_auth_endpoint;
+    'barbican/barbican_endpoint':                          value => $barbican_endpoint;
+    'barbican/barbican_api_version':                       value => $barbican_api_version;
+    'compute/consecutive_build_service_disable_threshold': value => $consecutive_build_service_disable_threshold;
+    'compute/live_migration_wait_for_vif_plug':            value => $live_migration_wait_for_vif_plug;
   }
 
   ensure_resource('nova_config', 'DEFAULT/allow_resize_to_same_host', { value => $allow_resize_to_same_host })
