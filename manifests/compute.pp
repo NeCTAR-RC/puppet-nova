@@ -177,6 +177,12 @@
 #   (optional) whether to wait for ``network-vif-plugged`` events before starting guest transfer
 #   Defaults to $::os_service_default
 #
+# [*default_access_ip_network_name*]
+#   (optioanal) Name of the network to be used to set access IPs for
+#   instances. If there are multiple IPs to choose from, an arbitrary
+#   one will be chosen.
+#   Defaults to $::os_service_default
+#
 # DEPRECATED PARAMETERS
 #
 # [*vnc_keymap*]
@@ -240,6 +246,7 @@ class nova::compute (
   $neutron_physnets_numa_nodes_mapping         = {},
   $neutron_tunnel_numa_nodes                   = [],
   $live_migration_wait_for_vif_plug            = $::os_service_default,
+  $default_access_ip_network_name              = $::os_service_default,
   # DEPRECATED PARAMETERS
   $vnc_keymap                                  = undef,
   $neutron_enabled                             = undef,
@@ -375,6 +382,7 @@ class nova::compute (
     'compute/consecutive_build_service_disable_threshold':
       value => $consecutive_build_service_disable_threshold;
     'compute/live_migration_wait_for_vif_plug':  value => $live_migration_wait_for_vif_plug;
+    'DEFAULT/default_access_ip_network_name':    value => $default_access_ip_network_name;
   }
 
   ensure_resource('nova_config', 'DEFAULT/allow_resize_to_same_host', { value => $allow_resize_to_same_host })

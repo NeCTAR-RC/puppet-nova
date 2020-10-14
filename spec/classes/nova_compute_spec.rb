@@ -43,6 +43,7 @@ describe 'nova::compute' do
       it { is_expected.to contain_nova_config('compute/live_migration_wait_for_vif_plug').with_value('<SERVICE DEFAULT>') }
 
       it { is_expected.to_not contain_package('cryptsetup').with( :ensure => 'present' )}
+      it { is_expected.to contain_nova_config('DEFAULT/default_access_ip_network_name').with_value('<SERVICE DEFAULT>') }
 
       it { is_expected.to_not contain_package('bridge-utils').with(
         :ensure => 'present',
@@ -103,6 +104,7 @@ describe 'nova::compute' do
           :verify_glance_signatures           => true,
           :consecutive_build_service_disable_threshold => '9',
           :live_migration_wait_for_vif_plug   => true,
+          :default_access_ip_network_name     => 'public',
         }
       end
 
@@ -158,6 +160,7 @@ describe 'nova::compute' do
       it { is_expected.to contain_nova_config('DEFAULT/resume_guests_state_on_host_boot').with_value(true) }
       it { is_expected.to contain_nova_config('glance/verify_glance_signatures').with_value(true) }
       it { is_expected.to contain_nova_config('compute/live_migration_wait_for_vif_plug').with_value(true) }
+      it { is_expected.to contain_nova_config('DEFAULT/default_access_ip_network_name').with_value('public') }
 
       it 'configures nova config_drive_format to vfat' do
         is_expected.to contain_nova_config('DEFAULT/config_drive_format').with_value('vfat')
