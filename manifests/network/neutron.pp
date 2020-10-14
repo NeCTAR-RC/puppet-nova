@@ -117,6 +117,7 @@ class nova::network::neutron (
   $vif_plugging_is_fatal           = true,
   $vif_plugging_timeout            = '300',
   $default_floating_pool           = 'nova',
+  $default_networks                = [],
   # DEPRECATED PARAMS
   $neutron_url                     = undef,
   $neutron_url_timeout             = undef,
@@ -176,6 +177,11 @@ class nova::network::neutron (
     'neutron/ovs_bridge':              value => $neutron_ovs_bridge;
     'neutron/extension_sync_interval': value => $neutron_extension_sync_interval;
     'neutron/auth_type':               value => $neutron_auth_type;
+  }
+
+  # nectar config option
+  nova_config {
+    'neutron/default_networks': value => $default_networks;
   }
 
 }
