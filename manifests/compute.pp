@@ -240,6 +240,7 @@ class nova::compute (
   $neutron_physnets_numa_nodes_mapping         = {},
   $neutron_tunnel_numa_nodes                   = [],
   $live_migration_wait_for_vif_plug            = $::os_service_default,
+  $image_cache_manager_interval                = $::os_service_default,
   # DEPRECATED PARAMETERS
   $vnc_keymap                                  = undef,
   $neutron_enabled                             = undef,
@@ -441,6 +442,10 @@ class nova::compute (
   nova_config {
     'DEFAULT/config_drive_format':     value => $config_drive_format;
     'glance/verify_glance_signatures': value => $verify_glance_signatures;
+  }
+
+  nova_config {
+    'DEFAULT/image_cache_manager_interval': value => $image_cache_manager_interval;
   }
 
 }
