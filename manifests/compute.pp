@@ -183,6 +183,22 @@
 #   one will be chosen.
 #   Defaults to $::os_service_default
 #
+# [*running_deleted_instance_action*]
+#   (optional) The compute service periodically checks for instances that
+#   have been deleted in the database but remain running on the compute node.
+#   This option enables action to be taken when such instances are identified
+#   Defaults to $::os_service_default
+#
+# [*running_deleted_instance_poll_interval*]
+#   (optional) Time interval in seconds to wait between runs for the clean up
+#   action. If set to 0, deleted instances check will be disabled.
+#   Defaults to $::os_service_default
+#
+# [*running_deleted_instance_timeout*]
+#   (optional) Time interval in seconds to wait for the instances that have
+#   been marked as deleted in database to be eligible for cleanup.
+#   Defaults to $::os_service_default
+#
 # DEPRECATED PARAMETERS
 #
 # [*vnc_keymap*]
@@ -247,6 +263,9 @@ class nova::compute (
   $neutron_tunnel_numa_nodes                   = [],
   $live_migration_wait_for_vif_plug            = $::os_service_default,
   $default_access_ip_network_name              = $::os_service_default,
+  $running_deleted_instance_action             = $::os_service_default,
+  $running_deleted_instance_poll_interval      = $::os_service_default,
+  $running_deleted_instance_timeout            = $::os_service_default,
   # DEPRECATED PARAMETERS
   $vnc_keymap                                  = undef,
   $neutron_enabled                             = undef,
@@ -383,6 +402,10 @@ class nova::compute (
       value => $consecutive_build_service_disable_threshold;
     'compute/live_migration_wait_for_vif_plug':  value => $live_migration_wait_for_vif_plug;
     'DEFAULT/default_access_ip_network_name':    value => $default_access_ip_network_name;
+    'DEFAULT/running_deleted_instance_action':   value => $running_deleted_instance_action;
+    'DEFAULT/running_deleted_instance_poll_interval':
+      value => $running_deleted_instance_poll_interval;
+    'DEFAULT/running_deleted_instance_timeout':  value => $running_deleted_instance_timeout;
   }
 
   ensure_resource('nova_config', 'DEFAULT/allow_resize_to_same_host', { value => $allow_resize_to_same_host })
