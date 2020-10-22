@@ -57,9 +57,6 @@ describe 'nova::compute::libvirt' do
       it { is_expected.to contain_nova_config('libvirt/inject_key').with_value(false)}
       it { is_expected.to contain_nova_config('libvirt/inject_partition').with_value(-2)}
       it { is_expected.to contain_nova_config('vnc/server_listen').with_value('127.0.0.1')}
-      it { is_expected.to contain_nova_config('DEFAULT/remove_unused_base_images').with_ensure('absent')}
-      it { is_expected.to contain_nova_config('DEFAULT/remove_unused_original_minimum_age_seconds').with_ensure('absent')}
-      it { is_expected.to contain_nova_config('libvirt/remove_unused_resized_minimum_age_seconds').with_ensure('absent')}
       it { is_expected.to contain_nova_config('libvirt/rx_queue_size').with_value('<SERVICE DEFAULT>')}
       it { is_expected.to contain_nova_config('libvirt/tx_queue_size').with_value('<SERVICE DEFAULT>')}
       it { is_expected.to contain_nova_config('libvirt/volume_use_multipath').with_value('<SERVICE DEFAULT>')}
@@ -85,9 +82,6 @@ describe 'nova::compute::libvirt' do
           :libvirt_hw_disk_discard                    => 'unmap',
           :libvirt_hw_machine_type                    => 'x86_64=machinetype1,armv7l=machinetype2',
           :libvirt_enabled_perf_events                => ['cmt', 'mbml', 'mbmt'],
-          :remove_unused_base_images                  => true,
-          :remove_unused_resized_minimum_age_seconds  => 3600,
-          :remove_unused_original_minimum_age_seconds => 3600,
           :libvirt_service_name                       => 'custom_service',
           :virtlock_service_name                      => 'virtlock',
           :virtlog_service_name                       => 'virtlog',
@@ -122,9 +116,6 @@ describe 'nova::compute::libvirt' do
       it { is_expected.to contain_nova_config('libvirt/hw_machine_type').with_value('x86_64=machinetype1,armv7l=machinetype2')}
       it { is_expected.to contain_nova_config('libvirt/enabled_perf_events').with_value('cmt,mbml,mbmt')}
       it { is_expected.to contain_nova_config('vnc/server_listen').with_value('0.0.0.0')}
-      it { is_expected.to contain_nova_config('DEFAULT/remove_unused_base_images').with_value(true)}
-      it { is_expected.to contain_nova_config('DEFAULT/remove_unused_original_minimum_age_seconds').with_value(3600)}
-      it { is_expected.to contain_nova_config('libvirt/remove_unused_resized_minimum_age_seconds').with_value(3600)}
       it { is_expected.to contain_libvirtd_config('log_outputs').with_value("\"#{params[:log_outputs]}\"")}
       it { is_expected.to contain_nova_config('libvirt/rx_queue_size').with_value(512)}
       it { is_expected.to contain_nova_config('libvirt/tx_queue_size').with_value(1024)}
