@@ -240,6 +240,11 @@
 #   loaded at a time.
 #   Defaults to $::os_service_default
 #
+# [*default_ephemeral_format*]
+#   (optional) The default format an ephemeral_volume will be formatted with
+#   on creation.
+#   Defaults to $::os_service_default
+#
 # DEPRECATED PARAMETERS
 #
 # [*vnc_keymap*]
@@ -314,6 +319,7 @@ class nova::compute (
   $running_deleted_instance_poll_interval      = $::os_service_default,
   $running_deleted_instance_timeout            = $::os_service_default,
   $compute_monitors                            = $::os_service_default,
+  $default_ephemeral_format                    = $::os_service_default,
   # DEPRECATED PARAMETERS
   $vnc_keymap                                  = undef,
   $neutron_enabled                             = undef,
@@ -462,6 +468,7 @@ class nova::compute (
       value => $running_deleted_instance_poll_interval;
     'DEFAULT/running_deleted_instance_timeout':  value => $running_deleted_instance_timeout;
     'DEFAULT/compute_monitors':                  value => join(any2array($compute_monitors), ',');
+    'DEFAULT/default_ephemeral_format':          value => $default_ephemeral_format;
   }
 
   ensure_resource('nova_config', 'DEFAULT/allow_resize_to_same_host', { value => $allow_resize_to_same_host })
