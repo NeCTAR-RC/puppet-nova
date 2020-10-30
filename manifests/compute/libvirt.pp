@@ -44,6 +44,11 @@
 #   have a preference and only operate on raw or qcow2
 #   Defaults to $::os_service_default
 #
+# [*snapshots_directory*]
+#   (optional) Location where libvirt driver will store snapshots before
+#   uploading them to image service
+#   Defaults to $::os_service_default
+#
 # [*libvirt_disk_cachemodes*]
 #   (optional) A list of cachemodes for different disk types, e.g.
 #   ["file=directsync", "block=none"]
@@ -214,6 +219,7 @@ class nova::compute::libvirt (
   $libvirt_inject_key                         = false,
   $libvirt_inject_partition                   = -2,
   $libvirt_enabled_perf_events                = $::os_service_default,
+  $snapshots_directory                        = $::os_service_default,
   $libvirt_service_name                       = $::nova::params::libvirt_service_name,
   $virtlock_service_name                      = $::nova::params::virtlock_service_name,
   $virtlog_service_name                       = $::nova::params::virtlog_service_name,
@@ -344,6 +350,7 @@ will be removed in a future release. Use the nova::compute::image_cache class')
     'libvirt/hw_disk_discard':          value => $libvirt_hw_disk_discard;
     'libvirt/hw_machine_type':          value => $libvirt_hw_machine_type;
     'libvirt/enabled_perf_events':      value => join(any2array($libvirt_enabled_perf_events), ',');
+    'libvirt/snapshots_directory':      value => $snapshots_directory;
     'libvirt/rx_queue_size':            value => $rx_queue_size;
     'libvirt/tx_queue_size':            value => $tx_queue_size;
     'libvirt/file_backed_memory':       value => $file_backed_memory;
