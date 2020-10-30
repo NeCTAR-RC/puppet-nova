@@ -52,6 +52,7 @@ describe 'nova::compute::libvirt' do
       it { is_expected.to contain_nova_config('libvirt/cpu_model').with_ensure('absent')}
       it { is_expected.to contain_nova_config('libvirt/cpu_model_extra_flags').with_ensure('absent')}
       it { is_expected.to contain_nova_config('libvirt/snapshot_image_format').with_value('<SERVICE DEFAULT>')}
+      it { is_expected.to contain_nova_config('libvirt/snapshots_directory').with_value('<SERVICE DEFAULT>')}
       it { is_expected.to contain_nova_config('libvirt/disk_cachemodes').with_ensure('absent')}
       it { is_expected.to contain_nova_config('libvirt/inject_password').with_value(false)}
       it { is_expected.to contain_nova_config('libvirt/inject_key').with_value(false)}
@@ -77,10 +78,12 @@ describe 'nova::compute::libvirt' do
         { :ensure_package                             => 'latest',
           :libvirt_virt_type                          => 'qemu',
           :vncserver_listen                           => '0.0.0.0',
+<<<<<<< HEAD
           :libvirt_cpu_mode                           => 'host-passthrough',
           :libvirt_cpu_model                          => 'kvm64',
           :libvirt_cpu_model_extra_flags              => 'pcid',
           :libvirt_snapshot_image_format              => 'raw',
+          :snapshots_directory                        => '/var/lib/nova/snapshots',
           :libvirt_disk_cachemodes                    => ['file=directsync','block=none'],
           :libvirt_hw_disk_discard                    => 'unmap',
           :libvirt_hw_machine_type                    => 'x86_64=machinetype1,armv7l=machinetype2',
@@ -117,6 +120,7 @@ describe 'nova::compute::libvirt' do
       it { is_expected.to contain_nova_config('libvirt/cpu_model').with_ensure('absent')}
       it { is_expected.to contain_nova_config('libvirt/cpu_model_extra_flags').with_value('pcid')}
       it { is_expected.to contain_nova_config('libvirt/snapshot_image_format').with_value('raw')}
+      it { is_expected.to contain_nova_config('libvirt/snapshots_directory').with_value('/var/lib/nova/snapshots')}
       it { is_expected.to contain_nova_config('libvirt/disk_cachemodes').with_value('file=directsync,block=none')}
       it { is_expected.to contain_nova_config('libvirt/hw_disk_discard').with_value('unmap')}
       it { is_expected.to contain_nova_config('libvirt/hw_machine_type').with_value('x86_64=machinetype1,armv7l=machinetype2')}
