@@ -170,19 +170,15 @@ database_connection_recycle_time instead.')
     validate_legacy(Oslo::Dbconn, 'validate_re', $api_database_connection_real,
       ['^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?'])
 
-    oslo::db { 'api_database':
-      config                  => 'nova_config',
-      config_group            => 'api_database',
-      connection              => $api_database_connection_real,
-      slave_connection        => $api_slave_connection_real,
-      connection_recycle_time => $api_database_connection_recycle_time,
-      max_pool_size           => $api_database_max_pool_size,
-      max_retries             => $api_database_max_retries,
-      retry_interval          => $api_database_retry_interval,
-      max_overflow            => $api_database_max_overflow,
-      pool_timeout            => $api_database_pool_timeout,
-      # Package management should be disabled here to avoid conflict.
-      manage_backend_package  => false
+    nova_config {
+      'api_database/connection':              value => $api_database_connection_real, secret => true;
+      'api_database/slave_connection':        value => $api_slave_connection_real, secret => true;
+      'api_database/connection_recycle_time': value => $api_database_connection_recycle_time;
+      'api_database/max_pool_size':           value => $api_database_max_pool_size;
+      'api_database/max_retries':             value => $api_database_max_retries;
+      'api_database/retry_interval':          value => $api_database_retry_interval;
+      'api_database/max_overflow':            value => $api_database_max_overflow;
+      'api_database/pool_timeout':            value => $api_database_pool_timeout;
     }
 
   }
