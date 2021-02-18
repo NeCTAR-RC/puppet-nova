@@ -1,7 +1,7 @@
 # api node
 class oldnova::cloudcontroller::api inherits oldnova::cloudcontroller {
 
-  $log_file = hiera('nova::cloudcontroller::api::log_file')
+  $log_file = hiera('nova::cloudcontroller::api::log_file', undef)
   $workers = hiera('nova::cloudcontroller::api::workers', 2)
   $metadata_workers = hiera('nova::cloudcontroller::api::metadata_workers', 1)
 
