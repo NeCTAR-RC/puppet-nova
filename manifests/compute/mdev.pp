@@ -26,11 +26,6 @@ class nova::compute::mdev(
       'devices/enabled_mdev_types': value  => join(any2array($mdev_types_real), ',');
     }
 
-    # TODO(tkajinam): Remove this when we remove nova::compute::vgpu
-    nova_config {
-      'devices/enabled_vgpu_types': ensure => absent;
-    }
-
     $mdev_types_device_addresses_mapping_real.each |$mdev_type, $device_addresses| {
       if !empty($device_addresses) {
         nova_config {

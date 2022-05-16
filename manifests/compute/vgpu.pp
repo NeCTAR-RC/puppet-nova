@@ -15,10 +15,13 @@ class nova::compute::vgpu(
 ) {
   include nova::deps
 
-  if $vgpu_types_device_addresses_mapping != undef or ! defined(Class[nova::compute]) {
-    # NOTE(tkajinam): If the nova::compute class is not yet included then it is
-    #                 likely this class is included explicitly.
-    warning('The nova::compute::vgpu class is deprecated. Use the nova::compute::mdev class instead')
-  }
   include nova::compute::mdev
+
+  if !empty($vgpu_types_device_addresses_mapping) {
+    validate_legacy(Hash, 'validate_hash', $vgpu_types_device_addresses_mapping)
+    $vgpu_types_real = keys($vgpu_types_device_addresses_mapping)
+    nova_config {
+      'devices/enabled_vgpu_types': value => join(any2array($vgpu_types_real), ',');
+    }
+  }
 }
