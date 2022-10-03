@@ -260,8 +260,8 @@ class nova::migration::libvirt(
     -> File_line<| tag == 'libvirt-file_line'|>
     -> Anchor['nova::config::end']
 
-    File<| tag == 'libvirt-file'|> ~> Service['libvirt']
-    File_line<| tag == 'libvirt-file_line' |> ~> Service['libvirt']
+    File<| tag == 'libvirt-file'|> ~> Service<| title == 'libvirt' |>
+    File_line<| tag == 'libvirt-file_line' |> ~> Service<| title == 'libvirt' |>
 
     if $override_uuid {
       if ! $facts['libvirt_uuid'] {
