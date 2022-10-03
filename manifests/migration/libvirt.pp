@@ -226,7 +226,7 @@ class nova::migration::libvirt(
     -> Anchor['nova::config::end']
 
     File_line<| tag == 'libvirt-file_line' |>
-    ~> Service['libvirt']
+    ~> Service<| title == 'libvirt' |>
 
     if $override_uuid {
       if ! $::libvirt_uuid {
