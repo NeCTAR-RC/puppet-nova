@@ -31,11 +31,6 @@ class nova::compute::mdev(
         nova_config {
           "mdev_${mdev_type}/device_addresses": value => join(any2array($device_addresses), ',');
         }
-
-        # TODO(tkajinam): Remove this when we remove nova::compute::vgpu
-        nova_config {
-          "vgpu_${mdev_type}/device_addresses": ensure => absent;
-        }
       } else {
         nova_config {
           "mdev_${mdev_type}/device_addresses": ensure => absent;

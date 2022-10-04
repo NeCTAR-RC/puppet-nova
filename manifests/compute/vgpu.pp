@@ -23,5 +23,16 @@ class nova::compute::vgpu(
     nova_config {
       'devices/enabled_vgpu_types': value => join(any2array($vgpu_types_real), ',');
     }
+    $vgpu_types_device_addresses_mapping.each |$vgpu_type, $device_addresses| {
+      if !empty($device_addresses) {
+        nova_config {
+          "vgpu_${vgpu_type}/device_addresses": value => join(any2array($device_addresses), ',');
+        }
+      } else {
+        nova_config {
+          "vgpu_${vgpu_type}/device_addresses": ensure => absent;
+        }
+      }
+    }
   }
 }
