@@ -29,7 +29,7 @@ class nova::migration::qemu(
   -> Anchor['nova::config::end']
 
   Augeas<| tag == 'qemu-conf-augeas'|>
-  ~> Service['libvirt']
+  ~> Service<| title == 'libvirt' |>
 
   if $configure_qemu {
 
