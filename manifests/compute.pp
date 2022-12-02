@@ -359,6 +359,9 @@ class nova::compute (
   include nova::compute::pci
   include nova::compute::mdev
 
+  # vgpu class will be removed after nova compute upgraded to xena
+  include nova::compute::vgpu
+
   if ($vnc_enabled and $spice_enabled) {
     fail('vnc_enabled and spice_enabled is mutually exclusive')
   }
