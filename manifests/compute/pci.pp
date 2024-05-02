@@ -27,8 +27,8 @@ class nova::compute::pci(
     'pci/device_spec': value => $passthrough_real;
   }
 
-  # TODO(tkajinam): Remove this after Zed release.
+  # NOTE(jake): This can be removed once all nodes are at Zed
   nova_config {
-    'pci/passthrough_whitelist': ensure => absent;
+    'pci/passthrough_whitelist': value => $passthrough_real;
   }
 }
